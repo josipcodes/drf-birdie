@@ -44,7 +44,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-josipcodes-drfbirdie-tl20mean2uf.ws-eu108.gitpod.io']
+ALLOWED_HOSTS = ['8000-josipcodes-drfbirdie-tl20mean2uf.ws-us108.gitpod.io']
 
 
 # Application definition
@@ -62,6 +62,7 @@ INSTALLED_APPS = [
 
     'profiles',
     'categories',
+    'posts',
 ]
 
 MIDDLEWARE = [
