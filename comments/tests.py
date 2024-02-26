@@ -55,10 +55,12 @@ class CommentDetailViewTests(APITestCase):
         self.category = Category.objects.create(
             name='test'
             )
+        # creating a post
         self.post = Post.objects.create(
             owner=eve,
             content='content',
             category=self.category)
+        # creating a comment
         self.comment = Comment.objects.create(
             owner=eve,
             content='content',
@@ -74,7 +76,6 @@ class CommentDetailViewTests(APITestCase):
         response = self.client.delete(f'/comments/{self.comment.id}/')
         count = Comment.objects.count()
         self.assertEqual(count, 0)
-        # basing status on the Post model delete function
         self.assertEqual(
             response.status_code,
             status.HTTP_204_NO_CONTENT
