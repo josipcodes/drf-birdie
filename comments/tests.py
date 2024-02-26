@@ -66,7 +66,6 @@ class CommentDetailViewTests(APITestCase):
             content='content',
             post=self.post
         )
-        print("comment", self.comment.id)
 
     def test_logged_in_user_can_delete_comment(self):
         self.client.login(
