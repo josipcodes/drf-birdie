@@ -3,7 +3,7 @@ from drf_api.permissions import isOwnerOrReadOnly
 from .models import Like
 from .serializers import LikeSerializer
 
-
+# views copied from drf_api lessons, minor modifications
 class LikeList(generics.ListCreateAPIView):
     # permission classes set globally
     serializer_class = LikeSerializer
@@ -12,3 +12,9 @@ class LikeList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class LikeDetail(generics.RetrieveDestroyAPIView):
+    permission_classes = [isOwnerOrReadOnly]
+    serializer_class = LikeSerializer
+    queryset = Like.objects.all()
