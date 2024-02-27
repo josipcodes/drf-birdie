@@ -1,9 +1,9 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, serializers
 from drf_api.permissions import isOwnerOrReadOnly
 from .models import Follower
 from .serializers import FollowerSerializer
 
-
+# views are based on drf_api with added improvements
 class FollowerList(generics.ListCreateAPIView):
     """
     List all followers, i.e. all instances of a user
@@ -17,7 +17,14 @@ class FollowerList(generics.ListCreateAPIView):
 
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        owner = self.request.user
+        followed = serializer.validated_data['followed']
+        # raise error if owner tries following themselves
+        if owner == followed:
+            raise serializers.ValidationError(
+                "This is your profile, you cannot follow it."
+                )
+        serializer.save(owner=owner)
 
 
 class FollowerDetail(generics.RetrieveDestroyAPIView):
