@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'followers',
     'companies',
     'products',
+    'advertisements'
 ]
 
 MIDDLEWARE = [
