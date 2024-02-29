@@ -27,4 +27,5 @@ urlpatterns = [
     path('', include('saved_posts.urls')),
     path('', include('followers.urls')),
     path('', include('companies.urls')),
+    path('', include('products.urls')),
 ]
