@@ -4,7 +4,7 @@
 # from rest_framework import status
 from .models import Profile
 from .serializers import ProfileSerializer
-from drf_api.permissions import isOwnerOrReadOnly
+from drf_api.permissions import IsOwnerOrReadOnly
 from rest_framework import generics
 
 # views were built based off of DRF_API lessons, 
@@ -28,7 +28,7 @@ class ProfileList(generics.ListAPIView):
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     serializer_class = ProfileSerializer
-    permission_classes = [isOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.all()
     # def get_object(self, pk):
     #     """

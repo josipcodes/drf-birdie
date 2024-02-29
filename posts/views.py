@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from .models import Post
 # is post detail needed?
 from .serializers import PostSerializer
-from drf_api.permissions import isOwnerOrReadOnly
+from drf_api.permissions import IsOwnerOrReadOnly
 
 
 # views were built based off of DRF_API lessons, 
@@ -60,7 +60,7 @@ class PostList(generics.ListCreateAPIView):
 
 
 # class PostDetail(APIView):
-#     permission_classes = [isOwnerOrReadOnly]
+#     permission_classes = [IsOwnerOrReadOnly]
 #     serializer_class = PostSerializer
 
 
@@ -123,6 +123,6 @@ class PostList(generics.ListCreateAPIView):
     #     )
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [isOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.all()

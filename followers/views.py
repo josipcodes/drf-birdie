@@ -1,5 +1,5 @@
 from rest_framework import generics, serializers
-from drf_api.permissions import isOwnerOrReadOnly
+from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Follower
 from .serializers import FollowerSerializer
 
@@ -34,7 +34,7 @@ class FollowerDetail(generics.RetrieveDestroyAPIView):
     Destroy a follower, i.e. unfollow someone if owner
     """
     serializer_class = FollowerSerializer
-    permission_classes = [isOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Follower.objects.all()
 
 

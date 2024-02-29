@@ -2,7 +2,7 @@ from rest_framework import permissions
 
 # below class has been copied from:
 # https://www.django-rest-framework.org/api-guide/permissions/
-class isOwnerOrReadOnly(permissions.BasePermission):
+class IsOwnerOrReadOnly(permissions.BasePermission):
     """
     Object-level permission to only allow owners of an object to edit it.
     Assumes the model instance has an `owner` attribute.
