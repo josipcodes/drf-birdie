@@ -3,14 +3,20 @@ from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Comment
 from .serializers import CommentSerializer, CommentDetailSerializer
 
-
+# views were built based off of DRF_API lessons
 class CommentList(generics.ListCreateAPIView):
+    """
+    View all commments.
+    Create a comment if logged in.
+    Permission already set globally in settings.py.
+    """
     serializer_class = CommentSerializer
-    # permission class set globally in settings
     queryset = Comment.objects.all()
 
-
     def perform_create(self, serializer):
+        """
+        Comment creation, associates owner with current user
+        """
         serializer.save(owner=self.request.user)
 
 

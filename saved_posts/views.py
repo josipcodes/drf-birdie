@@ -5,8 +5,12 @@ from .serializers import SavedPostSerializer
 
 # based off of Likes views
 class SavedPostList(generics.ListCreateAPIView):
-    # permission classes set globally
-    # tbd if permission needs updating
+    """
+    View all saved posts.
+    Save a post if logged in.
+    Permission already set globally in settings.py
+    """
+    # tbd if permissions need updating
     serializer_class = SavedPostSerializer
     queryset = SavedPost.objects.all()
 
@@ -16,6 +20,10 @@ class SavedPostList(generics.ListCreateAPIView):
 
 
 class SavedPostDetail(generics.RetrieveDestroyAPIView):
+    """
+    Retrieve/delete a saved post if it is your save.
+    """
+    # tbd if permissions need updating
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = SavedPostSerializer
     queryset = SavedPost.objects.all()

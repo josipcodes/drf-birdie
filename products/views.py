@@ -1,6 +1,4 @@
-# status potentially unnecessary
-from rest_framework import status, permissions, generics 
-from rest_framework.views import APIView
+from rest_framework import permissions, generics 
 from .serializers import ProductSerializer
 from .models import Product
 from rest_framework.permissions import IsAdminUser
@@ -15,6 +13,7 @@ class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     permission_classes = [IsAdminUser]
 
+    # tbd if permissions need updating
     def perform_create(self, serializer):
         """
         Product creation
@@ -24,8 +23,9 @@ class ProductList(generics.ListCreateAPIView):
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    Retrieve/update/delete a Product
+    Retrieve/update/delete a Product if admin.
     """
+    # tbd if permissions need updating
     serializer_class = ProductSerializer
     permission_classes = [IsAdminUser]
     queryset = Product.objects.all()

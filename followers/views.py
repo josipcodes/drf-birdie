@@ -9,14 +9,17 @@ class FollowerList(generics.ListCreateAPIView):
     List all followers, i.e. all instances of a user
     following another user'.
     Create a follower, i.e. follow a user if logged in.
-    Perform_create: associate the current logged in user with a follower.
+    Permission already set globally in settings.py.
     """
     serializer_class = FollowerSerializer
-    # permission class set globally
     queryset = Follower.objects.all()
 
 
     def perform_create(self, serializer):
+        """
+        Perform_create: associate the current 
+        logged in user with a follower.
+        """
         owner = self.request.user
         followed = serializer.validated_data['followed']
         # raise error if owner tries following themselves

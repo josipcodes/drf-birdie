@@ -3,12 +3,12 @@ from .models import Post
 from .serializers import PostSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 
-# views were built based off of DRF_API lessons, 
+# views were built based off of DRF_API lessons
 class PostList(generics.ListCreateAPIView):
     """
     View all posts.
     Create a post if logged in.
-    Permission already set globally in settings.py
+    Permission already set globally in settings.py.
     """
     serializer_class = PostSerializer
     queryset = Post.objects.all()
