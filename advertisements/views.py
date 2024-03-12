@@ -1,31 +1,28 @@
-# status potentially unnecessary
-from rest_framework import status, permissions, generics 
-from rest_framework.views import APIView
+from rest_framework import permissions, generics 
 from .serializers import AdvertisementSerializer
 from .models import Advertisement
 from rest_framework.permissions import IsAdminUser
 
-# Create your views here.
 class AdvertisementList(generics.ListCreateAPIView):
     """
     View all advertisements
     """
-    # post form
     serializer_class = AdvertisementSerializer
     queryset = Advertisement.objects.all()
     permission_classes = [IsAdminUser]
 
-    def perform_create(self, serializer):
-        """
-        Advertisement creation
-        """
-        serializer.save()
+    # # tbd if permissions need updating
+    # def perform_create(self, serializer):
+    #     """
+    #     Advertisement creation
+    #     """
+    #     serializer.save()
 
 
-class AdvertisementDetail(generics.RetrieveUpdateDestroyAPIView):
+class AdvertisementDetail(generics.RetrieveAPIView):
     """
-    Retrieve/update/delete an Advertisement
+    Retrieve an Advertisement.
     """
+    # tbd if permissions need updating
     serializer_class = AdvertisementSerializer
-    permission_classes = [IsAdminUser]
     queryset = Advertisement.objects.all()
