@@ -1,7 +1,8 @@
+from django.db.models import Count
 from .models import Profile
 from .serializers import ProfileSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
-from rest_framework import generics
+from rest_framework import generics, filters
 
 # views were built based off of DRF_API lessons, 
 # but have been slightly modified before refactoring
@@ -10,8 +11,24 @@ class ProfileList(generics.ListAPIView):
     List all profiles/create profile.
     Permission already set globally in settings.py
     """
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        # without  distinct, we would get duplicates
+        posts_count=Count('owner__post', distinct=True),
+        followers_count=Count('owner__followed', distinct=True),
+        following_count=Count('owner__following', distinct=True),
+    ).order_by('created')
     serializer_class = ProfileSerializer
+    # tbd if necessary here
+    filter_backends = [
+        filters.OrderingFilter
+    ]
+    ordering_fields = [
+        'posts_count',
+        'followers_count',
+        'following_count',
+        'owner__following__created',
+        'owner__followed__created'
+    ]
 
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
@@ -20,4 +37,8 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        posts_count=Count('owner__post', distinct=True),
+        followers_count=Count('owner__followed', distinct=True),
+        following_count=Count('owner__following', distinct=True),
+    ).order_by('created')
