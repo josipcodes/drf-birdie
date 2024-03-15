@@ -133,6 +133,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# prevents CSRF errors
+CSRF_TRUSTED_ORIGINS = ['https://8000-josipcodes-drfbirdie-tl20mean2uf.ws-eu110.gitpod.io']
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
