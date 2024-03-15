@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Post
+from likes.models import Like
 # from categories.serializers import CategorySerializer
 
 # most of the Serializer has been copied from drf_api lessons
@@ -9,6 +10,7 @@ class PostSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_avatar = serializers.ReadOnlyField(source='owner.profile.avatar.url')
+    like_id = serializers.SerializerMethodField()
     # category = CategorySerializer()
 
     def validate_image(self, values):
@@ -45,6 +47,18 @@ class PostSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return obj.owner == request.user
 
+    def get_like_id(self, obj):
+        """
+        Check if user liked the post
+        """
+        user = self.context['request'].user
+        if user.is_authenticated:
+            like = Like.objects.filter(
+                owner=user, post=obj
+            ).first()
+            return like.id if like else None
+        return None
+
     class Meta:
         model = Post
         fields = [
@@ -57,5 +71,6 @@ class PostSerializer(serializers.ModelSerializer):
             'category',
             'is_owner',
             'profile_id',
-            'profile_avatar'
+            'profile_avatar',
+            'like_id'
         ]

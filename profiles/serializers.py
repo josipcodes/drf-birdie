@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Profile
+from followers.models import Follower
 
 # most of the Serializer has been copied from drf_api lessons
 # some alternations made, validation of avatar added
@@ -7,6 +8,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     # read-only field, gets value from get_is_owner
     is_owner = serializers.SerializerMethodField()
+    following_id = serializers.SerializerMethodField()
 
     def validate_avatar(self, values):
         # 2MB
@@ -28,6 +30,18 @@ class ProfileSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return obj.owner == request.user
 
+    def get_following_id(self, obj):
+        """
+        Check if user follows another user
+        """
+        user = self.context['request'].user
+        if user.is_authenticated:
+            following = Follower.objects.filter(
+                owner=user, followed=obj.owner
+            ).first()
+            return following.id if following else None
+        return None
+
     class Meta:
         model = Profile
         fields = [
@@ -38,5 +52,6 @@ class ProfileSerializer(serializers.ModelSerializer):
             'created',
             'modified',
             'avatar',
-            'is_owner'
+            'is_owner',
+            'following_id'
         ]
