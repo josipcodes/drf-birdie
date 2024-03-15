@@ -2,12 +2,12 @@ from rest_framework import serializers
 from .models import Category
 
 class CategorySerializer(serializers.ModelSerializer):
-    post_count = serializers.SerializerMethodField()
+    posts_count = serializers.SerializerMethodField()
 
     # below function appropriated from:
     # https://stackoverflow.com/questions/32443471/
     # django-show-the-count-of-related-objects-in-admin-list-display
-    def get_post_count(self, obj):
+    def get_posts_count(self, obj):
         return obj.post_set.count()
 
     class Meta:
@@ -16,5 +16,6 @@ class CategorySerializer(serializers.ModelSerializer):
             'id',
             'name',
             'description',
-            'post_count'
+            # 'post_count',
+            'posts_count'
         ]
