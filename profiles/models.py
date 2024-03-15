@@ -25,7 +25,7 @@ class Profile(models.Model):
 
     # returning a human-readable form
     def __str__(self):
-        return self.owner
+        return self.owner.username
 
 
 # based on https://docs.djangoproject.com/en/3.2/ref/signals/
