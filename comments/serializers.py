@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from .models import Comment
 
 # serializers copied from drf_api lessons.
@@ -17,7 +18,8 @@ class CommentSerializer(serializers.ModelSerializer):
     profile_avatar = serializers.ReadOnlyField(
         source='owner.profile.avatar.url'
         )
-
+    created = serializers.SerializerMethodField()
+    modified = serializers.SerializerMethodField()
 
     """
     We need to check if request.user is the same as it's owner.
@@ -28,6 +30,12 @@ class CommentSerializer(serializers.ModelSerializer):
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
+
+    def get_created(self, obj):
+        return naturaltime(obj.created)
+    
+    def get_modified(self, obj):
+        return naturaltime(obj.modified)
 
 
     class Meta:
