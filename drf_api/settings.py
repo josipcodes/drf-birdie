@@ -43,6 +43,7 @@ ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOST'),
     'localhost',
     '3000-josipcodes-drfbirdie-tl20mean2uf.ws-eu110.gitpod.io',
+    'birdie-app-3064fd5d3b6f.herokuapp.com'
     # '<your_app_name>.herokuapp.com'
     ]
 

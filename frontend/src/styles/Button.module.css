@@ -1,0 +1,33 @@
+.Button {
+    align-self: center;
+    border-radius: 100px;
+    border-color: transparent;
+    background-color: #fcd619;
+    color: #212529;
+    font-weight: bold;
+  }
+  
+  .Button:hover {
+    border-color: rgb(212, 145, 19);
+    border-width: 2px;
+    cursor: pointer;
+    background-color: #fcd619;
+  }
+  
+  .Button:hover:active {
+    background-color: #fcd619 !important;
+  }
+  
+  .Button:active {
+    background-color: #fcd619;
+  }
+  
+  .Button:focus {
+    background-color: #fcd619;
+  }
+  
+  .Wide {
+    padding: 10px;
+    width: 100%;
+  }
+  

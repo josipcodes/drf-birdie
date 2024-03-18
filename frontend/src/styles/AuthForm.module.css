@@ -1,0 +1,50 @@
+.Row {
+  height: calc(100vh - 77px);
+}
+
+.Input {
+  background: #ffffff;
+  color: #212529;
+  text-align: center;
+}
+
+.Header {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #fcd619;
+}
+
+.Link {
+  text-align: center;
+  display: block;
+}
+
+.Link span {
+  color: #fcd619;
+  font-weight: bold;
+}
+
+.Container {
+  padding: 30px 10px;
+}
+
+.LoginCol {
+  height: 3250px;
+}
+
+.RegisterCol {
+  height: 400px;
+}
+
+.Image {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  background-color: #212529;
+  padding: 20px 10px;
+  /* filter: grayscale(100%); */
+}

@@ -1,3 +1,4 @@
+/* updated */
 .App {
   font-family: "K2D", sans-serif;
   background-color: #f8f8f8;
@@ -8,15 +9,26 @@
   box-sizing: border-box;
 }
 
+/* updated */
 a {
   color: #f8f8f8;
   transition: color ease-in-out 1s;
 }
 
+/* updated */
 a:hover {
   text-decoration: none;
   color: #fcd619;
 }
+
+/* updated */
+.Content {
+  background-color: #212529;
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid #dadadf;
+}
+
 
 /* padding added to display page names (h's) */
 .Main {
