@@ -1,0 +1,26 @@
+.NavBar {
+  border: 1px solid #d9d9dd;
+}
+
+.NavLink {
+  padding: 10px;
+  color: #f8f8f8;
+}
+
+.Active {
+  color: #fcd619;
+}
+
+.Brand {
+    padding: 5px;
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    color: #f8f8f8;
+}
+
+@media (max-width: 767px) { 
+    /* adjusts padding for dropdown */
+    .NavLink {
+        padding: 5px;
+      }
+}
