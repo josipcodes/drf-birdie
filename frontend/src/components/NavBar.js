@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/birdie.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
+import { CurrentUserContext } from "../App";
 
 const NavBar = () => {
+  const currentUser = useContext(CurrentUserContext);
+  const loggedInIcons = <>{currentUser?.username}</>;
+
+  const loggedOutIcons = (
+    // using empty element as JSX can only return a single element
+    <>
+      {" "}
+      <NavLink
+        to="/login"
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+      >
+        Log in
+      </NavLink>
+      <NavLink
+        to="/register"
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+      >
+        Register
+      </NavLink>
+    </>
+  );
+
   return (
     <Navbar
       className={styles.NavBar}
@@ -14,12 +39,14 @@ const NavBar = () => {
       variant="dark"
     >
       <Container>
-        <Navbar.Brand>
-          <img src={logo} alt="logo" height="47px" />
-        </Navbar.Brand>
-        <Navbar.Brand className={`${styles.Brand} mr-auto text-right`} href="/">
-          Birdie
-        </Navbar.Brand>
+        <NavLink to="/">
+          <Navbar.Brand>
+            <img src={logo} alt="logo" height="47px" />
+          </Navbar.Brand>
+          <Navbar.Brand className={`${styles.Brand} mr-auto text-right`}>
+            Birdie
+          </Navbar.Brand>
+        </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto text-right">
@@ -33,7 +60,8 @@ const NavBar = () => {
             </NavLink>
           </Nav>
           <Nav className="ml-auto text-right">
-            <NavLink
+            {currentUser ? loggedInIcons : loggedOutIcons}
+            {/* <NavLink
               to="/login"
               className={styles.NavLink}
               activeClassName={styles.Active}
@@ -46,7 +74,7 @@ const NavBar = () => {
               activeClassName={styles.Active}
             >
               Register
-            </NavLink>
+            </NavLink> */}
           </Nav>
         </Navbar.Collapse>
       </Container>
