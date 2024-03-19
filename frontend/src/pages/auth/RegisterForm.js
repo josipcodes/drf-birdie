@@ -11,12 +11,14 @@ import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap
 
 import axios from "axios";
 
+// code adapted from Moments lessons
 const RegisterForm = () => {
   const [signUpData, setSignUpData] = useState({
     username: "",
     password1: "",
     password2: "",
   });
+  
   const { username, password1, password2 } = signUpData;
 
   const [errors, setErrors] = useState({})
@@ -36,7 +38,7 @@ const RegisterForm = () => {
     // prevents refresh
     e.preventDefault();
     try {
-      await axios.post("dj-rest-auth/registration/", signUpData);
+      await axios.post("/dj-rest-auth/registration/", signUpData);
       history.push("/login");
     } catch (err) {
       // if response isn't defined, it won't throw an error
@@ -119,7 +121,7 @@ const RegisterForm = () => {
       </Col>
       <Col
         md={7}
-        className={`my-auto d-none d-md-block p-2 ${styles.RegisterCol}`}
+        className={`my-auto d-none d-md-block p-2 ${styles.AuthCol}`}
       >
         <Image className={`${styles.Image} ${appStyles.Content}`} src={bird} />
       </Col>
