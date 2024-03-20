@@ -5,11 +5,43 @@ import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
 // import { CurrentUserContext } from "../App";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
+import Avatar from "./Avatar";
 
 const NavBar = () => {
   // const currentUser = useContext(CurrentUserContext);
   const currentUser = useCurrentUser();
-  const loggedInOptions = <>{currentUser?.username}</>;
+  const loggedInOptions = (
+    <>
+    <NavLink
+      to="/feed"
+      className={`${styles.NavLink} ${styles.NavLinkOffset}`}
+      activeClassName={styles.Active}
+    >
+      Feed
+    </NavLink>
+    <NavLink
+      to="/liked"
+      className={`${styles.NavLink} ${styles.NavLinkOffset}`}
+      activeClassName={styles.Active}
+    >
+      Liked
+    </NavLink>
+    <NavLink
+      to="/"
+      className={`${styles.NavLink} ${styles.NavLinkOffset}`}
+      onClick={() => {}}
+    >
+      Log out
+    </NavLink>
+    <NavLink
+      to={`/profiles/${currentUser?.profile_id}`}
+      className={styles.NavLink}
+      onClick={() => {}}
+    >
+      <Avatar src={currentUser?.profile_avatar} text={currentUser?.username} height={38} />
+    </NavLink>
+  </>
+  )
 
   const loggedOutOptions = (
     // using empty element as JSX can only return a single element
@@ -63,20 +95,6 @@ const NavBar = () => {
           </Nav>
           <Nav className="ml-auto text-right">
             {currentUser ? loggedInOptions : loggedOutOptions}
-            {/* <NavLink
-              to="/login"
-              className={styles.NavLink}
-              activeClassName={styles.Active}
-            >
-              Log in
-            </NavLink>
-            <NavLink
-              to="/register"
-              className={styles.NavLink}
-              activeClassName={styles.Active}
-            >
-              Register
-            </NavLink> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

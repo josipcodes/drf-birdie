@@ -1,0 +1,10 @@
+.Avatar {
+    border-radius: 50%;
+    margin: 3px 10px 0 0;
+    /* object fit will make sure avatar fits the container */
+    object-fit: cover;
+  }
+
+  .Username {
+    font-weight: 900
+  }

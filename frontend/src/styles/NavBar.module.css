@@ -18,6 +18,10 @@
     color: #f8f8f8;
 }
 
+.NavLinkOffset {
+  margin-top: 8px;
+}
+
 @media (max-width: 767px) { 
     /* adjusts padding for dropdown */
     .NavLink {
