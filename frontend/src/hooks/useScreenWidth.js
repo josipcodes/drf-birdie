@@ -18,7 +18,7 @@ const ScreenWidth = () => {
     };
   }, []);
 //   returning boolean value
-  return width < 767;
+  return width < 768;
 }
 
 export default ScreenWidth;

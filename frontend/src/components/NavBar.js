@@ -133,8 +133,8 @@ const NavBar = () => {
         <Nav className="mr-auto text-right">
           {currentUser ? newPost : homePage}
           </Nav>
-          <Nav className="ml-auto text-left d-md-none">
-          {currentUser && avatarDisplay}
+          <Nav className="ml-auto text-left">
+          {currentUser && smallScreen && avatarDisplay}
           </Nav>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
