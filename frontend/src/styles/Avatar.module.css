@@ -8,3 +8,10 @@
   .Username {
     font-weight: 900
   }
+
+  @media (max-width: 767px) {
+    /* hidden username when hamburger available */
+    .Username {
+      font-size: 0;
+    }
+  }

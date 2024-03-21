@@ -8,6 +8,7 @@ import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContex
 import Avatar from "./Avatar";
 import axios from "axios";
 import { removeTokenTimestamp } from "../utils/utils";
+import useScreenWidth from "../hooks/useScreenWidth"
 
 const NavBar = () => {
   // const currentUser = useContext(CurrentUserContext);
@@ -15,7 +16,8 @@ const NavBar = () => {
   console.log("currentUser", currentUser)
   const setCurrentUser = useSetCurrentUser();
 
-  const smallScreen = window.innerWidth <= 767;
+  // screen width check
+  const smallScreen = useScreenWidth();
 
   const handleLogOut = async () => {
     /* handles logging user out
@@ -37,7 +39,7 @@ const NavBar = () => {
       className={styles.NavLink}
       activeClassName={styles.Active}
     >
-      New post
+      Post
     </NavLink>
   );
 
@@ -134,23 +136,15 @@ const NavBar = () => {
           <Nav className="ml-auto text-left d-md-none">
           {currentUser && avatarDisplay}
           </Nav>
-          {/* test */}
-          {/* <Nav className="ml-auto text-right">
-            {currentUser ? loggedInOptions : loggedOutOptions}
-          </Nav> */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          {/* <Nav className="mr-auto text-right">
-          {currentUser ? newPost : homePage}
-          </Nav> */}
+
           <Nav className="ml-auto text-right">
             {currentUser ? (
               <>
               {loggedInOptions}
               {!smallScreen && avatarDisplay}              
               </>
-                // {loggedInOptions} 
-                // // </>}
               ) : loggedOutOptions}
           </Nav>
         </Navbar.Collapse>
