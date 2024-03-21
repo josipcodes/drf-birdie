@@ -4,13 +4,55 @@ import logo from "../assets/birdie.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
 // import { CurrentUserContext } from "../App";
-import { useCurrentUser } from "../contexts/CurrentUserContext";
+import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
 import Avatar from "./Avatar";
+import axios from "axios";
+import { removeTokenTimestamp } from "../utils/utils";
 
 const NavBar = () => {
   // const currentUser = useContext(CurrentUserContext);
   const currentUser = useCurrentUser();
+  console.log("currentUser", currentUser)
+  const setCurrentUser = useSetCurrentUser();
+
+  const handleLogOut = async () => {
+    /* handles logging user out
+    nullifies CurrentUser
+    tbd if a better process can be implemented before going live */
+    try {
+      await axios.post("dj-rest-auth/logout/");
+      setCurrentUser(null);
+      removeTokenTimestamp();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+  const newPost = (
+    <NavLink
+      to="/posts/create"
+      className={styles.NavLink}
+      activeClassName={styles.Active}
+    >
+      New post
+    </NavLink>
+  );
+
+  const homePage = (
+    <NavLink
+    exact
+    to="/"
+    className={styles.NavLink}
+    activeClassName={styles.Active}
+  >
+    Home
+  </NavLink>
+  )
+
+
   const loggedInOptions = (
+    // using empty element as JSX can only return a single element
     <>
     <NavLink
       to="/feed"
@@ -29,7 +71,7 @@ const NavBar = () => {
     <NavLink
       to="/"
       className={`${styles.NavLink} ${styles.NavLinkOffset}`}
-      onClick={() => {}}
+      onClick={handleLogOut}
     >
       Log out
     </NavLink>
@@ -84,14 +126,7 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto text-right">
-            <NavLink
-              exact
-              to="/"
-              className={styles.NavLink}
-              activeClassName={styles.Active}
-            >
-              Home
-            </NavLink>
+          {currentUser ? newPost : homePage}
           </Nav>
           <Nav className="ml-auto text-right">
             {currentUser ? loggedInOptions : loggedOutOptions}
