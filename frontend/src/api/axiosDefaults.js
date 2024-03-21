@@ -7,7 +7,7 @@
 
  import axios from "axios";
 
-// copied from Moments lessons
+// from Moments lessons, modified
 //  axios.defaults.baseURL = 'api/';
 // axios.defaults.baseURL = 'http://localhost:8000/';
 
@@ -15,3 +15,8 @@
  // multipart as our app will deal with images, texts...
  axios.defaults.headers.post['Content-Type'] = "multipart/form-data"
  axios.defaults.withCredentials = true;
+
+ // to intercept the request
+export const axiosRequest = axios.create();
+// to intercept the response
+export const axiosResponse = axios.create();
