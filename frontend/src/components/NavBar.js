@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/birdie.png";
 import styles from "../styles/NavBar.module.css";
@@ -14,6 +14,8 @@ const NavBar = () => {
   const currentUser = useCurrentUser();
   console.log("currentUser", currentUser)
   const setCurrentUser = useSetCurrentUser();
+
+  const smallScreen = window.innerWidth <= 767;
 
   const handleLogOut = async () => {
     /* handles logging user out
@@ -50,6 +52,16 @@ const NavBar = () => {
   </NavLink>
   )
 
+  const avatarDisplay = (
+      <NavLink
+      to={`/profiles/${currentUser?.profile_id}`}
+      className={styles.NavLink}
+      onClick={() => {}}
+    >
+      <Avatar src={currentUser?.profile_avatar} text={currentUser?.username} height={38} />
+    </NavLink> 
+  )
+
 
   const loggedInOptions = (
     // using empty element as JSX can only return a single element
@@ -74,13 +86,6 @@ const NavBar = () => {
       onClick={handleLogOut}
     >
       Log out
-    </NavLink>
-    <NavLink
-      to={`/profiles/${currentUser?.profile_id}`}
-      className={styles.NavLink}
-      onClick={() => {}}
-    >
-      <Avatar src={currentUser?.profile_avatar} text={currentUser?.username} height={38} />
     </NavLink>
   </>
   )
@@ -123,13 +128,30 @@ const NavBar = () => {
             Birdie
           </Navbar.Brand>
         </NavLink>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto text-right">
+        <Nav className="mr-auto text-right">
           {currentUser ? newPost : homePage}
           </Nav>
-          <Nav className="ml-auto text-right">
+          <Nav className="ml-auto text-left d-md-none">
+          {currentUser && avatarDisplay}
+          </Nav>
+          {/* test */}
+          {/* <Nav className="ml-auto text-right">
             {currentUser ? loggedInOptions : loggedOutOptions}
+          </Nav> */}
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          {/* <Nav className="mr-auto text-right">
+          {currentUser ? newPost : homePage}
+          </Nav> */}
+          <Nav className="ml-auto text-right">
+            {currentUser ? (
+              <>
+              {loggedInOptions}
+              {!smallScreen && avatarDisplay}              
+              </>
+                // {loggedInOptions} 
+                // // </>}
+              ) : loggedOutOptions}
           </Nav>
         </Navbar.Collapse>
       </Container>
