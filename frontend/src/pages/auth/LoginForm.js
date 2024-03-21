@@ -17,6 +17,7 @@ import bird from "../../assets/bird.jpg";
 import axios from "axios";
 // import { SetCurrentUserContext } from "../../App";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+import { setTokenTimestamp } from "../../utils/utils";
 
 // code adapted from Moments lessons
 function LoginForm() {
@@ -47,8 +48,11 @@ function LoginForm() {
     e.preventDefault();
     try {
       const { data } = await axios.post("dj-rest-auth/login/", signInData);
+      console.log("data", data)
       setCurrentUser(data.user);
-      console.log(data)
+      console.log("data.user", data.user)
+      // extracting exp date from the access token, saves it to user's browser in local storage.
+      setTokenTimestamp(data);
       history.push("/")
     } catch(err) {
       setErrors(err.response?.data);
