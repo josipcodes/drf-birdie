@@ -15,13 +15,11 @@ import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import bird from "../../assets/bird.jpg";
 import axios from "axios";
-// import { SetCurrentUserContext } from "../../App";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { setTokenTimestamp } from "../../utils/utils";
 
 // code adapted from Moments lessons
 function LoginForm() {
-  // const setCurrentUser = useContext(SetCurrentUserContext);
   const setCurrentUser = useSetCurrentUser();
 
   const [signInData, setSignInData] = useState({

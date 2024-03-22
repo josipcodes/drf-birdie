@@ -3,7 +3,6 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/birdie.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
-// import { CurrentUserContext } from "../App";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
 import Avatar from "./Avatar";
 import axios from "axios";
@@ -11,7 +10,6 @@ import { removeTokenTimestamp } from "../utils/utils";
 import useScreenWidth from "../hooks/useScreenWidth"
 
 const NavBar = () => {
-  // const currentUser = useContext(CurrentUserContext);
   const currentUser = useCurrentUser();
   console.log("currentUser", currentUser)
   const setCurrentUser = useSetCurrentUser();

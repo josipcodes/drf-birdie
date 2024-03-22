@@ -5,26 +5,8 @@ import { Route, Switch } from "react-router-dom";
 import "./api/axiosDefaults";
 import RegisterForm from "./pages/auth/RegisterForm";
 import LoginForm from "./pages/auth/LoginForm";
-// import { createContext, useEffect, useState } from "react";
-// import axios from "axios";
-
-// export const CurrentUserContext = createContext();
-// export const SetCurrentUserContext = createContext();
 
 function App() {
-  // const [currentUser, setCurrentUser] = useState(null);
-
-  // const handleMount = async () => {
-  //   try {
-  //     const { data } = await axios.get("dj-rest-auth/user/");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   handleMount();
-  // }, []);
 
   return (
     <div className={styles.App}>
