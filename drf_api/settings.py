@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import datetime
 
 # importing env
 if os.path.exists('env.py'):
@@ -151,6 +152,10 @@ JWT_AUTH_SECURE = True
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 REST_AUTH_SERIALIZERS = {'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'}
 JWT_AUTH_SAMESITE = 'None'
+# set jwt token expiration to 2 days
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=2),
+}
 
 
 ROOT_URLCONF = 'drf_api.urls'
