@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import "./api/axiosDefaults";
 import RegisterForm from "./pages/auth/RegisterForm";
 import LoginForm from "./pages/auth/LoginForm";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
           <Route exact path="/login" render={() => <LoginForm />} />
           <Route exact path="/register" render={() => <RegisterForm />} />
           <Route
-            render={() => <h3>This page flew away and doesn't exist</h3>}
+            render={() => <PageNotFound />}
           />
         </Switch>
       </Container>

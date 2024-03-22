@@ -1,0 +1,13 @@
+.NotFound {
+  filter: grayscale(1);
+}
+
+.Subheader {
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 15px;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fcd619;
+}
