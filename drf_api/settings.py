@@ -153,6 +153,8 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 REST_AUTH_SERIALIZERS = {'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'}
 JWT_AUTH_SAMESITE = 'None'
 # set jwt token expiration to 2 days
+# source code modified:
+# https://stackoverflow.com/questions/31281208/where-to-override-jwt-expiration-delta-for-setting-custom-token-expiration-time
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=2),
 }
