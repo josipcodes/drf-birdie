@@ -16,7 +16,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     # category = CategorySerializer()
 
-    def validate_image(self, values):
+    def validate_image(self, value):
         # 2MB
         if value.size > 1024 * 1024 * 2:
             raise serializers.ValidationError(
