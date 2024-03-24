@@ -40,7 +40,7 @@ export const CurrentUserProvider = ({ children }) => {
         if (shouldRefreshToken()) {
           try {
             // attempting to refresh the token
-            await axios.post("dj-rest-auth/token/refresh/");
+            await axios.post("/dj-rest-auth/token/refresh/");
           } catch (err) {
             // if token refresh failed and user was previously logged in
             // if refresh token expired
@@ -67,7 +67,7 @@ export const CurrentUserProvider = ({ children }) => {
       async (err) => {
         if (err.response?.status === 401) {
           try {
-            await axios.post("dj-rest-auth/token/refresh/");
+            await axios.post("/dj-rest-auth/token/refresh/");
           } catch (err) {
             setCurrentUser((prevCurrentUser) => {
               if (prevCurrentUser) {
