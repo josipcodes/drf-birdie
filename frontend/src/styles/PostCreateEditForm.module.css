@@ -1,0 +1,9 @@
+/* temporarily copied from Moments */
+.Container {
+    min-height: 343px;
+  }
+
+.ButtonRight {
+  margin-left: 47%;
+  padding: 0 10px 9px;
+}
