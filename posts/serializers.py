@@ -1,10 +1,11 @@
 from rest_framework import serializers
 from .models import Post
 from likes.models import Like
-# from categories.serializers import CategorySerializer
+from categories.models import Category
+from saved_posts.models import SavedPost
 
-# most of the Serializer has been copied from drf_api lessons
-# some alternations made
+# portion of the Serializer has been copied from drf_api lessons
+# alternations made
 class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
@@ -13,8 +14,8 @@ class PostSerializer(serializers.ModelSerializer):
     like_id = serializers.SerializerMethodField()
     comments_count = serializers.ReadOnlyField()
     likes_count = serializers.ReadOnlyField()
-
-    # category = CategorySerializer()
+    category_name =  serializers.ReadOnlyField(source='category.name')
+    saved_id = serializers.SerializerMethodField()
 
     def validate_image(self, value):
         # 2MB
@@ -62,6 +63,18 @@ class PostSerializer(serializers.ModelSerializer):
             return like.id if like else None
         return None
 
+    def get_saved_id(self, obj):
+        """
+        Check if user saved the post
+        """
+        user = self.context['request'].user
+        if user.is_authenticated:
+            save = SavedPost.objects.filter(
+                owner=user, post=obj
+            ).first()
+            return save.id if save else None
+        return None
+
     class Meta:
         model = Post
         fields = [
@@ -77,5 +90,7 @@ class PostSerializer(serializers.ModelSerializer):
             'profile_avatar',
             'like_id',
             'comments_count',
-            'likes_count'
+            'likes_count',
+            'category_name',
+            'saved_id'
         ]
