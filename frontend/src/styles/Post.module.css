@@ -1,0 +1,53 @@
+.Post {
+  background-color: #212529;
+  border-radius: 5%;
+}
+
+.PostHeader {
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.PostText {
+  color: #f8f8f8;
+  margin: 5px;
+}
+
+.IconText {
+  color: #fcd619;
+  margin: 5px;
+}
+
+.Category {
+  color: #fcd619;
+  border: 1px solid #fcd619;
+  background-color: #4c5053;
+  font-weight: 900;
+  padding: 5px;
+  margin: 15px 2px 2px;
+  text-align: left;
+}
+
+.PostImage {
+  padding: 10px 50px;
+  /* object fit will make sure avatar fits the container */
+  object-fit: contain;
+}
+
+/* tbd */
+.Post figure,
+h5 {
+  margin: 0 0;
+}
+
+.Heart {
+  color: #fcd619;
+}
+
+.Heart:hover {
+  color: #4c5053;
+}
+
+.HeartOutline:hover {
+  color: #fcd619;
+}
