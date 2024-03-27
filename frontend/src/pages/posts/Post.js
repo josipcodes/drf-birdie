@@ -39,19 +39,17 @@ const Post = (props) => {
   return (
     <Card className={styles.Post}>
       <Card.Body>
-        <Media className={`${styles.PostHeader}`}>
-          {/* link wrapped around avatar */}
+        <Media className={`${styles.PostHeader} d-flex justify-content-between`}>
+          {/* link wrapped around header */}
           <Link to={`/profiles/${profile_id}`}>
             <Avatar src={profile_avatar} height={45} />
             {owner}
           </Link>
           {/* displaying when the post was last updated */}
-          <div>
-            <span className={styles.PostText}>{modified}</span>
+            <span className={`${styles.PostText} ${styles.PostHeader} text-right`}>{modified}</span>
             {/* ... are placeholder for dropdown menu, we are now testing if logic works */}
             {/* todo - is_owner is malfunctioning right now, so this is visible if is_owner is removed from the conditional */}
             {is_owner && postPage && "..."}
-          </div>
         </Media>
         {/* checking if category_name content and image props have been passed before we render them */}
         {category_name && (
@@ -112,7 +110,7 @@ const Post = (props) => {
             </OverlayTrigger>
           )}
           <Container>
-            <Row className={`${styles.IconText} justify-content-around`}>
+            <Row className={`${styles.IconText} justify-content-around text-center`}>
               <Col>
               {/* number of likes */}
               {likes_count}
