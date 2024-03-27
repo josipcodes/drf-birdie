@@ -1,6 +1,7 @@
 .Post {
   background-color: #212529;
   border-radius: 5%;
+  margin: 3px 0;
 }
 
 .PostHeader {
@@ -40,14 +41,29 @@ h5 {
   margin: 0 0;
 }
 
+/* tbd */
+i {
+  color: #f8f8f8;
+  font-size: 1.2rem;
+  padding-right: 7px;
+}
+
+i:hover {
+  cursor: pointer;
+  color: #fcd619;
+}
+
+/* tbd */
 .Heart {
   color: #fcd619;
 }
 
+/* tbd */
 .Heart:hover {
   color: #4c5053;
 }
 
+/* tbd */
 .HeartOutline:hover {
   color: #fcd619;
 }

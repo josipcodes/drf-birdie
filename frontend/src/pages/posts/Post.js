@@ -39,17 +39,23 @@ const Post = (props) => {
   return (
     <Card className={styles.Post}>
       <Card.Body>
-        <Media className={`${styles.PostHeader} d-flex justify-content-between`}>
+        <Media
+          className={`${styles.PostHeader} d-flex justify-content-between`}
+        >
           {/* link wrapped around header */}
           <Link to={`/profiles/${profile_id}`}>
             <Avatar src={profile_avatar} height={45} />
             {owner}
           </Link>
           {/* displaying when the post was last updated */}
-            <span className={`${styles.PostText} ${styles.PostHeader} text-right`}>{modified}</span>
-            {/* ... are placeholder for dropdown menu, we are now testing if logic works */}
-            {/* todo - is_owner is malfunctioning right now, so this is visible if is_owner is removed from the conditional */}
-            {is_owner && postPage && "..."}
+          <span
+            className={`${styles.PostText} ${styles.PostHeader} text-right`}
+          >
+            {modified}
+          </span>
+          {/* ... are placeholder for dropdown menu, we are now testing if logic works */}
+          {/* todo - is_owner is malfunctioning right now, so this is visible if is_owner is removed from the conditional */}
+          {is_owner && postPage && "..."}
         </Media>
         {/* checking if category_name content and image props have been passed before we render them */}
         {category_name && (
@@ -71,57 +77,63 @@ const Post = (props) => {
       </Card.Body>
       <Card.Body>
         <div>
-          {is_owner ? (
-            // using OverlayTrigger and Tooltip to display a tooltip for the owner.
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>You can't like your own post!</Tooltip>}
-            >
-              <i className={`fas fa-heart`} />
-            </OverlayTrigger>
-          ) : like_id ? (
-            // if like_id exists, user already liked the post
-            <span onClick={() => {}}>
-              <i className={`far fa-heart ${styles.Heart}`} />
-            </span>
-          ) : saved_id ? (
-            // if save_id exists, user already saved the post
-            <span onClick={() => {}}>
-              <i className={`fa-solid fa-egg ${styles.Heart}`} />
-            </span>
-          ) : currentUser ? (
-            <>
-              {/* if user is logged in, they can like the post */}
-              <span onClick={() => {}}>
-                <i className={`fas fa-heart ${styles.HeartOutline}`} />
-              </span>
-              {/* if user is logged in, they can save the post */}
-              <span onClick={() => {}}>
-                <i className={`fa-solid fa-egg ${styles.HeartOutline}`} />
-              </span>
-            </>
-          ) : (
-            // like icon for users who are not logged in.
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>Log in to like a post!</Tooltip>}
-            >
-              <i className="far fa-heart" />
-            </OverlayTrigger>
-          )}
           <Container>
-            <Row className={`${styles.IconText} justify-content-around text-center`}>
-              <Col>
-              {/* number of likes */}
-              {likes_count}
+            <Row
+              className={`justify-content-around text-center`}
+            >
+              {/* tbd if all hearts will use the same icon, classes added to test visual representation */}
+              <Col className={styles.IconText}>
+                {/* like logic */}
+                {is_owner ? (
+                  // using OverlayTrigger and Tooltip to display a tooltip for the owner.
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>You can't like your own post!</Tooltip>}
+                  >
+                    <i className={`fas fa-heart`} />
+                  </OverlayTrigger>
+                ) : like_id ? (
+                  // if like_id exists, user already liked the post
+                  <span onClick={() => {}}>
+                    <i className={`far fa-heart ${styles.Heart}`} />
+                  </span>
+                ) : currentUser ? (
+                  // if user is logged in, they can like the post
+                  <span onClick={() => {}}>
+                    <i className={`fas fa-heart ${styles.HeartOutline}`} />
+                  </span>
+                ) : (
+                  // display tooltip for non-user
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Log in to like a post!</Tooltip>}
+                  >
+                    <i className="fas fa-heart" />
+                  </OverlayTrigger>
+                )}
+                {/* number of likes */}
+                {likes_count}
+              </Col>
+              <Col className={styles.IconText}>
+                {/* comments icon leads to the post page */}
+                <Link to={`/posts/${id}`} className={styles.IconText}>
+                  <i className={`far fa-comments ${styles.Heart}`} />
+                  {/* number of comments */}
+                  {comments_count}
+                </Link>
               </Col>
               <Col>
-              {/* comments icon leads to the post page */}
-              <Link to={`/posts/${id}`}>
-                <i className={`far fa-comments ${styles.Heart}`} />
-                {/* number of comments */}
-                {comments_count}
-              </Link>
+                {currentUser && (
+                  <span onClick={() => {}} className={styles.IconText}>
+                    <i
+                      className={
+                        saved_id
+                          ? `fa-brands fa-earlybirds ${styles.IconText}`
+                          : `fa-solid fa-egg ${styles.PostText}`
+                      }
+                    />
+                  </span>
+                )}
               </Col>
             </Row>
           </Container>
