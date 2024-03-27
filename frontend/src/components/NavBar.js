@@ -81,6 +81,13 @@ const NavBar = () => {
       Liked
     </NavLink>
     <NavLink
+      to="/saved"
+      className={`${styles.NavLink} ${styles.NavLinkOffset}`}
+      activeClassName={styles.Active}
+    >
+      Saved posts
+    </NavLink>
+    <NavLink
       to="/"
       className={`${styles.NavLink} ${styles.NavLinkOffset}`}
       onClick={handleLogOut}
