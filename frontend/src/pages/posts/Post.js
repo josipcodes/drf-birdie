@@ -79,7 +79,7 @@ const Post = (props) => {
         <div>
           <Container>
             <Row
-              className={`justify-content-around text-center`}
+              className="justify-content-around text-center"
             >
               {/* tbd if all hearts will use the same icon, classes added to test visual representation */}
               <Col className={styles.IconText}>
@@ -90,7 +90,7 @@ const Post = (props) => {
                     placement="top"
                     overlay={<Tooltip>You can't like your own post!</Tooltip>}
                   >
-                    <i className={`fas fa-heart`} />
+                    <i className="fas fa-heart" />
                   </OverlayTrigger>
                 ) : like_id ? (
                   // if like_id exists, user already liked the post
@@ -117,7 +117,8 @@ const Post = (props) => {
               <Col className={styles.IconText}>
                 {/* comments icon leads to the post page */}
                 <Link to={`/posts/${id}`} className={styles.IconText}>
-                  <i className={`far fa-comments ${styles.Heart}`} />
+                  {/* post text hover needed to align visual representation? tbd */}
+                  <i className={`far fa-comments ${styles.PostText}`} />
                   {/* number of comments */}
                   {comments_count}
                 </Link>
