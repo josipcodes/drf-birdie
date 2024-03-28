@@ -24,7 +24,7 @@ function PostsPage({ message, filter = "" }) {
       try {
         // the request string will contain filter parameter, which comes from the filter prop we set in routes.
         // tells API if we want to see all posts or certain ones.
-        const { data } = await axiosRequest.get(`/posts/?${filter}`);
+        const { data } = await axiosRequest.get(`/posts/?${filter}/`);
         setPosts(data);
         // setting IsLoaded to true so spinner no longer spins.
         setIsLoaded(true);

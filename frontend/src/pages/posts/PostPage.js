@@ -32,7 +32,7 @@ function PostPage() {
         // Promises.all accepts an array of promises and gets resolved when all promises get resolved, returning an array of data.
         // If any of the promises fail, Promise.all gets rejected w/an error.
         const [{ data: post }] = await Promise.all([
-          axiosRequest.get(`/posts/${id}`),
+          axiosRequest.get(`/posts/${id}/`),
         ]);
         console.log("post", post)
         // using setPost func to update the results array in the state to contain a post

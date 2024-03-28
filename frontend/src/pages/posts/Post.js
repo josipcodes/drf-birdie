@@ -43,7 +43,7 @@ const Post = (props) => {
           className={`${styles.PostHeader} d-flex justify-content-between`}
         >
           {/* link wrapped around header */}
-          <Link to={`/profiles/${profile_id}`}>
+          <Link to={`/profiles/${profile_id}/`}>
             <Avatar src={profile_avatar} height={45} />
             {owner}
           </Link>

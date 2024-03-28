@@ -9,6 +9,7 @@ import PageNotFound from "./components/PageNotFound";
 import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
 import PostsPage from "./pages/posts/PostsPage";
+import PostEditForm from "./pages/posts/PostEditForm";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
           <Route exact path="/login" render={() => <LoginForm />} />
           <Route exact path="/register" render={() => <RegisterForm />} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
+          <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route render={() => <PageNotFound />} />
         </Switch>
