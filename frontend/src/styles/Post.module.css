@@ -7,6 +7,7 @@
 .PostHeader {
   font-weight: 900;
   margin-bottom: 16px;
+  color: #f8f8f8;
 }
 
 .PostText {
@@ -66,4 +67,9 @@ i:hover {
 /* tbd */
 .HeartOutline:hover {
   color: #fcd619;
+}
+
+/* adds spacing between {modified} and dropdown */
+.HeaderContent {
+  margin-left: 5px;
 }

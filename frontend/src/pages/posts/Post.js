@@ -31,6 +31,7 @@ const Post = (props) => {
     // adding prop from PostPage.js
     postPage,
   } = props;
+  
 
   const currentUser = useCurrentUser();
   // assigning boolean value to is_owner.
@@ -40,7 +41,7 @@ const Post = (props) => {
     <Card className={styles.Post}>
       <Card.Body>
         <Media
-          className={`${styles.PostHeader} d-flex justify-content-between`}
+          className={`${styles.PostHeader} d-flex justify-content-between align-items-center `}
         >
           {/* link wrapped around header */}
           <Link to={`/profiles/${profile_id}/`}>
@@ -49,18 +50,18 @@ const Post = (props) => {
           </Link>
           {/* displaying when the post was last updated */}
           <span
-            className={`${styles.PostText} ${styles.PostHeader} text-right`}
+            className={` ${styles.PostHeader} mt-1`}
           >
-            {modified}
-          </span>
+            <span>{modified}</span>
           {/* ... are placeholder for dropdown menu, we are now testing if logic works */}
           {/* todo - is_owner is malfunctioning right now, so this is visible if is_owner is removed from the conditional */}
-          {is_owner && postPage && "..."}
+          <span className={styles.HeaderContent}>{is_owner && postPage && "..."}</span>
+          </span>
         </Media>
         <Link to={`/posts/${id}/`}>
           {/* checking if category_name content and image props have been passed before we render them */}
           {category_name && (
-            <span className={`${styles.PostText} ${styles.Category}`}>
+            <span className={styles.Category}>
               {category_name}
             </span>
           )}
