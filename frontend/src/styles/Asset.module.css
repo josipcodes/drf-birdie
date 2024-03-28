@@ -1,9 +1,8 @@
-/* temporarily copied from Moments */
+/* based off of Moments lessons, with updates */
 .Asset {
-    /* display: flex;
-    flex-direction: column;
+    display: flex;
     justify-content: center;
-    align-items: center; */
-    /* padding: 10px; */
-    /* min-height: 120px; */
+    align-items: center;
+    color: #212529;
+    min-height: 100px;
   }
