@@ -57,30 +57,30 @@ const Post = (props) => {
           {/* todo - is_owner is malfunctioning right now, so this is visible if is_owner is removed from the conditional */}
           {is_owner && postPage && "..."}
         </Media>
-        {/* checking if category_name content and image props have been passed before we render them */}
-        {category_name && (
-          <span className={`${styles.PostText} ${styles.Category}`}>
-            {category_name}
-          </span>
-        )}
-        {content && (
-          <span className={`text-left ${styles.PostText}`}>{content}</span>
-        )}
-        {/* reminder, image is not mandatory */}
-        {image && (
-          // image wrapped in a link to the post
-          <Link to={`/posts/${id}`}>
-            {/* alt? tbd */}
-            <Card.Img className={styles.PostImage} src={image} />
-          </Link>
-        )}
+        <Link to={`/posts/${id}/`}>
+          {/* checking if category_name content and image props have been passed before we render them */}
+          {category_name && (
+            <span className={`${styles.PostText} ${styles.Category}`}>
+              {category_name}
+            </span>
+          )}
+          {content && (
+            <span className={`text-left ${styles.PostText}`}>{content}</span>
+          )}
+          {/* reminder, image is not mandatory */}
+          {image && (
+            // image wrapped in a link to the post
+            <Link to={`/posts/${id}`}>
+              {/* alt? tbd */}
+              <Card.Img className={styles.PostImage} src={image} />
+            </Link>
+          )}
+        </Link>
       </Card.Body>
       <Card.Body>
         <div>
           <Container>
-            <Row
-              className="justify-content-around text-center"
-            >
+            <Row className="justify-content-around text-center">
               {/* tbd if all hearts will use the same icon, classes added to test visual representation */}
               <Col className={styles.IconText}>
                 {/* like logic */}
