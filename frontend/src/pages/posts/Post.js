@@ -91,17 +91,17 @@ const Post = (props) => {
                     placement="top"
                     overlay={<Tooltip>You can't like your own post!</Tooltip>}
                   >
-                    <i className="fas fa-heart" />
+                    <i className="fas fa-heart mt-1" />
                   </OverlayTrigger>
                 ) : like_id ? (
                   // if like_id exists, user already liked the post
                   <span onClick={() => {}}>
-                    <i className={`far fa-heart ${styles.Heart}`} />
+                    <i className={`far fa-heart mt-1 ${styles.Heart}`} />
                   </span>
                 ) : currentUser ? (
                   // if user is logged in, they can like the post
                   <span onClick={() => {}}>
-                    <i className={`fas fa-heart ${styles.HeartOutline}`} />
+                    <i className={`fas fa-heart mt-1 ${styles.HeartOutline}`} />
                   </span>
                 ) : (
                   // display tooltip for non-user
@@ -109,7 +109,7 @@ const Post = (props) => {
                     placement="top"
                     overlay={<Tooltip>Log in to like a post!</Tooltip>}
                   >
-                    <i className="fas fa-heart" />
+                    <i className="fas fa-heart mt-1" />
                   </OverlayTrigger>
                 )}
                 {/* number of likes */}
