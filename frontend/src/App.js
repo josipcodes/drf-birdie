@@ -23,6 +23,7 @@ function App() {
       <NavBar />
       <Container className={styles.Main}>
         <Switch>
+          {/* home, feed and liked routes modelled after Moments code */}
           <Route
             exact
             path="/"
@@ -61,7 +62,7 @@ function App() {
               // message for when search brings up no results.
               <PostsPage
                 message="No results found. Adjust your search keyword or save a post."
-                filter={`saved_posts__owner__profile=${profile_id}&ordering=-saved_posts__created&`}
+                filter={`saved__owner__profile=${profile_id}&ordering=-saved__created&`}
               />
             )}
           />
