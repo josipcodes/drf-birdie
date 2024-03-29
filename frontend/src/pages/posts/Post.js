@@ -10,8 +10,10 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
+import { MoreDropdown } from "../../components/PostDropdown";
+import { axiosResponse } from "../../api/axiosDefaults";
 
 // temporarily copied from Moments, modified
 const Post = (props) => {
@@ -31,39 +33,59 @@ const Post = (props) => {
     // adding prop from PostPage.js
     postPage,
   } = props;
-  
 
   const currentUser = useCurrentUser();
   // assigning boolean value to is_owner.
   const is_owner = currentUser?.username === owner;
+  const history = useHistory();
+
+  // copied from Moments
+  const handleEdit = () => {
+    history.push(`/posts/${id}/edit`);
+  };
+
+  // copied from Moments
+  // tbd if asking for confirmation would benefit or annoy the user
+  const handleDelete = async () => {
+    try {
+      await axiosResponse.delete(`/posts/${id}/`);
+      history.goBack();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Card className={styles.Post}>
       <Card.Body>
         <Media
-          className={`${styles.PostHeader} d-flex justify-content-between align-items-center `}
+          className={`${styles.PostHeader} d-flex justify-content-between`}
         >
           {/* link wrapped around header */}
-          <Link to={`/profiles/${profile_id}/`}>
-            <Avatar src={profile_avatar} height={45} />
-            {owner}
-          </Link>
+          <Col>
+            <Link to={`/profiles/${profile_id}/`}>
+              <Avatar src={profile_avatar} height={45} />
+              {owner}
+            </Link>
+          </Col>
           {/* displaying when the post was last updated */}
-          <span
-            className={` ${styles.PostHeader} mt-1`}
-          >
+          <Col className="mt-2 text-right d-flex justify-content-end p-0 pt-1">
             <span>{modified}</span>
-          {/* ... are placeholder for dropdown menu, we are now testing if logic works */}
-          {/* todo - is_owner is malfunctioning right now, so this is visible if is_owner is removed from the conditional */}
-          <span className={styles.HeaderContent}>{is_owner && postPage && "..."}</span>
-          </span>
+            {/* ... are placeholder for dropdown menu, we are now testing if logic works */}
+            <span className="ml-3">
+              {is_owner && postPage && (
+                <MoreDropdown
+                  handleEdit={handleEdit}
+                  handleDelete={handleDelete}
+                />
+              )}
+            </span>
+          </Col>
         </Media>
         <Link to={`/posts/${id}/`}>
           {/* checking if category_name content and image props have been passed before we render them */}
           {category_name && (
-            <span className={styles.Category}>
-              {category_name}
-            </span>
+            <span className={styles.Category}>{category_name}</span>
           )}
           {content && (
             <span className={`text-left ${styles.PostText}`}>{content}</span>
@@ -73,6 +95,7 @@ const Post = (props) => {
             // image wrapped in a link to the post
             <Link to={`/posts/${id}`}>
               {/* alt? tbd */}
+              {/* <Card.Img className={styles.PostImage} src={image} /> */}
               <Card.Img className={styles.PostImage} src={image} />
             </Link>
           )}
