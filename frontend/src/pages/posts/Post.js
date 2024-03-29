@@ -58,6 +58,7 @@ const Post = (props) => {
     }
   };
 
+    // built based off of Moments lessons with changes
   const handleSave = async () => {
     /* Function saves a post, increases the number of saves on the post */
     try {
@@ -78,6 +79,7 @@ const Post = (props) => {
     }
   };
 
+    // built based off of Moments lessons with changes
   const handleUnsave = async () => {
     /* Function unsaves a post, decreases the number of saves on the post */
     try {
@@ -95,6 +97,7 @@ const Post = (props) => {
     }
   };
 
+  // built based off of Moments lessons
   const handleLike = async () => {
     /* Function likes a post, increases the number of likes on the post */
     try {
@@ -115,6 +118,7 @@ const Post = (props) => {
     }
   };
 
+    // built based off of Moments lessons
   const handleUnlike = async () => {
     /* Function unlikes a post, decreases the number of likes on the post */
     try {
