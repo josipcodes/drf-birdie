@@ -95,6 +95,43 @@ const Post = (props) => {
     }
   };
 
+  const handleLike = async () => {
+    /* Function likes a post, increases the number of likes on the post */
+    try {
+      // like id is needed so the API knows which post is being liked
+      const { data } = await axiosResponse.post("/likes/", { post: id });
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          // using ternary to check if the post id matches the post we liked.
+          // if it does, we'll add to the count, otherwise we return post so map can continue checking.
+          return post.id === id
+            ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
+            : post;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleUnlike = async () => {
+    /* Function unlikes a post, decreases the number of likes on the post */
+    try {
+      await axiosResponse.delete(`/likes/${like_id}/`);
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id
+            ? { ...post, likes_count: post.likes_count - 1, like_id: null }
+            : post;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Card className={styles.Post}>
       <Card.Body>
@@ -158,13 +195,13 @@ const Post = (props) => {
                   </OverlayTrigger>
                 ) : like_id ? (
                   // if like_id exists, user already liked the post
-                  <span onClick={() => {}}>
-                    <i className={`far fa-heart mt-1 ${styles.Heart}`} />
+                  <span onClick={handleUnlike}>
+                    <i className={`far fa-heart mt-1 ${styles.IconText}`} />
                   </span>
                 ) : currentUser ? (
                   // if user is logged in, they can like the post
-                  <span onClick={() => {}}>
-                    <i className={`fas fa-heart mt-1 ${styles.HeartOutline}`} />
+                  <span onClick={handleLike}>
+                    <i className={`fas fa-heart mt-1 ${styles.PostText}`} />
                   </span>
                 ) : (
                   // display tooltip for non-user

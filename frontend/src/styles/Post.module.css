@@ -19,6 +19,12 @@
   color: #fcd619;
 }
 
+i:hover {
+  cursor: pointer;
+  color: #fcd619;
+}
+
+
 .Category {
   color: #fcd619;
   border: 1px solid #fcd619;
@@ -48,27 +54,9 @@ i {
   padding-right: 7px;
 }
 
-i:hover {
-  cursor: pointer;
-  color: #fcd619;
-}
-
-/* tbd */
-.Heart {
-  color: #fcd619;
-}
-
-/* tbd */
-.Heart:hover {
-  color: #4c5053;
-}
-
-/* tbd */
-.HeartOutline:hover {
-  color: #fcd619;
-}
-
 /* adds spacing between {modified} and dropdown */
 .HeaderContent {
   margin-left: 5px;
 }
+
+i { color: #f8f8f8}
