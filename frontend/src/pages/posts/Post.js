@@ -30,8 +30,11 @@ const Post = (props) => {
     likes_count,
     category_name,
     saved_id,
+    saved_count,
     // adding prop from PostPage.js
     postPage,
+    // passed from a parent component to update the likes count.
+    setPosts,
   } = props;
 
   const currentUser = useCurrentUser();
@@ -50,6 +53,43 @@ const Post = (props) => {
     try {
       await axiosResponse.delete(`/posts/${id}/`);
       history.goBack();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSave = async () => {
+    /* Function saves a post, increases the number of saves on the post */
+    try {
+      // save id is needed so the API knows which post is being saved
+      const { data } = await axiosResponse.post("/saved/", { post: id });
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          // using ternary to check if the post id matches the post we saved.
+          // if it does, we'll add to the count, otherwise we return post so map can continue checking.
+          return post.id === id
+            ? { ...post, saved_count: post.saved_count + 1, saved_id: data.id }
+            : post;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleUnsave = async () => {
+    /* Function unsaves a post, decreases the number of saves on the post */
+    try {
+      await axiosResponse.delete(`/saved/${saved_id}/`);
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id
+            ? { ...post, saved_count: post.saved_count - 1, saved_id: null }
+            : post;
+        }),
+      }));
     } catch (err) {
       console.log(err);
     }
@@ -149,16 +189,19 @@ const Post = (props) => {
               </Col>
               <Col>
                 {currentUser && (
-                  <span onClick={() => {}} className={styles.IconText}>
+                  saved_id ? (
+                    <span onClick={handleUnsave} className={styles.IconText}>
                     <i
-                      className={
-                        saved_id
-                          ? `fa-brands fa-earlybirds ${styles.IconText}`
-                          : `fa-solid fa-egg ${styles.PostText}`
-                      }
+                      className={`fa-brands fa-earlybirds ${styles.IconText}`}
                     />
+                    {saved_count}
                   </span>
-                )}
+                  ) : (
+                    <span onClick={handleSave} className={styles.IconText}>
+                    <i className={`fa-solid fa-egg ${styles.PostText}`} />
+                    {saved_count}
+                  </span>
+                  ))}
               </Col>
             </Row>
           </Container>

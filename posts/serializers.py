@@ -16,6 +16,7 @@ class PostSerializer(serializers.ModelSerializer):
     likes_count = serializers.ReadOnlyField()
     category_name =  serializers.ReadOnlyField(source='category.name')
     saved_id = serializers.SerializerMethodField()
+    saved_count = serializers.ReadOnlyField()
 
     def validate_image(self, value):
         # 2MB
@@ -92,5 +93,6 @@ class PostSerializer(serializers.ModelSerializer):
             'comments_count',
             'likes_count',
             'category_name',
-            'saved_id'
+            'saved_id',
+            'saved_count'
         ]
