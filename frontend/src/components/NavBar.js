@@ -22,7 +22,7 @@ const NavBar = () => {
     nullifies CurrentUser
     tbd if a better process can be implemented before going live */
     try {
-      await axios.post("dj-rest-auth/logout/");
+      await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
       removeTokenTimestamp();
     } catch (err) {
