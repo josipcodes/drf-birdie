@@ -58,7 +58,7 @@ const Post = (props) => {
     }
   };
 
-    // built based off of Moments lessons with changes
+  // built based off of Moments lessons with changes
   const handleSave = async () => {
     /* Function saves a post, increases the number of saves on the post */
     try {
@@ -79,7 +79,7 @@ const Post = (props) => {
     }
   };
 
-    // built based off of Moments lessons with changes
+  // built based off of Moments lessons with changes
   const handleUnsave = async () => {
     /* Function unsaves a post, decreases the number of saves on the post */
     try {
@@ -118,7 +118,7 @@ const Post = (props) => {
     }
   };
 
-    // built based off of Moments lessons
+  // built based off of Moments lessons
   const handleUnlike = async () => {
     /* Function unlikes a post, decreases the number of likes on the post */
     try {
@@ -230,19 +230,20 @@ const Post = (props) => {
               </Col>
               <Col>
                 {currentUser && (
-                  saved_id ? (
-                    <span onClick={handleUnsave} className={styles.IconText}>
+                  <span
+                    onClick={saved_id == null ? handleSave : handleUnsave}
+                    className={styles.IconText}
+                  >
                     <i
-                      className={`fa-brands fa-earlybirds ${styles.IconText}`}
+                      className={
+                        saved_id !== null
+                          ? `fa-brands fa-earlybirds ${styles.IconText}`
+                          : `fa-solid fa-egg ${styles.PostText}`
+                      }
                     />
                     {saved_count}
                   </span>
-                  ) : (
-                    <span onClick={handleSave} className={styles.IconText}>
-                    <i className={`fa-solid fa-egg ${styles.PostText}`} />
-                    {saved_count}
-                  </span>
-                  ))}
+                )}
               </Col>
             </Row>
           </Container>
