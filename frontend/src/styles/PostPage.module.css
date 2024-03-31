@@ -1,0 +1,12 @@
+
+.CommentFormWidth {
+    width: 97%;
+    margin: 0 3%;
+}
+
+@media (min-width: 768px) {
+    .CommentFormWidth {
+        width: 93%;
+        margin: 0 7%;
+    }
+  }

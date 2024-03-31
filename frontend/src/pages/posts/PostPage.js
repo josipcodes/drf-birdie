@@ -5,14 +5,16 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
-
-import appStyles from "../../App.module.css";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosRequest } from "../../api/axiosDefaults";
 
-import Post from "./Post";
-
+import appStyles from "../../App.module.css";
 import postStyles from "../../styles/Post.module.css"
+import styles from "../../styles/PostPage.module.css"
+
+import Post from "./Post";
+import CommentCreateForm from "../comments/CommentCreateForm";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 // modelled after Moments lessons
 function PostPage() {
@@ -21,6 +23,8 @@ function PostPage() {
   // this way it doesn't matter if we're getting a single object or array of posts.
   const [post, setPost] = useState({ results: [] });
 
+  const currentUser = useCurrentUser();
+  const [comments, setComments] = useState({ results: [] });
 
   useEffect(() => {
     // handleMount to fetch the post on mount.
@@ -51,8 +55,18 @@ function PostPage() {
     <Row>
       <Col className="py-2" lg={8}>
         <Post {...post.results[0]} setPosts={setPost} postPage />
-        <Container className={`${appStyles.Content} ${postStyles.PostText}`}>
-          Comments placeholder
+        <Container className={`${appStyles.Content} ${postStyles.PostText} ${styles.CommentFormWidth}`}>
+          {/* tbd if conditional needs changing */}
+        {currentUser ? (
+            <CommentCreateForm
+              profile_id={currentUser.profile_id}
+              post={id}
+              setPost={setPost}
+              setComments={setComments}
+            />
+          ) : comments.results.length ? (
+            "Comments placeholder"
+          ) : null}
         </Container>
       </Col>
       <Col lg={4} className="p-lg-1">
