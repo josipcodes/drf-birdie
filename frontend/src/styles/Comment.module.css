@@ -1,0 +1,10 @@
+.Commenter {
+    font-weight: bold;
+    color: #fcd619;
+    margin-right: 8px;
+  }
+ 
+  .ModifiedDate {
+    font-weight: 200;
+    color: #f2f2f7;
+  }
