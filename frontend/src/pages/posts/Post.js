@@ -173,12 +173,7 @@ const Post = (props) => {
           )}
           {/* reminder, image is not mandatory */}
           {image && (
-            // image wrapped in a link to the post
-            <Link to={`/posts/${id}`}>
-              {/* alt? tbd */}
-              {/* <Card.Img className={styles.PostImage} src={image} /> */}
               <Card.Img className={styles.PostImage} src={image} />
-            </Link>
           )}
         </Link>
       </Card.Body>
