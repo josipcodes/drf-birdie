@@ -10,6 +10,9 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 import appStyles from "../../App.module.css";
 
+import axios from "axios"
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+
 // modelled after Moments lessons
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
@@ -19,13 +22,21 @@ function PostsPage({ message, filter = "" }) {
   // to detect location, we'll use useLocation react router hook.
   const { pathname } = useLocation();
 
+  // attemting to fix loading issues when not logged in
+  const currentUser = useCurrentUser();
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         // the request string will contain filter parameter, which comes from the filter prop we set in routes.
         // tells API if we want to see all posts or certain ones.
-        const { data } = await axiosRequest.get(`/posts/?${filter}/`);
+        if (currentUser == null) {
+        const { data } = await axios.get(`/posts/?${filter}/`);
         setPosts(data);
+        } else {
+          const { data } = await axiosRequest.get(`/posts/?${filter}/`);
+          setPosts(data);
+        }
         // setting IsLoaded to true so spinner no longer spins.
         setIsLoaded(true);
       } catch (err) {
@@ -36,7 +47,7 @@ function PostsPage({ message, filter = "" }) {
     setIsLoaded(false);
     // we want this called any time filter or url changes.
     fetchPosts();
-  }, [filter, pathname]);
+  }, [filter, pathname, currentUser]);
 
   return (
     <Row className="h-100">
