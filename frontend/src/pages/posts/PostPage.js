@@ -35,7 +35,8 @@ function PostPage() {
         // it is called renaming with an object key.
         // Promises.all accepts an array of promises and gets resolved when all promises get resolved, returning an array of data.
         // If any of the promises fail, Promise.all gets rejected w/an error.
-        const [{ data: post }, {data: comments}] = await Promise.all([
+        const [{ data: post }, { data: comments }] = await Promise.all([
+          // fetching the posts
           axiosRequest.get(`/posts/${id}/`),
           // fetching the comments
           axiosRequest.get(`/comments/?post=${id}`),
@@ -64,18 +65,20 @@ function PostPage() {
           className={`${appStyles.Content} ${postStyles.PostText} ${styles.CommentFormWidth}`}
         >
           {/* tbd if conditional needs changing */}
-          {currentUser && (
+          {currentUser ? (
             <CommentCreateForm
               profile_id={currentUser.profile_id}
               post={id}
               setPost={setPost}
               setComments={setComments}
             />
-          )}
+          ) : comments.results.length ? (
+            "Comments"
+          ) : null}
           {comments.results.length ? (
             // if there are comments, they're shown
             comments.results.map(comment => (
-              <Comment key={comment.id} {...comment} />
+              <Comment key={comment.id} {...comment} setPost={setPost} setComments={setComments} />
             ))
             // if there are no comments, we are checking if user is logged in
           ) : currentUser ? (

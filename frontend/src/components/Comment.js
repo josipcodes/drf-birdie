@@ -8,9 +8,20 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import useScreenWidth from "../hooks/useScreenWidth";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { MoreDropdown } from "./PostDropdown";
+import { axiosResponse } from "../api/axiosDefaults";
 
 const Comment = (props) => {
-  const { profile_id, profile_avatar, owner, modified, content } = props;
+  const {
+    profile_id,
+    profile_avatar,
+    owner,
+    modified,
+    content,
+    id,
+    // passed down from PostPage
+    setPost,
+    setComments,
+  } = props;
 
   // currentUser from  custom context
   const currentUser = useCurrentUser();
@@ -19,6 +30,27 @@ const Comment = (props) => {
 
   // screen width check
   const smallScreen = useScreenWidth();
+
+  // copied from Moments
+  const handleDelete = async () => {
+    try {
+      await axiosResponse.delete(`/comments/${id}/`)
+      setPost(prevPost => ({
+        results: [{
+          ...prevPost.results[0],
+          // reducing comment count by 1
+          comments_count: prevPost.results[0].comments_count - 1
+        }]
+      }))
+      setComments(prevComments => ({
+        ...prevComments,
+        // we want to filter for the id of comment we are removing
+        results: prevComments.results.filter((comment) => comment.id !== id),
+      }))
+    } catch(err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="mt-2">
@@ -32,7 +64,7 @@ const Comment = (props) => {
           <p>{content}</p>
         </Media.Body>
         {is_owner && (
-          <MoreDropdown handleEdit={() => {}} handleDelete={() => {}} />
+          <MoreDropdown handleEdit={() => {}} handleDelete={handleDelete} />
         )}
       </Media>
     </div>
