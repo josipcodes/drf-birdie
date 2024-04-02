@@ -17,6 +17,8 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Comment from "../../components/Comment";
 import PopularCategories from "../../components/PopularCategories";
 
+import useScreenWidth from "../../hooks/useScreenWidth";
+
 // modelled after Moments lessons
 function PostPage() {
   const { id } = useParams();
@@ -26,6 +28,9 @@ function PostPage() {
 
   const currentUser = useCurrentUser();
   const [comments, setComments] = useState({ results: [] });
+
+  // screen width check
+  const smallScreen = useScreenWidth();
 
   useEffect(() => {
     // handleMount to fetch the post on mount.
@@ -47,7 +52,7 @@ function PostPage() {
         setPost({ results: [post] });
         // setting Comments
         setComments(comments);
-        console.log("comments", comments)
+        console.log("comments", comments);
         // clg post to check that this is working
         console.log(post);
       } catch (err) {
@@ -60,7 +65,7 @@ function PostPage() {
 
   return (
     <Row>
-      <Col className="py-2" lg={8}>
+      <Col className="py-2 p-md-1" md={8}>
         <Post {...post.results[0]} setPosts={setPost} postPage />
         <Container
           className={`${appStyles.Content} ${postStyles.PostText} ${styles.CommentFormWidth}`}
@@ -78,23 +83,29 @@ function PostPage() {
           ) : null}
           {comments.results.length ? (
             // if there are comments, they're shown
-            comments.results.map(comment => (
-              <Comment key={comment.id} {...comment} setPost={setPost} setComments={setComments} />
+            comments.results.map((comment) => (
+              <Comment
+                key={comment.id}
+                {...comment}
+                setPost={setPost}
+                setComments={setComments}
+              />
             ))
-            // if there are no comments, we are checking if user is logged in
-          ) : currentUser ? (
+          ) : // if there are no comments, we are checking if user is logged in
+          currentUser ? (
             <span>No comments yet, be the first to comment.</span>
           ) : (
             // if the user is not logged in
             <span>No comments...yet. Log in to comment.</span>
           )}
-
         </Container>
       </Col>
-      {/* small screen hook needed, tbd */}
-      <Col lg={4} className="d-none d-lg-block p-lg-1">
-        <PopularCategories />
-      </Col>
+      {!smallScreen && (
+        // display popular categories when on desktop
+        <Col md={4} className="p-md-2">
+          <PopularCategories />
+        </Col>
+      )}
     </Row>
   );
 }

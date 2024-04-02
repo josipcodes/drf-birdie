@@ -10,9 +10,11 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 import appStyles from "../../App.module.css";
 
-import axios from "axios"
+import axios from "axios";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import PopularCategories from "../../components/PopularCategories";
+
+import useScreenWidth from "../../hooks/useScreenWidth";
 
 // modelled after Moments lessons
 function PostsPage({ message, filter = "" }) {
@@ -26,14 +28,17 @@ function PostsPage({ message, filter = "" }) {
   // attemting to fix loading issues when not logged in
   const currentUser = useCurrentUser();
 
+  // screen width check
+  const smallScreen = useScreenWidth();
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         // the request string will contain filter parameter, which comes from the filter prop we set in routes.
         // tells API if we want to see all posts or certain ones.
         if (currentUser == null) {
-        const { data } = await axios.get(`/posts/?${filter}/`);
-        setPosts(data);
+          const { data } = await axios.get(`/posts/?${filter}/`);
+          setPosts(data);
         } else {
           const { data } = await axiosRequest.get(`/posts/?${filter}/`);
           setPosts(data);
@@ -52,37 +57,38 @@ function PostsPage({ message, filter = "" }) {
 
   return (
     <Row className="h-100">
-      <Col className="py-2 p-lg-1" lg={8}>
+      <Col className="py-2 p-md-1" md={8}>
         {/* ternary to display spinner or posts */}
         {isLoaded ? (
-            // nested ternary to display posts or message.
-            <>
-                {posts.results.length ? (
-                    // map over posts and render each one
-                    posts.results.map((post) => (
-                        // setPosts is needed to like posts.
-                        <Post key={post.id} {...post} setPosts={setPosts} />
-                      ))
-                ) : (
-                    // show no results asset
-                    <Container className={appStyles.Content}>
-                        {/* message we passed down */}
-                        <Asset message={message} />
-                    </Container>
-                )}
-            </>
+          // nested ternary to display posts or message.
+          <>
+            {posts.results.length ? (
+              // map over posts and render each one
+              posts.results.map((post) => (
+                // setPosts is needed to like posts.
+                <Post key={post.id} {...post} setPosts={setPosts} />
+              ))
+            ) : (
+              // show no results asset
+              <Container className={appStyles.Content}>
+                {/* message we passed down */}
+                <Asset message={message} />
+              </Container>
+            )}
+          </>
         ) : (
-            // spinner
-            <Container className={appStyles.Content}>
-                <Asset spinner />
-            </Container>
+          // spinner
+          <Container className={appStyles.Content}>
+            <Asset spinner />
+          </Container>
         )}
-
       </Col>
-      {/* small screen hook needed, tbd */}
-      <Col lg={4} className="d-none d-lg-block p-lg-1">
-        <PopularCategories />
-      </Col>
+      {!smallScreen && (
+        // display popular categories when on desktop
+        <Col md={4} className="p-md-2">
+          <PopularCategories />
+        </Col>
+      )}
     </Row>
   );
 }
