@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/birdie.png";
 import styles from "../styles/NavBar.module.css";
@@ -15,8 +15,27 @@ const NavBar = () => {
   console.log("currentUser", currentUser)
   const setCurrentUser = useSetCurrentUser();
 
+    // menu is initially collapsed
+    const [expanded, setExpanded] = useState(false);
+    const ref = useRef(null);
+
   // screen width check
   const smallScreen = useScreenWidth();
+
+  // created following Moments lessons
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      console.log(ref)
+      if (ref.current && !ref.current.contains(e.target)){
+        setExpanded(false)
+      }
+    }
+    document.addEventListener('mouseup', handleClickOutside)
+    return () => {
+      document.removeEventListener('mouseup', handleClickOutside)
+    }
+  }, [ref])
+
 
   const handleLogOut = async () => {
     /* handles logging user out
@@ -130,6 +149,7 @@ const NavBar = () => {
       fixed="top"
       bg="dark"
       variant="dark"
+      expanded={expanded}
     >
       <Container>
         <NavLink to="/">
@@ -146,7 +166,7 @@ const NavBar = () => {
           <Nav className="ml-auto text-left">
           {currentUser && smallScreen && avatarDisplay}
           </Nav>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} ref={ref} />
         <Navbar.Collapse id="basic-navbar-nav">
 
           <Nav className="ml-auto text-right">
