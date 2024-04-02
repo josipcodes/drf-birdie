@@ -123,6 +123,10 @@ const NavBar = () => {
       >
         Register
       </NavLink>
+      {smallScreen && (
+        // display popular categories when on smaller screens
+          <PopularCategories className="text-right" />
+      )}
     </>
   );
 
