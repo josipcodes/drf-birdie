@@ -15,6 +15,7 @@ import Post from "./Post";
 import CommentCreateForm from "../comments/CommentCreateForm";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Comment from "../../components/Comment";
+import PopularCategories from "../../components/PopularCategories";
 
 // modelled after Moments lessons
 function PostPage() {
@@ -90,8 +91,9 @@ function PostPage() {
 
         </Container>
       </Col>
-      <Col lg={4} className="p-lg-1">
-        Popular categories for desktop
+      {/* small screen hook needed, tbd */}
+      <Col lg={4} className="d-none d-lg-block p-lg-1">
+        <PopularCategories />
       </Col>
     </Row>
   );

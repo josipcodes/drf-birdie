@@ -1,0 +1,15 @@
+.Header {
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 35px;
+    text-align: center;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #fcd619;
+  }
+
+  .CategoryName {
+    color: #f8f8f8;
+    margin: 15px;
+    display: block;
+  }

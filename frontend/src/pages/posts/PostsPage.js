@@ -12,6 +12,7 @@ import appStyles from "../../App.module.css";
 
 import axios from "axios"
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import PopularCategories from "../../components/PopularCategories";
 
 // modelled after Moments lessons
 function PostsPage({ message, filter = "" }) {
@@ -65,7 +66,7 @@ function PostsPage({ message, filter = "" }) {
                 ) : (
                     // show no results asset
                     <Container className={appStyles.Content}>
-                        {/* no results image, message we passed down */}
+                        {/* message we passed down */}
                         <Asset message={message} />
                     </Container>
                 )}
@@ -80,7 +81,7 @@ function PostsPage({ message, filter = "" }) {
       </Col>
       {/* small screen hook needed, tbd */}
       <Col lg={4} className="d-none d-lg-block p-lg-1">
-        <p>Popular profiles for desktop</p>
+        <PopularCategories />
       </Col>
     </Row>
   );

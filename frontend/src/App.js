@@ -11,9 +11,12 @@ import PostPage from "./pages/posts/PostPage";
 import PostsPage from "./pages/posts/PostsPage";
 import PostEditForm from "./pages/posts/PostEditForm";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
+import { useSelectedCategory } from "./contexts/SelectedCategoryContext";
 
 function App() {
   const currentUser = useCurrentUser();
+  const selectedCategory = useSelectedCategory();
+  console.log("app.js", selectedCategory)
 
   // need profile_id to filter the posts by.
   // defaults to an empty string if current user details are still being fetched.
@@ -26,6 +29,7 @@ function App() {
         <Switch>
           {/* home, feed and liked routes modelled after Moments code */}
           <Route
+           className={styles.Content}
             exact
             path="/"
             render={() => (
@@ -64,6 +68,17 @@ function App() {
               <PostsPage
                 message="No results found. Adjust your search keyword or save a post."
                 filter={`saved__owner__profile=${profile_id}&ordering=-saved__created&`}
+              />
+            )}
+          />
+                    <Route
+            exact
+            path="/categories/:id/posts"
+            render={() => (
+              // message for when search brings up no results.
+              <PostsPage
+                message="No results found. Adjust your search keyword or save a post."
+                filter={`category_id=${selectedCategory}&ordering=-created&`}
               />
             )}
           />
