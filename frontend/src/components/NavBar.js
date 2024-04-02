@@ -8,6 +8,7 @@ import Avatar from "./Avatar";
 import axios from "axios";
 import { removeTokenTimestamp } from "../utils/utils";
 import useScreenWidth from "../hooks/useScreenWidth"
+import PopularCategories from "./PopularCategories";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -87,6 +88,10 @@ const NavBar = () => {
     >
       Saved posts
     </NavLink>
+      {smallScreen && (
+        // display popular categories when on smaller screens
+          <PopularCategories className="text-right" />
+      )}
     <NavLink
       to="/"
       className={`${styles.NavLink} ${styles.NavLinkOffset}`}

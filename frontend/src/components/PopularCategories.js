@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
 import axios from "axios";
 import appStyles from ".././App.module.css";
 import Asset from ".././components/Asset";
@@ -9,12 +8,12 @@ import { Link } from "react-router-dom";
 
 import {useSelectedCategory, useSetSelectedCategory } from "../contexts/SelectedCategoryContext";
 
-
 const PopularCategories = () => {
   const [categories, setCategories] = useState("");
 
   const selectedCategory = useSelectedCategory()
   const setSelectedCategory = useSetSelectedCategory()
+
 
   useEffect(() => {
     // fetching existing categories
@@ -39,7 +38,7 @@ const PopularCategories = () => {
   };
 
   return (
-    <Container className={appStyles.Content}>
+    <div className={`${appStyles.Content}`}>
       {categories.results?.length ? (
         <>
         {/* display categories in the order of popularity */}
@@ -51,7 +50,7 @@ const PopularCategories = () => {
       ) : (
         <Asset spinner />
       )}
-    </Container>
+    </div>
   );
 };
 

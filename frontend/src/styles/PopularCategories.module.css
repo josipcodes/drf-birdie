@@ -13,3 +13,9 @@
     margin: 15px;
     display: block;
   }
+
+  @media (max-width: 767px) { 
+    .Header {
+      text-align: right;
+      }
+}
