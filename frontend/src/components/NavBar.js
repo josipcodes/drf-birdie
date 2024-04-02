@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/birdie.png";
 import styles from "../styles/NavBar.module.css";
@@ -9,33 +9,17 @@ import axios from "axios";
 import { removeTokenTimestamp } from "../utils/utils";
 import useScreenWidth from "../hooks/useScreenWidth"
 import PopularCategories from "./PopularCategories";
+import useNavBarToggle from "../hooks/useNavBarToggle";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
   console.log("currentUser", currentUser)
   const setCurrentUser = useSetCurrentUser();
 
-    // menu is initially collapsed
-    const [expanded, setExpanded] = useState(false);
-    const ref = useRef(null);
+  const { expanded, setExpanded, ref } = useNavBarToggle();
 
   // screen width check
   const smallScreen = useScreenWidth();
-
-  // created following Moments lessons
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      console.log(ref)
-      if (ref.current && !ref.current.contains(e.target)){
-        setExpanded(false)
-      }
-    }
-    document.addEventListener('mouseup', handleClickOutside)
-    return () => {
-      document.removeEventListener('mouseup', handleClickOutside)
-    }
-  }, [ref])
-
 
   const handleLogOut = async () => {
     /* handles logging user out
