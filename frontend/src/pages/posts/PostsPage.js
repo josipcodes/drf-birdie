@@ -16,6 +16,9 @@ import PopularCategories from "../../components/PopularCategories";
 
 import useScreenWidth from "../../hooks/useScreenWidth";
 
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
+
 // modelled after Moments lessons
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
@@ -63,11 +66,27 @@ function PostsPage({ message, filter = "" }) {
           // nested ternary to display posts or message.
           <>
             {posts.results.length ? (
+              <InfiniteScroll
+              // child component will tell our Infinite Scroll component which child components we want it to render.
+              children={
+
               // map over posts and render each one
               posts.results.map((post) => (
                 // setPosts is needed to like posts.
                 <Post key={post.id} {...post} setPosts={setPosts} />
-              ))
+              ))}
+              // how many posts are displayed
+              dataLength={posts.results.length}
+              // loader
+              loader={<Asset spinner />}
+              // check if there is more data to display
+              // we use double not operator, returns true for truthy and false for falsy values
+              // next is set to null if there are no more posts left
+              hasMore={!!posts.next}
+              // if hasMore is true, loads more
+              next={fetchMoreData(posts, setPosts)}
+            />
+
             ) : (
               // show no results asset
               <Container className={appStyles.Content}>
