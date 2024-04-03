@@ -20,7 +20,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 
 // modelled after Moments lessons
-function PostsPage({ message, filter = "" }) {
+function PostsPage({ message, filter = "", selectedCategory="" }) {
   const [posts, setPosts] = useState({ results: [] });
   // keeping track if all data has loaded
   const [isLoaded, setIsLoaded] = useState(false);
@@ -105,7 +105,7 @@ function PostsPage({ message, filter = "" }) {
       {!smallScreen && (
         // display popular categories when on desktop
         <Col md={4} className="p-md-2">
-          <PopularCategories />
+          <PopularCategories selectedCategory={selectedCategory} />
         </Col>
       )}
     </Row>

@@ -6,12 +6,11 @@ import Asset from ".././components/Asset";
 import styles from ".././styles/PopularCategories.module.css"
 import { Link } from "react-router-dom";
 
-import {useSelectedCategory, useSetSelectedCategory } from "../contexts/SelectedCategoryContext";
+import { useSetSelectedCategory } from "../contexts/SelectedCategoryContext";
 
-const PopularCategories = () => {
+const PopularCategories = ({selectedCategory}) => {
   const [categories, setCategories] = useState("");
 
-  const selectedCategory = useSelectedCategory()
   const setSelectedCategory = useSetSelectedCategory()
 
 
@@ -39,7 +38,7 @@ const PopularCategories = () => {
 
   return (
     <div className={`${appStyles.Content}`}>
-      {categories.results?.length ? (
+      {categories?.results?.length ? (
         <>
         {/* display categories in the order of popularity */}
           <h1 className={styles.Header}>Popular categories</h1>
