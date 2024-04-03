@@ -12,6 +12,7 @@ import PostsPage from "./pages/posts/PostsPage";
 import PostEditForm from "./pages/posts/PostEditForm";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import { useSelectedCategory } from "./contexts/SelectedCategoryContext";
+import ProfilePage from "./pages/profiles/ProfilePage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -79,6 +80,7 @@ function App() {
               <PostsPage
                 message="No results found. Adjust your search keyword or save a post."
                 filter={`category_id=${selectedCategory}&ordering=-created&`}
+                selectedCategory={selectedCategory}
               />
             )}
           />
@@ -87,6 +89,7 @@ function App() {
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
           <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
+          <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route render={() => <PageNotFound />} />
         </Switch>
       </Container>

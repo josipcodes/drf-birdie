@@ -1,0 +1,23 @@
+/* temporarily copied from Moments */
+.ProfileAvatar {
+    object-fit: cover;
+    height: 100px;
+    width: 100px;
+  }
+
+  .ProfileUsername {
+    color: #fcd619;
+    text-align: left;
+    margin-left: 15px;
+  }
+
+  .ProfileText {
+    color: #f8f8f8;
+  }
+ 
+  @media (max-width: 991px) { 
+    .ProfileUsername {
+      text-align: center;
+      margin-top: 10px;
+      }
+}
