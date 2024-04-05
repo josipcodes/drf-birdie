@@ -17,6 +17,9 @@ import { useParams } from "react-router-dom";
 import { Button, Image } from "react-bootstrap";
 
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import Post from "../posts/Post";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
 
 // built following Moments lessons, with major changes
 function ProfilePage() {
@@ -112,7 +115,7 @@ function ProfilePage() {
   };
 
   const mainProfile = (
-      <Row noGutters className="text-center">
+      <Row noGutters className={`text-center ${appStyles.Content}`}>
         <Col md={2} className=" mt-1 offset-lg-0">
           <Image
             className={`${styles.ProfileAvatar}`}
@@ -171,14 +174,29 @@ function ProfilePage() {
 
   const mainProfilePosts = (
     <>
-      <p>Owner's posts</p>
+      {currentPosts.results.length ? (
+        <InfiniteScroll
+          children={currentPosts.results.map((post) => (
+            <Post key={post.id} {...post} className={appStyles.Content} />
+          ))}
+          dataLength={currentPosts.results.length}
+          loader={<Asset spinner />}
+          hasMore={!!currentPosts.next}
+          next={() => fetchMoreData(currentPosts, currentPosts)}
+        />
+      ) : (
+        <Asset
+          message={`${currentProfile?.owner} hasn't posted yet.`}
+        />
+      )}
     </>
+
   );
 
   return (
     <Row>
       <Col className="py-2 p-md-1" md={8}>
-        <Container className={`${appStyles.Content}`}>
+        <Container >
           {isLoaded ? (
             <>
               {mainProfile}
