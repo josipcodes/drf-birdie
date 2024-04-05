@@ -60,7 +60,7 @@ function LoginForm() {
   return (
     <Row className={styles.Row}>
       <Col className="my-auto p-md-2" md={5}>
-        <Container className={`${appStyles.Content} p-4 `}>
+        <Container className={`${appStyles.Content} p-4`}>
           <h1 className={styles.Header}>Sign in</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">
@@ -74,7 +74,7 @@ function LoginForm() {
               onChange={handleChange}
               />
             </Form.Group>
-            {errors.username?.map((message, idx) => (
+            {errors?.username?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                     {message}
                 </Alert>
@@ -90,8 +90,8 @@ function LoginForm() {
                 onChange={handleChange}
               />
             </Form.Group>
-            {errors.password?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
+            {errors?.password?.map((message, idx) => (
+                <Alert key={idx} variant="warning">
                     {message}
                 </Alert>
             ))}
@@ -101,7 +101,7 @@ function LoginForm() {
             >
               Login
             </Button>
-            {errors.non_field_errors?.map((message, idx) => (
+            {errors?.non_field_errors?.map((message, idx) => (
                 <Alert variant="warning" key={idx} className="mt-3">
                     {message}
                 </Alert>

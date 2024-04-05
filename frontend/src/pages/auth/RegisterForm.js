@@ -47,7 +47,7 @@ const RegisterForm = () => {
 
   return (
     <Row className={styles.Row}>
-      <Col className={`${styles.RegisterCol} my-auto p-md-2`} md={5}>
+      <Col className={`${styles.AuthCol} my-auto p-md-2`} md={5}>
         <Container className={`${appStyles.Content} p-4`}>
           <h1 className={styles.Header}>Sign up</h1>
           <Form onSubmit={handleSubmit}>
@@ -62,7 +62,7 @@ const RegisterForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
-            {errors.username?.map((message, idx) => (
+            {errors?.username?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                     {message}
                 </Alert>
@@ -78,7 +78,7 @@ const RegisterForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
-            {errors.password1?.map((message, idx) => (
+            {errors?.password1?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                     {message}
                 </Alert>
@@ -94,7 +94,7 @@ const RegisterForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
-            {errors.password2?.map((message, idx) => (
+            {errors?.password2?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                     {message}
                 </Alert>
@@ -105,7 +105,7 @@ const RegisterForm = () => {
             >
               Register
             </Button>
-            {errors.non_field_errors?.map((message, idx) => (
+            {errors?.non_field_errors?.map((message, idx) => (
                 <Alert variant="warning" key={idx} className="mt-3">
                     {message}
                 </Alert>
