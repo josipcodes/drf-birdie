@@ -18,143 +18,94 @@ import { Button, Image } from "react-bootstrap";
 
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-// built following Moments lessons
+// built following Moments lessons, with major changes
 function ProfilePage() {
   const [isLoaded, setIsLoaded] = useState(false);
-  // const [refresh, setRefresh] = useState(false);
   // extracting id from the url to know which profile to fetch
   const { id } = useParams();
 
-  const [profileData, setProfileData] = useState({
-    userProfiles: { results: [] },
-  });
 
   const [currentProfile, setCurrentProfile] = useState()
   const [currentPosts, setCurrentPosts] = useState({ results: [] })
   const currentUser = useCurrentUser();
+  const [currentUserProfile, setCurrentUserProfile] = useState()
 
   // screen width check
   const smallScreen = useScreenWidth();
 
-
-
-  // const is_owner = currentUser?.username === profile?.owner;
-
-  // const handleFollow = async (clickedProfile) => {
-  //   console.log(clickedProfile);
-  //   try {
-  //     // destructuring data property from the response object
-  //     const { data } = await axiosResponse.post("/followers/", {
-  //       // data sent is what profile user followed
-  //       followed: clickedProfile.id,
-  //     });
-  //     return profile.id === clickedProfile.id
-  //       ? // this is the profile user clicked on,
-  //         // update its followers count and set its following id
-  //         {
-  //           ...profile,
-  //           followers_count: profile.followers_count + 1,
-  //           following_id: data.id,
-  //         }
-  //       : currentUser.is_owner
-  //       ? // This is the profile of the logged in user
-  //         // update its following count
-  //         { ...currentUser, following_count: currentUser.following_count + 1 }
-  //       : // this is not the profile the user clicked on or the profile
-  //         // the user owns, so just return it unchanged
-  //         profile;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  //   setRefresh(!refresh)
-  // };
-
-  //   const handleUnfollow = async (clickedProfile) => {
-  //   console.log(clickedProfile)
-  //   try {
-  //     await axiosResponse.delete(`/followers/${clickedProfile.following_id}/`);
-  //     // setProfileData((prevState) => ({
-  //     //   ...prevState.pageProfiles,
-  //     //   results: prevState.pageProfiles.results?.map((profile) => {
-  //       setRefresh(!refresh)
-  //         return profile.id === clickedProfile.id
-  //           ? // This is the profile user clicked on,
-  //             // update its followers count and remove its following id
-  //             {
-  //               ...profile,
-  //               followers_count: profile.followers_count - 1,
-  //               // setting following id to null
-  //               following_id: null,
-  //             }
-  //           : profile.is_owner
-  //           ? // This is the profile of the logged in user
-  //             // update its following count
-  //             { ...profile, following_count: profile.following_count - 1 }
-  //           : // this is not the profile the user clicked on or the profile
-  //             // the user owns, so just return it unchanged
-  //             profile;
-  //     //   }),
-  //     // }));
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const fetchProfile = async () => {
-  //     try {
-  //       const [selectedProfileData, currentUserProfileData] = await Promise.all([
-  //         axiosRequest.get(`/profiles/${id}/`),
-  //         axiosRequest.get(`/profiles/${currentUser?.profile_id}/`),
-  //       ])
-  //       if (selectedProfileData && currentUserProfileData) {
-  //       setProfileData({
-  //         selectedProfile: selectedProfileData.response,
-  //         currentUserProfile: currentUserProfileData.response
-  //       })}
-  //       console.log(profileData)
-  //       // setIsLoaded was set to true so the spinner is switched off and we can see the layout
-  //       setIsLoaded(true);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   fetchProfile();
-  // }, [id]);
-
-  useEffect(() => {
-    FetchProfileData();
-    // FetchPosts()
-    // handleMount();
-    setIsLoaded(true)
-  }, [id]);
-
-  // const handleMount = async () => {
-  //   try {
-  //     const { data } = await axiosRequest.get(
-  //       // most followed profile will be at the top, but realistically, tbd if we want to change it
-  //       "/profiles/"
-  //     );
-  //     setProfileData((prevState) => ({
-  //       ...prevState,
-  //       userProfiles: data,
-  //     }));
-  //     console.log(profileData);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   const FetchProfileData = async () => {
+    /* Function fetches current profile
+    and current profile posts */
     try {
       const [profile, posts] = await Promise.all([
         axiosRequest.get(`/profiles/${id}/`),
-        axiosRequest.get(`/posts/?.owner__profile=${id}/`)
+        axiosRequest.get(`/posts/?.owner__profile=${id}/`),
       ])
       setCurrentProfile(profile.data);
       setCurrentPosts(posts.data);
-      console.log(currentProfile);
-      console.log(currentPosts);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const FetchCurrentUserProfile = async () => {
+    /* Function fetches current user profile */
+    try {
+      console.log("id", currentUser.profile_id)
+      const profile = await axiosRequest.get(`/profiles/${currentUser.profile_id}/`);
+      console.log(profile.data)
+      setCurrentUserProfile(profile.data)
+      console.log("CURRENT USER PROFILE", currentUserProfile);
+    } catch (err) {
+      console.log(err);
+  };
+}
+
+  useEffect(() => {
+    FetchProfileData();
+    if (currentUser) {
+      FetchCurrentUserProfile();
+    }
+    setIsLoaded(true)
+  }, [id, currentUser?.profile_id]);
+
+  const handleFollow = async () => {
+    /* Function updates current profile and 
+    current user profile data after following them */
+    try {
+      // destructuring data property from the response object
+      const { data } = await axiosResponse.post("/followers/", {
+        // data sent is what profile user followed
+        followed: currentProfile.id,
+      });
+      setCurrentProfile(prevCurrentProfile => ({
+        ...prevCurrentProfile,
+        followers_count: currentProfile.followers_count + 1,
+        following_id: data.id,
+    }))
+    setCurrentUserProfile(prevCurrentUserProfile => ({
+      ...prevCurrentUserProfile,
+      following_count: currentUserProfile.followers_count + 1,
+    }))
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+    const handleUnfollow = async () => {
+    /* Function updates current profile and 
+    current user profile data after following them */
+    try {
+      await axiosResponse.delete(`/followers/${currentProfile.following_id}/`);
+      setCurrentProfile(prevCurrentProfile => ({
+        ...prevCurrentProfile,
+        followers_count: currentProfile.followers_count - 1,
+        following_id: null,
+      }))
+      setCurrentUserProfile(prevCurrentUserProfile => ({
+        ...prevCurrentUserProfile,
+        following_count: currentUserProfile.followers_count - 1,
+      }))
     } catch (err) {
       console.log(err);
     }
@@ -176,19 +127,18 @@ function ProfilePage() {
           md={3}
           className="mt-1 offset-md-2 text-lg-right d-flex justify-content-end pr-3"
         >
-          {currentUser &&
-            // !is_owner &&
+          {currentUser && !currentProfile?.is_owner &&
             (currentProfile?.following_id ? (
               <Button
                 className={bttnStyles.Button}
-                // onClick={() => handleUnfollow(profile)}
+                onClick={handleUnfollow}
               >
                 Unfollow
               </Button>
             ) : (
               <Button
                 className={bttnStyles.Button}
-                // onClick={handleFollow(profile)}
+                onClick={handleFollow}
               >
                 Follow
               </Button>
