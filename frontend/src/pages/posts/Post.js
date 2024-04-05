@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
-import { MoreDropdown } from "../../components/PostDropdown";
+import { MoreDropdown } from "../../components/Dropdowns";
 import { axiosResponse } from "../../api/axiosDefaults";
 
 // temporarily copied from Moments, modified

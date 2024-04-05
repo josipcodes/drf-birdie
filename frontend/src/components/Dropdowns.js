@@ -1,6 +1,6 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
-import styles from "../styles/PostDropdown.module.css";
+import styles from "../styles/Dropdowns.module.css";
 import { useHistory } from "react-router";
 
 // copied from Moments!
@@ -51,27 +51,27 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
 export function ProfileEditDropdown({ id }) {
   const history = useHistory();
   return (
-    <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
+    <Dropdown className={`px-3 m-4 ${styles.Absolute}`} drop="left">
       <Dropdown.Toggle as={ThreeDots} />
-      <Dropdown.Menu>
+      <Dropdown.Menu className={`text-center ${styles.DropdownBackground}`}>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit`)}
           aria-label="edit-profile"
         >
-          <i className="fas fa-edit" /> edit profile
+          <i className={`fas fa-edit ${styles.DropdownIcon}`} /> edit profile
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit/username`)}
           aria-label="edit-username"
         >
-          <i className="far fa-id-card" />
+          <i className={`far fa-id-card ${styles.DropdownIcon}`} />
           Change username
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit/password`)}
           aria-label="edit-password"
         >
-          <i className="fas fa-key" />
+          <i className={`fas fa-key ${styles.DropdownIcon}`}/>
           Change password
         </Dropdown.Item>
       </Dropdown.Menu>

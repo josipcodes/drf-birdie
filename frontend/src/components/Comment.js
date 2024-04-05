@@ -7,7 +7,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import useScreenWidth from "../hooks/useScreenWidth";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
-import { MoreDropdown } from "./PostDropdown";
+import { MoreDropdown } from "./Dropdowns";
 import { axiosResponse } from "../api/axiosDefaults";
 
 import CommentEditForm from "../pages/comments/CommentEditForm";
