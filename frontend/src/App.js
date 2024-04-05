@@ -13,6 +13,9 @@ import PostEditForm from "./pages/posts/PostEditForm";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import { useSelectedCategory } from "./contexts/SelectedCategoryContext";
 import ProfilePage from "./pages/profiles/ProfilePage";
+import EditUsernameForm from "./pages/profiles/EditUsernameForm";
+import EditPasswordForm from "./pages/profiles/EditPasswordForm";
+import EditProfileForm from "./pages/profiles/EditProfileForm";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -90,6 +93,21 @@ function App() {
           <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+          <Route
+            exact
+            path="/profiles/:id/edit/username"
+            render={() => <EditUsernameForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit/password"
+            render={() => <EditPasswordForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit"
+            render={() => <EditProfileForm />}
+          />
           <Route render={() => <PageNotFound />} />
         </Switch>
       </Container>

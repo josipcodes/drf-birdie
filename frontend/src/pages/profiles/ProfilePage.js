@@ -20,6 +20,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Post from "../posts/Post";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
+import { ProfileEditDropdown } from "../../components/Dropdowns";
 
 // built following Moments lessons, with major changes
 function ProfilePage() {
@@ -115,6 +116,8 @@ function ProfilePage() {
   };
 
   const mainProfile = (
+    <>
+    {currentProfile?.is_owner && <ProfileEditDropdown id={currentProfile?.id} />}
       <Row noGutters className={`text-center ${appStyles.Content}`}>
         <Col md={2} className=" mt-1 offset-lg-0">
           <Image
@@ -170,6 +173,7 @@ function ProfilePage() {
           </Row>
         </Col>
       </Row>
+      </>
   );
 
   const mainProfilePosts = (
