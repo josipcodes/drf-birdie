@@ -10,7 +10,7 @@ import Alert from "react-bootstrap/Alert";
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import authStyles from "../../styles/AuthForm.module.css";
-import btnStyles from "../../styles/Button.module.css";
+import bttnStyles from "../../styles/Button.module.css";
 
 import Asset from "../../components/Asset";
 import { Image } from "react-bootstrap";
@@ -175,7 +175,7 @@ function PostCreateForm() {
         </figure>
         <div className="mr-auto text-right">
           <Form.Label
-            className={`${btnStyles.Button} btn`}
+            className={`${bttnStyles.Button} btn`}
             htmlFor="image-upload"
           >
             Change the image
@@ -184,7 +184,7 @@ function PostCreateForm() {
       </>
     ) : (
       <Form.Label
-        className={`${btnStyles.Button} text-center ${smallScreen ? styles.ButtonRight : btnStyles.Wide}`}
+        className={`${bttnStyles.Button} text-center ${smallScreen ? styles.ButtonRight : bttnStyles.Wide}`}
         htmlFor="image-upload"
       >
         <Asset
@@ -211,12 +211,12 @@ function PostCreateForm() {
   const buttonField = (
     <div className="text-right">
     <Button
-    className={`${btnStyles.Button} m-2`}
+    className={`${bttnStyles.Button} m-2`}
     onClick={() => history.goBack()}
   >
     Cancel
   </Button>
-  <Button className={`${btnStyles.Button} m-2`} type="submit">
+  <Button className={`${bttnStyles.Button} m-2`} type="submit">
     Post
   </Button>
   </div>

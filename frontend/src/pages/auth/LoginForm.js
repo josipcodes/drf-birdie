@@ -11,7 +11,7 @@ import Container from "react-bootstrap/Container";
 import { Link, useHistory } from "react-router-dom";
 
 import styles from "../../styles/AuthForm.module.css";
-import btnStyles from "../../styles/Button.module.css";
+import bttnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import bird from "../../assets/bird.jpg";
 import axios from "axios";
@@ -97,7 +97,7 @@ function LoginForm() {
             ))}
             <Button
               type="submit"
-              className={`${btnStyles.Button} ${btnStyles.Wide}`}
+              className={`${bttnStyles.Button} ${bttnStyles.Wide}`}
             >
               Login
             </Button>

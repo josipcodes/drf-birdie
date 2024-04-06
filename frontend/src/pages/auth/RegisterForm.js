@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import styles from "../../styles/AuthForm.module.css";
-import btnStyles from "../../styles/Button.module.css";
+import bttnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import bird from "../../assets/bird.jpg";
 
@@ -100,7 +100,7 @@ const RegisterForm = () => {
                 </Alert>
             ))}
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Wide}`}
+              className={`${bttnStyles.Button} ${bttnStyles.Wide}`}
               type="submit"
             >
               Register

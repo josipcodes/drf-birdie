@@ -12,7 +12,7 @@ import Asset from "../../components/Asset";
 
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
-import btnStyles from "../../styles/Button.module.css";
+import bttnStyles from "../../styles/Button.module.css";
 import authStyles from "../../styles/AuthForm.module.css";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
@@ -197,7 +197,7 @@ function PostEditForm() {
             </figure>
             <div className="mr-auto text-right">
               <Form.Label
-                className={`${btnStyles.Button} btn`}
+                className={`${bttnStyles.Button} btn`}
                 htmlFor="image-upload"
               >
                 Change the image
@@ -206,8 +206,8 @@ function PostEditForm() {
           </>
         ) : (
           <Form.Label
-            className={`${btnStyles.Button} text-center ${
-              smallScreen ? styles.ButtonRight : btnStyles.Wide
+            className={`${bttnStyles.Button} text-center ${
+              smallScreen ? styles.ButtonRight : bttnStyles.Wide
             }`}
             htmlFor="image-upload"
           >
@@ -233,12 +233,12 @@ function PostEditForm() {
   const buttonField = (
     <div className="text-right">
       <Button
-        className={`${btnStyles.Button} m-2`}
+        className={`${bttnStyles.Button} m-2`}
         onClick={() => history.goBack()}
       >
         Cancel
       </Button>
-      <Button className={`${btnStyles.Button} m-2`} type="submit">
+      <Button className={`${bttnStyles.Button} m-2`} type="submit">
         Update
       </Button>
     </div>
