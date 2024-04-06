@@ -33,8 +33,11 @@ const Post = (props) => {
     saved_count,
     // adding prop from PostPage.js
     postPage,
-    // passed from a parent component to update the likes count.
+    // adding prop from ProfilePage.js
+    profilePage,
+    // passed from parent components to update the likes/saves.
     setPosts,
+    setCurrentPosts,
   } = props;
 
   const currentUser = useCurrentUser();
@@ -60,79 +63,161 @@ const Post = (props) => {
 
   // built based off of Moments lessons with changes
   const handleSave = async () => {
-    /* Function saves a post, increases the number of saves on the post */
-    try {
-      // save id is needed so the API knows which post is being saved
-      const { data } = await axiosResponse.post("/saved/", { post: id });
-      setPosts((prevPosts) => ({
-        ...prevPosts,
-        results: prevPosts.results.map((post) => {
-          // using ternary to check if the post id matches the post we saved.
-          // if it does, we'll add to the count, otherwise we return post so map can continue checking.
-          return post.id === id
-            ? { ...post, saved_count: post.saved_count + 1, saved_id: data.id }
-            : post;
-        }),
-      }));
-    } catch (err) {
-      console.log(err);
+    if (profilePage) {
+      /* Function saves a post, increases the number of saves on the post */
+      try {
+        // save id is needed so the API knows which post is being saved
+        const { data } = await axiosResponse.post("/saved/", { post: id });
+        setCurrentPosts((prevPosts) => ({
+          ...prevPosts,
+          results: prevPosts.results.map((post) => {
+            // using ternary to check if the post id matches the post we saved.
+            // if it does, we'll add to the count, otherwise we return post so map can continue checking.
+            return post.id === id
+              ? {
+                  ...post,
+                  saved_count: post.saved_count + 1,
+                  saved_id: data.id,
+                }
+              : post;
+          }),
+        }));
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      /* Function saves a post, increases the number of saves on the post */
+      try {
+        // save id is needed so the API knows which post is being saved
+        const { data } = await axiosResponse.post("/saved/", { post: id });
+        setPosts((prevPosts) => ({
+          ...prevPosts,
+          results: prevPosts.results.map((post) => {
+            // using ternary to check if the post id matches the post we saved.
+            // if it does, we'll add to the count, otherwise we return post so map can continue checking.
+            return post.id === id
+              ? {
+                  ...post,
+                  saved_count: post.saved_count + 1,
+                  saved_id: data.id,
+                }
+              : post;
+          }),
+        }));
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
   // built based off of Moments lessons with changes
   const handleUnsave = async () => {
-    /* Function unsaves a post, decreases the number of saves on the post */
-    try {
-      await axiosResponse.delete(`/saved/${saved_id}/`);
-      setPosts((prevPosts) => ({
-        ...prevPosts,
-        results: prevPosts.results.map((post) => {
-          return post.id === id
-            ? { ...post, saved_count: post.saved_count - 1, saved_id: null }
-            : post;
-        }),
-      }));
-    } catch (err) {
-      console.log(err);
+    if (profilePage) {
+      /* Function unsaves a post, decreases the number of saves on the post */
+      try {
+        await axiosResponse.delete(`/saved/${saved_id}/`);
+        setCurrentPosts((prevPosts) => ({
+          ...prevPosts,
+          results: prevPosts.results.map((post) => {
+            return post.id === id
+              ? { ...post, saved_count: post.saved_count - 1, saved_id: null }
+              : post;
+          }),
+        }));
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      /* Function unsaves a post, decreases the number of saves on the post */
+      try {
+        await axiosResponse.delete(`/saved/${saved_id}/`);
+        setPosts((prevPosts) => ({
+          ...prevPosts,
+          results: prevPosts.results.map((post) => {
+            return post.id === id
+              ? { ...post, saved_count: post.saved_count - 1, saved_id: null }
+              : post;
+          }),
+        }));
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
   // built based off of Moments lessons
   const handleLike = async () => {
-    /* Function likes a post, increases the number of likes on the post */
-    try {
-      // like id is needed so the API knows which post is being liked
-      const { data } = await axiosResponse.post("/likes/", { post: id });
-      setPosts((prevPosts) => ({
-        ...prevPosts,
-        results: prevPosts.results.map((post) => {
-          // using ternary to check if the post id matches the post we liked.
-          // if it does, we'll add to the count, otherwise we return post so map can continue checking.
-          return post.id === id
-            ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
-            : post;
-        }),
-      }));
-    } catch (err) {
-      console.log(err);
+    if (profilePage) {
+      /* Function likes a post, increases the number of likes on the post */
+      try {
+        // like id is needed so the API knows which post is being liked
+        const { data } = await axiosResponse.post("/likes/", { post: id });
+        setCurrentPosts((prevPosts) => ({
+          ...prevPosts,
+          results: prevPosts.results.map((post) => {
+            // using ternary to check if the post id matches the post we liked.
+            // if it does, we'll add to the count, otherwise we return post so map can continue checking.
+            return post.id === id
+              ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
+              : post;
+          }),
+        }));
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      /* Function likes a post, increases the number of likes on the post */
+      try {
+        // like id is needed so the API knows which post is being liked
+        const { data } = await axiosResponse.post("/likes/", { post: id });
+        setPosts((prevPosts) => ({
+          ...prevPosts,
+          results: prevPosts.results.map((post) => {
+            // using ternary to check if the post id matches the post we liked.
+            // if it does, we'll add to the count, otherwise we return post so map can continue checking.
+            return post.id === id
+              ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
+              : post;
+          }),
+        }));
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
   // built based off of Moments lessons
   const handleUnlike = async () => {
-    /* Function unlikes a post, decreases the number of likes on the post */
-    try {
-      await axiosResponse.delete(`/likes/${like_id}/`);
-      setPosts((prevPosts) => ({
-        ...prevPosts,
-        results: prevPosts.results.map((post) => {
-          return post.id === id
-            ? { ...post, likes_count: post.likes_count - 1, like_id: null }
-            : post;
-        }),
-      }));
-    } catch (err) {
-      console.log(err);
+    if (profilePage) {
+      /* Function unlikes a post, decreases the number of likes on the post */
+      try {
+        await axiosResponse.delete(`/likes/${like_id}/`);
+        setCurrentPosts((prevPosts) => ({
+          ...prevPosts,
+          results: prevPosts.results.map((post) => {
+            return post.id === id
+              ? { ...post, likes_count: post.likes_count - 1, like_id: null }
+              : post;
+          }),
+        }));
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      /* Function unlikes a post, decreases the number of likes on the post */
+      try {
+        await axiosResponse.delete(`/likes/${like_id}/`);
+        setPosts((prevPosts) => ({
+          ...prevPosts,
+          results: prevPosts.results.map((post) => {
+            return post.id === id
+              ? { ...post, likes_count: post.likes_count - 1, like_id: null }
+              : post;
+          }),
+        }));
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -172,9 +257,7 @@ const Post = (props) => {
             <span className={`text-left ${styles.PostText}`}>{content}</span>
           )}
           {/* reminder, image is not mandatory */}
-          {image && (
-              <Card.Img className={styles.PostImage} src={image} />
-          )}
+          {image && <Card.Img className={styles.PostImage} src={image} />}
         </Link>
       </Card.Body>
       <Card.Body>
@@ -224,7 +307,7 @@ const Post = (props) => {
                 </Link>
               </Col>
               <Col>
-                {currentUser && (
+                {currentUser && !is_owner && (
                   <span
                     onClick={saved_id == null ? handleSave : handleUnsave}
                     className={styles.IconText}
