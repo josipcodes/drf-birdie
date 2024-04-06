@@ -43,7 +43,7 @@ function ProfilePage() {
     try {
       const [profile, posts] = await Promise.all([
         axiosRequest.get(`/profiles/${id}/`),
-        axiosRequest.get(`/posts/?.owner__profile=${id}/`),
+        axiosRequest.get(`/posts/?owner__profile=${id}`)
       ])
       setCurrentProfile(profile.data);
       setCurrentPosts(posts.data);
@@ -153,24 +153,28 @@ function ProfilePage() {
         </Col>
         <Col className={`${styles.ProfileText} align-content-center`}>
           {/* user stats */}
-          <Row className="justify-content-center no-gutters">
-            <Col xs={3} className="mt-2">
+          <Row className="justify-content-center no-gutters mt-2">
+            <Col xs={3} className="pr-4">
               <div>{currentProfile?.posts_count}</div>
               <span>Posts</span>
             </Col>
-            <Col xs={3} className="mt-2">
+            <Col xs={3} className="pr-2">
               <div>{currentProfile?.followers_count}</div>
               <span>Followers</span>
             </Col>
-            <Col xs={3} className="mt-2">
+            <Col xs={3} className="pl-2">
               <div>{currentProfile?.following_count}</div>
               <span>Following</span>
             </Col>
-            <Col xs={3} className="mt-2">
+            <Col xs={3} className="pl-4">
               <div>{currentProfile?.saved_count}</div>
-              <span>Saved posts</span>
+              <span>Status</span>
             </Col>
           </Row>
+        </Col>
+          <Col xs={12} className={`${styles.ProfileText} text-left mt-3`}>
+        <div><strong>Name: </strong>{currentProfile?.name}</div>
+        <div className="mt-2"><strong>Bio: </strong>{currentProfile?.bio}</div>
         </Col>
       </Row>
       </>
@@ -181,7 +185,7 @@ function ProfilePage() {
       {currentPosts.results.length ? (
         <InfiniteScroll
           children={currentPosts.results.map((post) => (
-            <Post key={post.id} {...post} className={appStyles.Content} />
+            <Post key={post.id} {...post} className={appStyles.Content} setCurrentPosts={setCurrentPosts} profilePage />
           ))}
           dataLength={currentPosts.results.length}
           loader={<Asset spinner />}
