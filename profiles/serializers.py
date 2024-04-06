@@ -16,7 +16,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     saved_count = serializers.ReadOnlyField()
 
 
-    def validate_avatar(self, values):
+    def validate_avatar(self, value):
         # 2MB
         if value.size > 1024 * 1024 * 2:
             raise serializers.ValidationError(
