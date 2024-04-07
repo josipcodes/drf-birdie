@@ -20,7 +20,7 @@ import EditProfileForm from "./pages/profiles/EditProfileForm";
 function App() {
   const currentUser = useCurrentUser();
   const selectedCategory = useSelectedCategory();
-  console.log("app.js", selectedCategory)
+  console.log("app.js", selectedCategory);
 
   // need profile_id to filter the posts by.
   // defaults to an empty string if current user details are still being fetched.
@@ -33,7 +33,7 @@ function App() {
         <Switch>
           {/* home, feed and liked routes modelled after Moments code */}
           <Route
-           className={styles.Content}
+            className={styles.Content}
             exact
             path="/"
             render={() => (
@@ -41,7 +41,6 @@ function App() {
               <PostsPage message="No results found." />
             )}
           />
-          {/* feed and liked routes copied from Moments with minor changes */}
           <Route
             exact
             path="/feed"
@@ -75,13 +74,13 @@ function App() {
               />
             )}
           />
-                    <Route
+          <Route
             exact
             path="/categories/:id/posts"
             render={() => (
               // message for when search brings up no results.
               <PostsPage
-                message="No results found. Adjust your search keyword or save a post."
+                message="No results found."
                 filter={`category_id=${selectedCategory}&ordering=-created&`}
                 selectedCategory={selectedCategory}
               />
