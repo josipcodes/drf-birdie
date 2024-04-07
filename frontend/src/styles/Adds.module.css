@@ -1,0 +1,10 @@
+.AddImage {
+    /* object fit will make sure avatar fits the container */
+    object-fit: fit;
+    max-width: 100%;
+  }
+
+.AddText {
+    color: #fcd619;
+    justify-content: center;
+}
