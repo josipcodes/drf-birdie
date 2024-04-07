@@ -18,6 +18,7 @@ import Comment from "../../components/Comment";
 import PopularCategories from "../../components/PopularCategories";
 
 import useScreenWidth from "../../hooks/useScreenWidth";
+import Add from "../../components/Add";
 
 // modelled after Moments lessons
 function PostPage() {
@@ -104,6 +105,7 @@ function PostPage() {
         // display popular categories when on desktop
         <Col md={4} className="p-md-2">
           <PopularCategories />
+          <Add />
         </Col>
       )}
     </Row>

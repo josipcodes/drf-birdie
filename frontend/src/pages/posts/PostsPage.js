@@ -18,9 +18,10 @@ import useScreenWidth from "../../hooks/useScreenWidth";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
+import Add from "../../components/Add";
 
 // modelled after Moments lessons
-function PostsPage({ message, filter = "", selectedCategory="" }) {
+function PostsPage({ message, filter = "", selectedCategory = "" }) {
   const [posts, setPosts] = useState({ results: [] });
   // keeping track if all data has loaded
   const [isLoaded, setIsLoaded] = useState(false);
@@ -67,26 +68,25 @@ function PostsPage({ message, filter = "", selectedCategory="" }) {
           <>
             {posts.results.length ? (
               <InfiniteScroll
-              // child component will tell our Infinite Scroll component which child components we want it to render.
-              children={
-
-              // map over posts and render each one
-              posts.results.map((post) => (
-                // setPosts is needed to like posts.
-                <Post key={post.id} {...post} setPosts={setPosts} />
-              ))}
-              // how many posts are displayed
-              dataLength={posts.results.length}
-              // loader
-              loader={<Asset spinner />}
-              // check if there is more data to display
-              // we use double not operator, returns true for truthy and false for falsy values
-              // next is set to null if there are no more posts left
-              hasMore={!!posts.next}
-              // if hasMore is true, loads more
-              next={fetchMoreData(posts, setPosts)}
-            />
-
+                // child component will tell our Infinite Scroll component which child components we want it to render.
+                children={
+                  // map over posts and render each one
+                  posts.results.map((post) => (
+                    // setPosts is needed to like posts.
+                    <Post key={post.id} {...post} setPosts={setPosts} />
+                  ))
+                }
+                // how many posts are displayed
+                dataLength={posts.results.length}
+                // loader
+                loader={<Asset spinner />}
+                // check if there is more data to display
+                // we use double not operator, returns true for truthy and false for falsy values
+                // next is set to null if there are no more posts left
+                hasMore={!!posts.next}
+                // if hasMore is true, loads more
+                next={fetchMoreData(posts, setPosts)}
+              />
             ) : (
               // show no results asset
               <Container className={appStyles.Content}>
@@ -106,6 +106,7 @@ function PostsPage({ message, filter = "", selectedCategory="" }) {
         // display popular categories when on desktop
         <Col md={4} className="p-md-2">
           <PopularCategories selectedCategory={selectedCategory} />
+          <Add />
         </Col>
       )}
     </Row>

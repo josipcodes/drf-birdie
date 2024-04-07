@@ -21,6 +21,7 @@ import Post from "../posts/Post";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import { ProfileEditDropdown } from "../../components/Dropdowns";
+import Add from "../../components/Add";
 
 // built following Moments lessons, with major changes
 function ProfilePage() {
@@ -69,8 +70,8 @@ function ProfilePage() {
     FetchProfileData();
     if (currentUser) {
       FetchCurrentUserProfile();
+      setIsLoaded(true)
     }
-    setIsLoaded(true)
   }, [id, currentUser?.profile_id]);
 
   const handleFollow = async () => {
@@ -210,6 +211,9 @@ function ProfilePage() {
           {isLoaded ? (
             <>
               {mainProfile}
+              {smallScreen && 
+                <Add />
+              }
               {mainProfilePosts}
             </>
           ) : (
@@ -221,6 +225,7 @@ function ProfilePage() {
         // display popular categories when on desktop
         <Col md={4} className="p-md-2">
           <PopularCategories />
+          <Add />
         </Col>
       )}
     </Row>
