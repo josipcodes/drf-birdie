@@ -193,9 +193,11 @@ function ProfilePage() {
           next={() => fetchMoreData(currentPosts, currentPosts)}
         />
       ) : (
+        <div className={`${appStyles.Content}`}>
         <Asset
           message={`${currentProfile?.owner} hasn't posted yet.`}
         />
+        </div>
       )}
     </>
 
