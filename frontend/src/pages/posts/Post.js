@@ -63,11 +63,11 @@ const Post = (props) => {
 
   // built based off of Moments lessons with changes
   const handleSave = async () => {
-    if (profilePage) {
       /* Function saves a post, increases the number of saves on the post */
       try {
         // save id is needed so the API knows which post is being saved
         const { data } = await axiosResponse.post("/saved/", { post: id });
+        if (profilePage) {
         setCurrentPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
@@ -82,14 +82,7 @@ const Post = (props) => {
               : post;
           }),
         }));
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      /* Function saves a post, increases the number of saves on the post */
-      try {
-        // save id is needed so the API knows which post is being saved
-        const { data } = await axiosResponse.post("/saved/", { post: id });
+      } else {
         setPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
@@ -104,18 +97,17 @@ const Post = (props) => {
               : post;
           }),
         }));
-      } catch (err) {
+      }} catch (err) {
         console.log(err);
       }
-    }
   };
 
   // built based off of Moments lessons with changes
   const handleUnsave = async () => {
-    if (profilePage) {
       /* Function unsaves a post, decreases the number of saves on the post */
       try {
         await axiosResponse.delete(`/saved/${saved_id}/`);
+        if (profilePage) {
         setCurrentPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
@@ -124,13 +116,7 @@ const Post = (props) => {
               : post;
           }),
         }));
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      /* Function unsaves a post, decreases the number of saves on the post */
-      try {
-        await axiosResponse.delete(`/saved/${saved_id}/`);
+      } else {
         setPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
@@ -139,19 +125,19 @@ const Post = (props) => {
               : post;
           }),
         }));
+      }
       } catch (err) {
         console.log(err);
       }
-    }
-  };
+    } 
 
   // built based off of Moments lessons
   const handleLike = async () => {
-    if (profilePage) {
       /* Function likes a post, increases the number of likes on the post */
       try {
         // like id is needed so the API knows which post is being liked
         const { data } = await axiosResponse.post("/likes/", { post: id });
+        if (profilePage) {
         setCurrentPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
@@ -162,14 +148,7 @@ const Post = (props) => {
               : post;
           }),
         }));
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      /* Function likes a post, increases the number of likes on the post */
-      try {
-        // like id is needed so the API knows which post is being liked
-        const { data } = await axiosResponse.post("/likes/", { post: id });
+      } else {
         setPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
@@ -180,18 +159,18 @@ const Post = (props) => {
               : post;
           }),
         }));
+      }
       } catch (err) {
         console.log(err);
       }
     }
-  };
 
   // built based off of Moments lessons
   const handleUnlike = async () => {
-    if (profilePage) {
       /* Function unlikes a post, decreases the number of likes on the post */
       try {
         await axiosResponse.delete(`/likes/${like_id}/`);
+        if (profilePage) {
         setCurrentPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
@@ -200,13 +179,7 @@ const Post = (props) => {
               : post;
           }),
         }));
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      /* Function unlikes a post, decreases the number of likes on the post */
-      try {
-        await axiosResponse.delete(`/likes/${like_id}/`);
+      } else {
         setPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
@@ -215,11 +188,10 @@ const Post = (props) => {
               : post;
           }),
         }));
-      } catch (err) {
+      }} catch (err) {
         console.log(err);
       }
-    }
-  };
+    } 
 
   return (
     <Card className={styles.Post}>
