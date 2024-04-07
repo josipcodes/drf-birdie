@@ -27,7 +27,7 @@ const Add = () => {
   }, []);
 
   useEffect(() => {
-    if (isLoaded && advertisements.results.length > 0) {
+    if (isLoaded && advertisements?.results && advertisements?.results?.length > 0) {
       const randomSelect = Math.floor(Math.random() * advertisements.results.length);
       setSelectedAdd(advertisements.results[randomSelect]);
     }
