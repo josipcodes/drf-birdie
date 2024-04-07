@@ -65,7 +65,7 @@ function PostPage() {
   }, [id]);
 
   return (
-    <Row>
+    <Row className="mt-2">
       <Col className="py-2 p-md-1" md={8}>
         <Post {...post.results[0]} setPosts={setPost} postPage />
         <Container

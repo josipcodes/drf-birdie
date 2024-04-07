@@ -60,7 +60,7 @@ function PostsPage({ message, filter = "", selectedCategory = "" }) {
   }, [filter, pathname, currentUser]);
 
   return (
-    <Row className="h-100">
+    <Row className="mt-2">
       <Col className="py-2 p-md-1" md={8}>
         {/* ternary to display spinner or posts */}
         {isLoaded ? (

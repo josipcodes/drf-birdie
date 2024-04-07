@@ -205,7 +205,7 @@ function ProfilePage() {
   );
 
   return (
-    <Row>
+    <Row className="mt-2">
       <Col className="py-2 p-md-1" md={8}>
         <Container >
           {isLoaded ? (
