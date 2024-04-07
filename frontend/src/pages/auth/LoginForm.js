@@ -17,10 +17,12 @@ import bird from "../../assets/bird.jpg";
 import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { setTokenTimestamp } from "../../utils/utils";
+import { useRedirect } from "../../hooks/useRedirect";
 
 // code adapted from Moments lessons
 function LoginForm() {
   const setCurrentUser = useSetCurrentUser();
+  useRedirect('loggedIn')
 
   const [signInData, setSignInData] = useState({
     username: "",
@@ -51,7 +53,8 @@ function LoginForm() {
       console.log("data.user", data.user)
       // extracting exp date from the access token, saves it to user's browser in local storage.
       setTokenTimestamp(data);
-      history.push("/")
+      // history.push("/")
+      history.goBack();
     } catch(err) {
       setErrors(err.response?.data);
     }

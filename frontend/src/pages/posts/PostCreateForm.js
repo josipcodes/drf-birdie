@@ -20,8 +20,11 @@ import { axiosRequest } from "../../api/axiosDefaults";
 
 import useScreenWidth from "../../hooks/useScreenWidth"
 
+import { useRedirect } from "../../hooks/useRedirect";
+
 // based off of Moments lessons
 function PostCreateForm() {
+  useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
 
   const [categories, setCategories] = useState("");
