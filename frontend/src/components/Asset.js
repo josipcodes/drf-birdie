@@ -6,13 +6,12 @@ import styles from "../styles/Asset.module.css";
 // minor changes applied
 const Asset = ({ spinner, src, message }) => {
   return (
-        <div className={`${styles.Asset}`}>
+    <div className={`${styles.Asset}`}>
       {spinner && <Spinner animation="border" variant="warning" />}
       {src && <img src={src} alt={message} />}
       {message && <p className={`${styles.ProfileText} mt-4`}>{message}</p>}
     </div>
   );
 };
-
 
 export default Asset;
