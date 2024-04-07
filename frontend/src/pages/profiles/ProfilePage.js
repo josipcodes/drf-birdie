@@ -67,11 +67,14 @@ function ProfilePage() {
 }
 
   useEffect(() => {
+    /* Generates a warning in the console,
+    however, moving function within useEffect does not solve the issue,
+    but makes it worse. */
     FetchProfileData();
     if (currentUser) {
       FetchCurrentUserProfile();
-      setIsLoaded(true)
     }
+    setIsLoaded(true)
   }, [id, currentUser?.profile_id]);
 
   const handleFollow = async () => {
