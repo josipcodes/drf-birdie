@@ -9,15 +9,7 @@ class AdvertisementList(generics.ListCreateAPIView):
     """
     serializer_class = AdvertisementSerializer
     queryset = Advertisement.objects.all()
-    permission_classes = [IsAdminUser]
-
-    # # tbd if permissions need updating
-    # def perform_create(self, serializer):
-    #     """
-    #     Advertisement creation
-    #     """
-    #     serializer.save()
-
+    # permission_classes = [IsAdminUser]
 
 class AdvertisementDetail(generics.RetrieveAPIView):
     """
