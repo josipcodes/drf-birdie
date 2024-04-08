@@ -8,7 +8,7 @@
  import axios from "axios";
 
 // from Moments lessons, modified
- axios.defaults.baseURL = 'api/';
+ axios.defaults.baseURL = '/api';
 
  
  // multipart as our app will deal with images, texts...
