@@ -20,7 +20,6 @@ import EditProfileForm from "./pages/profiles/EditProfileForm";
 function App() {
   const currentUser = useCurrentUser();
   const selectedCategory = useSelectedCategory();
-  console.log("app.js", selectedCategory);
 
   // need profile_id to filter the posts by.
   // defaults to an empty string if current user details are still being fetched.

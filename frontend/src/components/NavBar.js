@@ -13,7 +13,6 @@ import useNavBarToggle from "../hooks/useNavBarToggle";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
-  console.log("currentUser", currentUser)
   const setCurrentUser = useSetCurrentUser();
 
   const { expanded, setExpanded, ref } = useNavBarToggle();

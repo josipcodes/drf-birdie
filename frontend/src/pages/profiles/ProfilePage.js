@@ -23,6 +23,8 @@ import { fetchMoreData } from "../../utils/utils";
 import { ProfileEditDropdown } from "../../components/Dropdowns";
 import Add from "../../components/Add";
 
+import axios from "axios";
+
 // built following Moments lessons, with major changes
 function ProfilePage() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -43,8 +45,9 @@ function ProfilePage() {
     and current profile posts */
     try {
       const [profile, posts] = await Promise.all([
-        axiosRequest.get(`/profiles/${id}/`),
-        axiosRequest.get(`/posts/?owner__profile=${id}`)
+        axios.get(`/profiles/${id}/`),
+        // updated url temporarily due to url appearing with two api/ when fetching
+        axios.get(`posts/?owner__profile=${id}`)
       ])
       setCurrentProfile(profile.data);
       setCurrentPosts(posts.data);

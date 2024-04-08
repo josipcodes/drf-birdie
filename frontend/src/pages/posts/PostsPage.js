@@ -41,10 +41,10 @@ function PostsPage({ message, filter = "", selectedCategory = "" }) {
         // the request string will contain filter parameter, which comes from the filter prop we set in routes.
         // tells API if we want to see all posts or certain ones.
         if (currentUser == null) {
-          const { data } = await axios.get(`/posts/?${filter}/`);
+          const { data } = await axios.get(`/posts/?${filter}`);
           setPosts(data);
         } else {
-          const { data } = await axiosRequest.get(`/posts/?${filter}/`);
+          const { data } = await axiosRequest.get(`/posts/?${filter}`);
           setPosts(data);
         }
         // setting IsLoaded to true so spinner no longer spins.
@@ -56,6 +56,7 @@ function PostsPage({ message, filter = "", selectedCategory = "" }) {
     // we want spinner displayed before we fetch posts.
     setIsLoaded(false);
     // we want this called any time filter or url changes.
+    
     fetchPosts();
   }, [filter, pathname, currentUser]);
 
@@ -85,7 +86,7 @@ function PostsPage({ message, filter = "", selectedCategory = "" }) {
                 // next is set to null if there are no more posts left
                 hasMore={!!posts.next}
                 // if hasMore is true, loads more
-                next={fetchMoreData(posts, setPosts)}
+                next={() => fetchMoreData(posts, setPosts)}
               />
             ) : (
               // show no results asset

@@ -19,9 +19,11 @@ import PopularCategories from "../../components/PopularCategories";
 
 import useScreenWidth from "../../hooks/useScreenWidth";
 import Add from "../../components/Add";
+import { useRedirect } from "../../hooks/useRedirect";
 
 // modelled after Moments lessons
 function PostPage() {
+  useRedirect("loggedOut");
   const { id } = useParams();
   // setting an initial value as an empty array in useState to make all the future logic compatible with arrays of objects.
   // this way it doesn't matter if we're getting a single object or array of posts.
@@ -48,14 +50,11 @@ function PostPage() {
           // fetching the comments
           axiosRequest.get(`/comments/?post=${id}`),
         ]);
-        console.log("post", post);
         // using setPost func to update the results array in the state to contain a post
         setPost({ results: [post] });
         // setting Comments
         setComments(comments);
-        console.log("comments", comments);
         // clg post to check that this is working
-        console.log(post);
       } catch (err) {
         console.log(err);
       }

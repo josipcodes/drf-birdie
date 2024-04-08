@@ -17,12 +17,10 @@ const Add = () => {
         const { data } = await axios.get("/advertisements/");
         setAdvertisements(data);
         setIsLoaded(true)
-        // console.log("advertisements", advertisements);
       } catch (err) {
         console.log(err);
       }
     };
-    // setIsLoaded(false)
     fetchAdds();
   }, []);
 
@@ -34,7 +32,6 @@ const Add = () => {
   }, [advertisements, isLoaded]);
 
     useEffect(() => {
-    console.log(selectedAdd)
   }, [selectedAdd])
 
   return (

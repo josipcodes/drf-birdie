@@ -6,7 +6,7 @@ import { useHistory } from "react-router";
 export const useRedirect = (userAuthStatus) => {
   const history = useHistory();
 
-// copied from Moments
+// copied from Moments with minor changes
   useEffect(() => {
     // making a network request on mount to check if user is logged in.
     const handleMount = async () => {
@@ -19,7 +19,7 @@ export const useRedirect = (userAuthStatus) => {
       } catch (err) {
         // if user is not logged in, the code below will run
         if (userAuthStatus === "loggedOut") {
-          history.push("/");
+          history.push("/login/");
         }
       }
     };
