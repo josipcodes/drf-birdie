@@ -20,6 +20,9 @@ import PopularCategories from "../../components/PopularCategories";
 import useScreenWidth from "../../hooks/useScreenWidth";
 import Add from "../../components/Add";
 import { useRedirect } from "../../hooks/useRedirect";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Asset from "../../components/Asset";
+import { fetchMoreData } from "../../utils/utils";
 
 // modelled after Moments lessons
 function PostPage() {
@@ -48,7 +51,7 @@ function PostPage() {
           // fetching the posts
           axiosRequest.get(`/posts/${id}/`),
           // fetching the comments
-          axiosRequest.get(`/comments/?post=${id}`),
+          axiosRequest.get(`comments/?post=${id}`),
         ]);
         // using setPost func to update the results array in the state to contain a post
         setPost({ results: [post] });
@@ -71,26 +74,34 @@ function PostPage() {
           className={`${appStyles.Content} ${postStyles.PostText} ${styles.CommentFormWidth}`}
         >
           {/* tbd if conditional needs changing */}
-          {currentUser ? (
+          {currentUser && (
             <CommentCreateForm
               profile_id={currentUser.profile_id}
               post={id}
               setPost={setPost}
               setComments={setComments}
             />
-          ) : comments.results.length ? (
-            "Comments"
-          ) : null}
+          )}
           {comments.results.length ? (
-            // if there are comments, they're shown
-            comments.results.map((comment) => (
-              <Comment
-                key={comment.id}
-                {...comment}
-                setPost={setPost}
-                setComments={setComments}
-              />
-            ))
+            // copied off of Moments
+            <InfiniteScroll
+              children={
+                // if there are comments, they're shown
+                comments.results.map((comment) => (
+                  // we're spreading comment object so its contents are passed as props
+                  <Comment
+                    key={comment.id}
+                    {...comment}
+                    setPost={setPost}
+                    setComments={setComments}
+                  />
+                ))
+              }
+              dataLength={comments.results.length}
+              loader={<Asset spinner />}
+              hasMore={!!comments.next}
+              next={() => fetchMoreData(comments, setComments)}
+            />
           ) : // if there are no comments, we are checking if user is logged in
           currentUser ? (
             <span>No comments yet, be the first to comment.</span>
