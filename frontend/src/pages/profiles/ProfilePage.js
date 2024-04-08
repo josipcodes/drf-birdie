@@ -48,6 +48,7 @@ function ProfilePage() {
       ])
       setCurrentProfile(profile.data);
       setCurrentPosts(posts.data);
+      console.log(currentPosts)
     } catch (err) {
       console.log(err);
     }
@@ -194,7 +195,7 @@ function ProfilePage() {
           dataLength={currentPosts.results.length}
           loader={<Asset spinner />}
           hasMore={!!currentPosts.next}
-          next={() => fetchMoreData(currentPosts, currentPosts)}
+          next={() => fetchMoreData(currentPosts, setCurrentPosts)}
         />
       ) : (
         <div className={`${appStyles.Content}`}>
