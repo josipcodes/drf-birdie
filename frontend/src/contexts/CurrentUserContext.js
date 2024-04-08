@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { axiosRequest, axiosResponse } from "../api/axiosDefaults";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router";
 import { removeTokenTimestamp, shouldRefreshToken } from "../utils/utils";
 
 // based off of Moments lessons
@@ -17,7 +17,7 @@ export const CurrentUserProvider = ({ children }) => {
 
   const handleMount = async () => {
     try {
-      const { data } = await axios.get("dj-rest-auth/user/");
+      const { data } = await axiosResponse.get("dj-rest-auth/user/");
       console.log("CurrentUserProvider", data)
       // Set the current user with the data we get back.
       // Without this, we'd have to log in after each refresh
@@ -36,6 +36,7 @@ export const CurrentUserProvider = ({ children }) => {
     // request interceptor
     axiosRequest.interceptors.request.use(
       async (config) => {
+        console.log(config)
         // if runs only when token needs refreshing
         if (shouldRefreshToken()) {
           try {
