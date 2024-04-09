@@ -211,7 +211,7 @@ function PostEditForm() {
             }`}
             htmlFor="image-upload"
           >
-            <Asset message="Click or tap to upload an image" />
+            <Asset buttonMessage="Click or tap to upload an image" />
           </Form.Label>
         )}
         <Form.File

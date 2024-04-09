@@ -190,8 +190,8 @@ function PostCreateForm() {
         className={`${bttnStyles.Button} text-center ${smallScreen ? styles.ButtonRight : bttnStyles.Wide}`}
         htmlFor="image-upload"
       >
-        <Asset
-          message="Click or tap to upload an image"
+        <Asset 
+          buttonMessage="Click or tap to upload an image"
         />
       </Form.Label>
     )}
