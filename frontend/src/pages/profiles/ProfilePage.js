@@ -129,7 +129,7 @@ function ProfilePage() {
       <Row noGutters className={`text-center ${appStyles.Content}`}>
         <Col md={2} className=" mt-1 offset-lg-0">
           <Image
-            className={`${styles.ProfileAvatar}`}
+            className={styles.ProfileAvatar}
             roundedCircle
             src={currentProfile?.avatar}
           />
@@ -201,7 +201,7 @@ function ProfilePage() {
           next={() => fetchMoreData(currentPosts, setCurrentPosts)}
         />
       ) : (
-        <div className={`${appStyles.Content}`}>
+        <div className={appStyles.Content}>
         <Asset
           message={`${currentProfile?.owner} hasn't posted yet.`}
         />

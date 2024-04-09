@@ -35,7 +35,7 @@ const Add = () => {
   }, [selectedAdd])
 
   return (
-    <div className={`${appStyles.Content}`}>
+    <div className={appStyles.Content}>
       {selectedAdd && isLoaded ? (
           <div>
             <Image

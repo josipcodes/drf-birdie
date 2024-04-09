@@ -85,7 +85,7 @@ const EditUsernameForm = () => {
               >
                 Cancel
               </Button>
-              <Button className={`${bttnStyles.Button}`} type="submit">
+              <Button className={bttnStyles.Button} type="submit">
                 Save
               </Button>
               {errors?.non_field_errors?.map((message, idx) => (

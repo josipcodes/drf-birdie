@@ -9,7 +9,7 @@ const PageNotFound = () => {
   return (
     <Row className={authStyles.Row}>
       <Col className="my-auto offset-md-2" md={8}>
-        <Container className={`${appStyles.Content}`}>
+        <Container className={appStyles.Content}>
           <h1 className={`${appStyles.Main} ${authStyles.Header}`}>
             This page seems to have flown away
           </h1>
