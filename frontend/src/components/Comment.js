@@ -15,7 +15,6 @@ import CommentEditForm from "../pages/comments/CommentEditForm";
 const Comment = (props) => {
   const {
     profile_id,
-    // tbd is it needed?
     profile_avatar,
     owner,
     modified,

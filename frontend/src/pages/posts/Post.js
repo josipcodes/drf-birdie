@@ -236,7 +236,6 @@ const Post = (props) => {
         <div>
           <Container>
             <Row className="justify-content-around text-center">
-              {/* tbd if all hearts will use the same icon, classes added to test visual representation */}
               <Col className={styles.IconText}>
                 {/* like logic */}
                 {is_owner ? (

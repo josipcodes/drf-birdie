@@ -8,11 +8,9 @@ class CategoryList(generics.ListCreateAPIView):
         List all categories.
         Permission already set globally in settings.py.
         """
-        # need further checks as to ensure no brute force can be used
         queryset = Category.objects.annotate(
         posts_count=Count('post', distinct=True),
     ).order_by('-posts_count')
-    #     # tbd if necessary here
         filter_backends = [
         filters.OrderingFilter
     ]

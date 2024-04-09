@@ -21,7 +21,6 @@ export const removeTokenTimestamp = () => {
   localStorage.removeItem("refreshTokenTimestamp");
 };
 
-// todo check if this works when deployed, users report infinite scroll is causing problems on Gitpod
 // when replacing localhost address from dev tools with an actual page address, I can see next data
 // used for InfiniteScroll
 export const fetchMoreData = async (resource, setResource) => {
@@ -30,7 +29,8 @@ export const fetchMoreData = async (resource, setResource) => {
     let url = new URL(resource.next);
     url = (url.pathname + url.search).replace('/api', '')
     console.log({requestUrl: url})
-    // updated axiosRequest to axios, fetching posts now works correctly. Todo, update comment
+    // replacing axiosRequest with axios so data is fetched
+    // regardless is user is signed in
     const { data } = await axios.get(url);
 
     setResource((prevResource) => ({
