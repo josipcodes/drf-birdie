@@ -63,11 +63,11 @@ const Post = (props) => {
 
   // built based off of Moments lessons with changes
   const handleSave = async () => {
-      /* Function saves a post, increases the number of saves on the post */
-      try {
-        // save id is needed so the API knows which post is being saved
-        const { data } = await axiosResponse.post("/saved/", { post: id });
-        if (profilePage) {
+    /* Function saves a post, increases the number of saves on the post */
+    try {
+      // save id is needed so the API knows which post is being saved
+      const { data } = await axiosResponse.post("/saved/", { post: id });
+      if (profilePage) {
         setCurrentPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
@@ -97,17 +97,18 @@ const Post = (props) => {
               : post;
           }),
         }));
-      }} catch (err) {
-        console.log(err);
       }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // built based off of Moments lessons with changes
   const handleUnsave = async () => {
-      /* Function unsaves a post, decreases the number of saves on the post */
-      try {
-        await axiosResponse.delete(`/saved/${saved_id}/`);
-        if (profilePage) {
+    /* Function unsaves a post, decreases the number of saves on the post */
+    try {
+      await axiosResponse.delete(`/saved/${saved_id}/`);
+      if (profilePage) {
         setCurrentPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
@@ -126,18 +127,18 @@ const Post = (props) => {
           }),
         }));
       }
-      } catch (err) {
-        console.log(err);
-      }
-    } 
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // built based off of Moments lessons
   const handleLike = async () => {
-      /* Function likes a post, increases the number of likes on the post */
-      try {
-        // like id is needed so the API knows which post is being liked
-        const { data } = await axiosResponse.post("/likes/", { post: id });
-        if (profilePage) {
+    /* Function likes a post, increases the number of likes on the post */
+    try {
+      // like id is needed so the API knows which post is being liked
+      const { data } = await axiosResponse.post("/likes/", { post: id });
+      if (profilePage) {
         setCurrentPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
@@ -160,17 +161,17 @@ const Post = (props) => {
           }),
         }));
       }
-      } catch (err) {
-        console.log(err);
-      }
+    } catch (err) {
+      console.log(err);
     }
+  };
 
   // built based off of Moments lessons
   const handleUnlike = async () => {
-      /* Function unlikes a post, decreases the number of likes on the post */
-      try {
-        await axiosResponse.delete(`/likes/${like_id}/`);
-        if (profilePage) {
+    /* Function unlikes a post, decreases the number of likes on the post */
+    try {
+      await axiosResponse.delete(`/likes/${like_id}/`);
+      if (profilePage) {
         setCurrentPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
@@ -188,10 +189,11 @@ const Post = (props) => {
               : post;
           }),
         }));
-      }} catch (err) {
-        console.log(err);
       }
-    } 
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Card className={styles.Post}>
@@ -204,6 +206,11 @@ const Post = (props) => {
             <Link to={`/profiles/${profile_id}/`}>
               <Avatar src={profile_avatar} height={45} />
               {owner}
+              {!postPage && !profilePage && (
+                <i
+                  className={`fa-solid fa-arrow-up-right-from-square ml-2 ${styles.OwnerLinkIcon}`}
+                ></i>
+              )}
             </Link>
           </Col>
           {/* displaying when the post was last updated */}
@@ -266,9 +273,7 @@ const Post = (props) => {
                   </OverlayTrigger>
                 )}
                 {/* number of likes */}
-                <span className={styles.IconText}>
-                {likes_count}
-                </span>
+                <span className={styles.IconText}>{likes_count}</span>
               </Col>
               <Col className={styles.IconText}>
                 {/* comments icon leads to the post page */}
@@ -284,20 +289,20 @@ const Post = (props) => {
                   <OverlayTrigger
                     placement="top"
                     overlay={<Tooltip>Save a post for later!</Tooltip>}
-                    >
-                  <span
-                    onClick={saved_id == null ? handleSave : handleUnsave}
-                    className={styles.IconText}
                   >
-                    <i
-                      className={
-                        saved_id !== null
-                          ? `fa-brands fa-earlybirds ${styles.PostSaved}`
-                          : `fa-solid fa-egg ${styles.PostNotSaved}`
-                      }
-                    />
-                    {saved_count}
-                  </span>
+                    <span
+                      onClick={saved_id == null ? handleSave : handleUnsave}
+                      className={styles.IconText}
+                    >
+                      <i
+                        className={
+                          saved_id !== null
+                            ? `fa-brands fa-earlybirds ${styles.PostSaved}`
+                            : `fa-solid fa-egg ${styles.PostNotSaved}`
+                        }
+                      />
+                      {saved_count}
+                    </span>
                   </OverlayTrigger>
                 )}
               </Col>

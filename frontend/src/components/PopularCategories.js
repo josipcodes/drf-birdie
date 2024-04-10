@@ -35,7 +35,7 @@ const PopularCategories = ({selectedCategory}) => {
   };
 
   return (
-    <div className={`${appStyles.Content} ${styles.Container}`}>
+    <div className={`${appStyles.Content} ${styles.CategoryContainer}`}>
       {categories?.results?.length ? (
         <>
         {/* display categories in the order of popularity */}

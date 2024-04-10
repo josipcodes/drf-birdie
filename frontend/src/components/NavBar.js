@@ -40,6 +40,7 @@ const NavBar = () => {
       className={styles.NavLink}
       activeClassName={styles.Active}
     >
+      <i class="fa-solid fa-plus mr-2"></i>
       Post
     </NavLink>
   );
@@ -51,7 +52,7 @@ const NavBar = () => {
     className={styles.NavLink}
     activeClassName={styles.Active}
   >
-    Home
+    Feed
   </NavLink>
   )
 
@@ -73,6 +74,7 @@ const NavBar = () => {
       className={`${styles.NavLink} ${styles.NavLinkOffset}`}
       activeClassName={styles.Active}
     >
+      <i class="fa-solid fa-user-group mr-2"></i>
       Feed
     </NavLink>
     <NavLink
@@ -80,6 +82,7 @@ const NavBar = () => {
       className={`${styles.NavLink} ${styles.NavLinkOffset}`}
       activeClassName={styles.Active}
     >
+      <i className="fas fa-heart mr-2"></i>
       Liked
     </NavLink>
     <NavLink
@@ -87,6 +90,7 @@ const NavBar = () => {
       className={`${styles.NavLink} ${styles.NavLinkOffset}`}
       activeClassName={styles.Active}
     >
+      <i className="fa-brands fa-earlybirds mr-2"></i>
       Saved posts
     </NavLink>
       {smallScreen && (
