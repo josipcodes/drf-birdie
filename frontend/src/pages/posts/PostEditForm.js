@@ -158,9 +158,9 @@ function PostEditForm() {
           ))}
         </Form.Control>
       </Form.Group>
-      {errors.category?.map((message, idx) => (
+      {errors.category?.map((idx) => (
         <Alert variant="warning" key={idx}>
-          {message}
+          You need to choose a category.
         </Alert>
       ))}
     </div>
@@ -179,9 +179,9 @@ function PostEditForm() {
           onChange={handleChangePost}
         />
       </Form.Group>
-      {errors.content?.map((message, idx) => (
+      {errors.content?.map((idx) => (
         <Alert variant="warning" key={idx}>
-          {message}
+          Post has to contain at least some text.
         </Alert>
       ))}
     </div>
