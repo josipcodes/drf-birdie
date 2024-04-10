@@ -249,12 +249,12 @@ const Post = (props) => {
                 ) : like_id ? (
                   // if like_id exists, user already liked the post
                   <span onClick={handleUnlike}>
-                    <i className={`far fa-heart mt-1 ${styles.IconText}`} />
+                    <i className={`fas fa-heart mt-1 ${styles.PostLiked}`} />
                   </span>
                 ) : currentUser ? (
                   // if user is logged in, they can like the post
                   <span onClick={handleLike}>
-                    <i className={`fas fa-heart mt-1 ${styles.PostText}`} />
+                    <i className={`fas fa-heart mt-1 ${styles.PostNotLiked}`} />
                   </span>
                 ) : (
                   // display tooltip for non-user
@@ -272,7 +272,7 @@ const Post = (props) => {
                 {/* comments icon leads to the post page */}
                 <Link to={`/posts/${id}`} className={styles.IconText}>
                   {/* post text hover needed to align visual representation? tbd */}
-                  <i className={`far fa-comments ${styles.PostText}`} />
+                  <i className={`far fa-comments ${styles.CommentIcon}`} />
                   {/* number of comments */}
                   {comments_count}
                 </Link>
@@ -286,8 +286,8 @@ const Post = (props) => {
                     <i
                       className={
                         saved_id !== null
-                          ? `fa-brands fa-earlybirds ${styles.IconText}`
-                          : `fa-solid fa-egg ${styles.PostText}`
+                          ? `fa-brands fa-earlybirds ${styles.PostSaved}`
+                          : `fa-solid fa-egg ${styles.PostNotSaved}`
                       }
                     />
                     {saved_count}

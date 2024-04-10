@@ -10,13 +10,15 @@
   color: #f8f8f8;
 }
 
-.PostText {
+.PostText, .PostNotLiked, .CommentIcon, .PostNotSaved {
   color: #f8f8f8;
   margin: 5px;
 }
 
-.IconText {
+
+.IconText, .PostLiked, .PostSaved {
   color: #fcd619;
+  margin: 5px;
 }
 
 i:hover {
@@ -37,26 +39,6 @@ i:hover {
 
 .PostImage {
   padding: 10px 50px;
-  /* object fit will make sure avatar fits the container */
+  /* ensuring avatar fits the container */
   object-fit: contain;
 }
-
-/* tbd */
-.Post figure,
-h5 {
-  margin: 0 0;
-}
-
-/* tbd */
-i {
-  color: #f8f8f8;
-  font-size: 1.2rem;
-  padding-right: 7px;
-}
-
-/* adds spacing between {modified} and dropdown */
-.HeaderContent {
-  margin-left: 5px;
-}
-
-i { color: #f8f8f8}
