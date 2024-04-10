@@ -244,7 +244,7 @@ const Post = (props) => {
                     placement="top"
                     overlay={<Tooltip>You can't like your own post!</Tooltip>}
                   >
-                    <i className="fas fa-heart mt-1" />
+                    <i className={`fas fa-heart mt-1 ${styles.PostNotLiked}`} />
                   </OverlayTrigger>
                 ) : like_id ? (
                   // if like_id exists, user already liked the post
@@ -262,11 +262,13 @@ const Post = (props) => {
                     placement="top"
                     overlay={<Tooltip>Log in to like a post!</Tooltip>}
                   >
-                    <i className="fas fa-heart mt-1" />
+                    <i className={`fas fa-heart mt-1 ${styles.PostNotLiked}`} />
                   </OverlayTrigger>
                 )}
                 {/* number of likes */}
+                <span className={styles.IconText}>
                 {likes_count}
+                </span>
               </Col>
               <Col className={styles.IconText}>
                 {/* comments icon leads to the post page */}
@@ -279,6 +281,10 @@ const Post = (props) => {
               </Col>
               <Col>
                 {currentUser && !is_owner && (
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Save a post for later!</Tooltip>}
+                    >
                   <span
                     onClick={saved_id == null ? handleSave : handleUnsave}
                     className={styles.IconText}
@@ -292,6 +298,7 @@ const Post = (props) => {
                     />
                     {saved_count}
                   </span>
+                  </OverlayTrigger>
                 )}
               </Col>
             </Row>

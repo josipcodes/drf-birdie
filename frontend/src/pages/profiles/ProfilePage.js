@@ -127,7 +127,7 @@ function ProfilePage() {
     <>
     {currentProfile?.is_owner && <ProfileEditDropdown id={currentProfile?.id} />}
       <Row noGutters className={`text-center ${appStyles.Content}`}>
-        <Col md={2} className=" mt-1 offset-lg-0">
+        <Col md={2} className="mt-1 offset-lg-0">
           <Image
             className={styles.ProfileAvatar}
             roundedCircle

@@ -1,5 +1,5 @@
 .Post {
-  background-color: #212529;
+  background-color: #2e343a;
   border-radius: 5%;
   margin: 3px 0;
 }
@@ -15,10 +15,9 @@
   margin: 5px;
 }
 
-
 .IconText, .PostLiked, .PostSaved {
   color: #fcd619;
-  margin: 5px;
+    margin: 5px;
 }
 
 i:hover {
