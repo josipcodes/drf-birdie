@@ -75,7 +75,7 @@ const NavBar = () => {
       activeClassName={styles.Active}
     >
       <i class="fa-solid fa-user-group mr-2"></i>
-      Feed
+      Subscribed
     </NavLink>
     <NavLink
       to="/liked"
@@ -87,11 +87,11 @@ const NavBar = () => {
     </NavLink>
     <NavLink
       to="/saved"
-      className={`${styles.NavLink} ${styles.NavLinkOffset}`}
+      className={`${styles.NavLink} ${styles.NavLinkOffset} ${smallScreen ? "mb-2" : ""}`}
       activeClassName={styles.Active}
     >
       <i className="fa-brands fa-earlybirds mr-2"></i>
-      Saved posts
+      Saved
     </NavLink>
       {smallScreen && (
         // display popular categories when on smaller screens

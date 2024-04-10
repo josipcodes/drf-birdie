@@ -196,7 +196,7 @@ const Post = (props) => {
   };
 
   return (
-    <Card className={styles.Post}>
+    <Card className={profilePage ? styles.ProfilePost : styles.Post}>
       <Card.Body>
         <Media
           className={`${styles.PostHeader} d-flex justify-content-between`}

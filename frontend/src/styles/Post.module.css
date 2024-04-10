@@ -1,4 +1,10 @@
 .Post {
+  background-color: #212529;;
+  border-radius: 5%;
+  margin: 3px 0;
+}
+
+.ProfilePost {
   background-color: #2e343a;
   border-radius: 5%;
   margin: 3px 0;
