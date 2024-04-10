@@ -36,8 +36,8 @@ function App() {
             exact
             path="/"
             render={() => (
-              // message for when search brings up no results.
-              <PostsPage message="No results found." />
+              // message for when path brings up no results.
+              <PostsPage message="No posts found." />
             )}
           />
           <Route
@@ -46,7 +46,7 @@ function App() {
             render={() => (
               // message for when search brings up no results.
               <PostsPage
-                message="No results found. Adjust your search keyword or follow a user."
+                message="No posts found. Follow a user to change that."
                 filter={`owner__followed__owner__profile=${profile_id}&`}
               />
             )}
@@ -57,7 +57,7 @@ function App() {
             render={() => (
               // message for when search brings up no results.
               <PostsPage
-                message="No results found. Adjust your search keyword or like a post."
+                message="No posts found. Like some posts to change that."
                 filter={`likes__owner__profile=${profile_id}&ordering=-likes__created&`}
               />
             )}
@@ -68,7 +68,7 @@ function App() {
             render={() => (
               // message for when search brings up no results.
               <PostsPage
-                message="No results found. Adjust your search keyword or save a post."
+                message="No posts found. Save some post for later and find them here later."
                 filter={`saved__owner__profile=${profile_id}&ordering=-saved__created&`}
               />
             )}
@@ -79,7 +79,7 @@ function App() {
             render={() => (
               // message for when search brings up no results.
               <PostsPage
-                message="No results found."
+                message="No posts in this category."
                 filter={`category_id=${selectedCategory}&ordering=-created&`}
                 selectedCategory={selectedCategory}
               />

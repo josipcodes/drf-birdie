@@ -40,7 +40,7 @@ const NavBar = () => {
       className={styles.NavLink}
       activeClassName={styles.Active}
     >
-      <i class="fa-solid fa-plus mr-2"></i>
+      <i className="fa-solid fa-plus mr-2"></i>
       Post
     </NavLink>
   );
@@ -74,7 +74,7 @@ const NavBar = () => {
       className={`${styles.NavLink} ${styles.NavLinkOffset}`}
       activeClassName={styles.Active}
     >
-      <i class="fa-solid fa-user-group mr-2"></i>
+      <i className="fa-solid fa-user-group mr-2"></i>
       Subscribed
     </NavLink>
     <NavLink
