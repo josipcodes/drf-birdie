@@ -12,6 +12,8 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import useScreenWidth from "../../hooks/useScreenWidth"
 
+import styles from "../../styles/CommentCreateEditForm.module.css"
+
 // based off of Moments, with various changes
 function CommentCreateForm(props) {
   const { post, setPost, setComments, profile_id } = props;
@@ -65,7 +67,7 @@ function CommentCreateForm(props) {
           </Link>
           <Form.Control
             as="textarea"
-            className="ml-2 ml-md-3"
+            className={`ml-2 ml-md-3 ${styles.CommentHeight}`}
             placeholder="Type comment..."
             rows={smallScreen ? 4 : 2}
             value={content}

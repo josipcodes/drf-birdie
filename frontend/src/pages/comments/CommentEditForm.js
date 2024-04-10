@@ -6,6 +6,8 @@ import { axiosResponse } from "../../api/axiosDefaults";
 
 import bttnStyles from "../../styles/Button.module.css"
 
+import styles from "../../styles/CommentCreateEditForm.module.css"
+
 // based off of Moments, with some changes
 function CommentEditForm(props) {
   const { id, content, setShowEditForm, setComments } = props;
@@ -51,6 +53,7 @@ function CommentEditForm(props) {
           as="textarea"
           value={formContent}
           onChange={handleChange}
+          className={styles.CommentHeight}
           rows={2}
         />
       </Form.Group>

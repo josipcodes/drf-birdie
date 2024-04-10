@@ -65,7 +65,7 @@ const Comment = (props) => {
         <Link to={`/profiles/${profile_id}`}>
           <Avatar src={profile_avatar} height={smallScreen ? 35 : 40} />
         </Link>
-        <Media.Body>
+        <Media.Body className={styles.MediaBody}>
           <span className={styles.Commenter}>{owner}</span>
           <span className={styles.ModifiedDate}>{modified}</span>
           {/* ternary deciding if the form should show */}
@@ -78,7 +78,7 @@ const Comment = (props) => {
             setShowEditForm={setShowEditForm}
           />
           ) : (
-            <p>{content}</p>
+            <p className={styles.CommentDisplay}>{content}</p>
           )}
         </Media.Body>
         {is_owner && !showEditForm && (
