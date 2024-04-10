@@ -13,7 +13,7 @@ import bttnStyles from "../../styles/Button.module.css";
 import PopularCategories from "../../components/PopularCategories";
 import useScreenWidth from "../../hooks/useScreenWidth";
 import { axiosRequest, axiosResponse } from "../../api/axiosDefaults";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { Button, Image } from "react-bootstrap";
 
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
@@ -31,11 +31,10 @@ function ProfilePage() {
   // extracting id from the url to know which profile to fetch
   const { id } = useParams();
 
-
-  const [currentProfile, setCurrentProfile] = useState()
-  const [currentPosts, setCurrentPosts] = useState({ results: [] })
+  const [currentProfile, setCurrentProfile] = useState();
+  const [currentPosts, setCurrentPosts] = useState({ results: [] });
   const currentUser = useCurrentUser();
-  const [currentUserProfile, setCurrentUserProfile] = useState()
+  const [currentUserProfile, setCurrentUserProfile] = useState();
 
   // screen width check
   const smallScreen = useScreenWidth();
@@ -47,11 +46,11 @@ function ProfilePage() {
       const [profile, posts] = await Promise.all([
         axios.get(`/profiles/${id}/`),
         // updated url temporarily due to url appearing with two api/ when fetching
-        axios.get(`posts/?owner__profile=${id}`)
-      ])
+        axios.get(`posts/?owner__profile=${id}`),
+      ]);
       setCurrentProfile(profile.data);
       setCurrentPosts(posts.data);
-      console.log(currentPosts)
+      console.log(currentPosts);
     } catch (err) {
       console.log(err);
     }
@@ -60,15 +59,17 @@ function ProfilePage() {
   const FetchCurrentUserProfile = async () => {
     /* Function fetches current user profile */
     try {
-      console.log("id", currentUser.profile_id)
-      const profile = await axiosRequest.get(`/profiles/${currentUser.profile_id}/`);
-      console.log(profile.data)
-      setCurrentUserProfile(profile.data)
+      console.log("id", currentUser.profile_id);
+      const profile = await axiosRequest.get(
+        `/profiles/${currentUser.profile_id}/`
+      );
+      console.log(profile.data);
+      setCurrentUserProfile(profile.data);
       console.log("CURRENT USER PROFILE", currentUserProfile);
     } catch (err) {
       console.log(err);
+    }
   };
-}
 
   useEffect(() => {
     /* Generates a warning in the console,
@@ -78,7 +79,7 @@ function ProfilePage() {
     if (currentUser) {
       FetchCurrentUserProfile();
     }
-    setIsLoaded(true)
+    setIsLoaded(true);
   }, [id, currentUser?.profile_id]);
 
   const handleFollow = async () => {
@@ -90,34 +91,34 @@ function ProfilePage() {
         // data sent is what profile user followed
         followed: currentProfile.id,
       });
-      setCurrentProfile(prevCurrentProfile => ({
+      setCurrentProfile((prevCurrentProfile) => ({
         ...prevCurrentProfile,
         followers_count: currentProfile.followers_count + 1,
         following_id: data.id,
-    }))
-    setCurrentUserProfile(prevCurrentUserProfile => ({
-      ...prevCurrentUserProfile,
-      following_count: currentUserProfile.followers_count + 1,
-    }))
+      }));
+      setCurrentUserProfile((prevCurrentUserProfile) => ({
+        ...prevCurrentUserProfile,
+        following_count: currentUserProfile.followers_count + 1,
+      }));
     } catch (err) {
       console.log(err);
     }
   };
 
-    const handleUnfollow = async () => {
+  const handleUnfollow = async () => {
     /* Function updates current profile and 
     current user profile data after following them */
     try {
       await axiosResponse.delete(`/followers/${currentProfile.following_id}/`);
-      setCurrentProfile(prevCurrentProfile => ({
+      setCurrentProfile((prevCurrentProfile) => ({
         ...prevCurrentProfile,
         followers_count: currentProfile.followers_count - 1,
         following_id: null,
-      }))
-      setCurrentUserProfile(prevCurrentUserProfile => ({
+      }));
+      setCurrentUserProfile((prevCurrentUserProfile) => ({
         ...prevCurrentUserProfile,
         following_count: currentUserProfile.followers_count - 1,
-      }))
+      }));
     } catch (err) {
       console.log(err);
     }
@@ -125,7 +126,9 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-    {currentProfile?.is_owner && <ProfileEditDropdown id={currentProfile?.id} />}
+      {currentProfile?.is_owner && (
+        <ProfileEditDropdown id={currentProfile?.id} />
+      )}
       <Row noGutters className={`text-center ${appStyles.Content}`}>
         <Col md={2} className="mt-1 offset-lg-0">
           <Image
@@ -141,23 +144,17 @@ function ProfilePage() {
           md={3}
           className="mt-1 offset-md-2 text-lg-right d-flex justify-content-end pr-3"
         >
-          {currentUser && !currentProfile?.is_owner &&
+          {currentUser &&
+            !currentProfile?.is_owner &&
             (currentProfile?.following_id ? (
-              <Button
-                className={bttnStyles.Button}
-                onClick={handleUnfollow}
-              >
+              <Button className={bttnStyles.Button} onClick={handleUnfollow}>
                 Unfollow
               </Button>
             ) : (
-              <Button
-                className={bttnStyles.Button}
-                onClick={handleFollow}
-              >
+              <Button className={bttnStyles.Button} onClick={handleFollow}>
                 Follow
               </Button>
-            ))
-            }
+            ))}
         </Col>
         <Col className={`${styles.ProfileText} align-content-center`}>
           {/* user stats */}
@@ -180,12 +177,22 @@ function ProfilePage() {
             </Col>
           </Row>
         </Col>
-          <Col xs={12} className={`${styles.ProfileText} text-left mt-3`}>
-        <div><strong>Name: </strong>{currentProfile?.name}</div>
-        <div className="mt-2"><strong>Bio: </strong>{currentProfile?.bio}</div>
+        <Col xs={12} className={`${styles.ProfileText} text-left mt-3`}>
+          {currentProfile?.name && (
+            <div>
+              <strong>Name: </strong>
+              {currentProfile?.name}
+            </div>
+          )}
+          {currentProfile?.bio && (
+            <div className="mt-2">
+              <strong>Bio: </strong>
+              {currentProfile?.bio}
+            </div>
+          )}
         </Col>
       </Row>
-      </>
+    </>
   );
 
   const mainProfilePosts = (
@@ -193,7 +200,13 @@ function ProfilePage() {
       {currentPosts.results.length ? (
         <InfiniteScroll
           children={currentPosts.results.map((post) => (
-            <Post key={post.id} {...post} className={appStyles.Content} setCurrentPosts={setCurrentPosts} profilePage />
+            <Post
+              key={post.id}
+              {...post}
+              className={appStyles.Content}
+              setCurrentPosts={setCurrentPosts}
+              profilePage
+            />
           ))}
           dataLength={currentPosts.results.length}
           loader={<Asset spinner />}
@@ -202,25 +215,29 @@ function ProfilePage() {
         />
       ) : (
         <div className={appStyles.Content}>
-        <Asset
-          message={`${currentProfile?.owner} hasn't posted yet.`}
-        />
+          <Asset message={`${currentProfile?.owner} hasn't posted yet.`} />
+          {currentProfile?.is_owner && (
+            // conditional rendering call to action for owner
+            <NavLink
+              to="/posts/create"
+              className={`${bttnStyles.Button} ${bttnStyles.Wide} d-block text-center`}
+            >
+              Post something
+            </NavLink>
+          )}
         </div>
       )}
     </>
-
   );
 
   return (
     <Row className="mt-2">
       <Col className="py-2 p-md-1" md={8}>
-        <Container >
+        <Container>
           {isLoaded ? (
             <>
               {mainProfile}
-              {smallScreen && 
-                <Add />
-              }
+              {smallScreen && <Add />}
               {mainProfilePosts}
             </>
           ) : (
