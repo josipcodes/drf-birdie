@@ -13,6 +13,7 @@ const Add = () => {
   useEffect(() => {
     // fetching existing Advertisements
     const fetchAdds = async () => {
+      // when adds are fetched, updates isLoaded
       try {
         const { data } = await axios.get("/advertisements/");
         setAdvertisements(data);
@@ -25,14 +26,12 @@ const Add = () => {
   }, []);
 
   useEffect(() => {
+    // set random valid add to be displayed
     if (isLoaded && advertisements?.results && advertisements?.results?.length > 0) {
       const randomSelect = Math.floor(Math.random() * advertisements.results.length);
       setSelectedAdd(advertisements.results[randomSelect]);
     }
   }, [advertisements, isLoaded]);
-
-    useEffect(() => {
-  }, [selectedAdd])
 
   return (
     <div className={appStyles.Content}>

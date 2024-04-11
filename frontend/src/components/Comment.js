@@ -25,10 +25,10 @@ const Comment = (props) => {
     setComments,
   } = props;
 
-    // adding state to toggle EditForm
+    // state to toggle EditForm
     const [showEditForm, setShowEditForm] = useState(false);
 
-  // currentUser from  custom context
+  // currentUser from custom context
   const currentUser = useCurrentUser();
   // checking if current user's username matches owner's
   const is_owner = currentUser?.username === owner;
@@ -51,7 +51,7 @@ const Comment = (props) => {
       }));
       setComments((prevComments) => ({
         ...prevComments,
-        // we want to filter for the id of comment we are removing
+        // filter for the id of comment we are removing
         results: prevComments.results.filter((comment) => comment.id !== id),
       }));
     } catch (err) {
@@ -82,6 +82,7 @@ const Comment = (props) => {
           )}
         </Media.Body>
         {is_owner && !showEditForm && (
+          // show dropdown for owner when not editing
           <MoreDropdown
             handleEdit={() => setShowEditForm(true)}
             handleDelete={handleDelete}

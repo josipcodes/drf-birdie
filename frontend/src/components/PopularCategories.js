@@ -3,19 +3,18 @@ import axios from "axios";
 import appStyles from ".././App.module.css";
 import Asset from ".././components/Asset";
 
-import styles from ".././styles/PopularCategories.module.css"
+import styles from ".././styles/PopularCategories.module.css";
 import { Link } from "react-router-dom";
 
 import { useSetSelectedCategory } from "../contexts/SelectedCategoryContext";
 
-const PopularCategories = ({selectedCategory}) => {
+const PopularCategories = ({ selectedCategory }) => {
   const [categories, setCategories] = useState("");
 
-  const setSelectedCategory = useSetSelectedCategory()
-
+  const setSelectedCategory = useSetSelectedCategory();
 
   useEffect(() => {
-    // fetching existing categories
+    // fetch existing categories
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get("/categories/");
@@ -30,18 +29,23 @@ const PopularCategories = ({selectedCategory}) => {
   const handleClick = (category_id) => {
     // setting selected category
     setSelectedCategory(category_id);
-    console.log("category_id", category_id)
-    console.log("selectedCategory", selectedCategory)
   };
 
   return (
     <div className={`${appStyles.Content} ${styles.CategoryContainer}`}>
       {categories?.results?.length ? (
         <>
-        {/* display categories in the order of popularity */}
+          {/* display categories in the order of popularity */}
           <h1 className={styles.Header}>Popular categories</h1>
           {categories.results?.map((category) => (
-            <Link to={`/categories/${category.id}/posts`} className={styles.CategoryName} key={category.id} onClick={() => handleClick(category.id)}>{category.name}</Link>
+            <Link
+              to={`/categories/${category.id}/posts`}
+              className={styles.CategoryName}
+              key={category.id}
+              onClick={() => handleClick(category.id)}
+            >
+              {category.name}
+            </Link>
           ))}
         </>
       ) : (
@@ -50,6 +54,5 @@ const PopularCategories = ({selectedCategory}) => {
     </div>
   );
 };
-
 
 export default PopularCategories;

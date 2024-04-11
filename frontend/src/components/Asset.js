@@ -2,9 +2,9 @@ import React from "react";
 import { Spinner } from "react-bootstrap";
 import styles from "../styles/Asset.module.css";
 
-// temporarily copied from Moments
-// minor changes applied
 const Asset = ({ spinner, src, message, buttonMessage }) => {
+  /* initially copied off of Momments.
+  Changes applied. */
   return (
     <div className={styles.Asset}>
       {spinner && <Spinner animation="border" variant="warning" />}

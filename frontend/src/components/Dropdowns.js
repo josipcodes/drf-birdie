@@ -3,12 +3,10 @@ import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/Dropdowns.module.css";
 import { useHistory } from "react-router";
 
-// copied from Moments!
 
-// The forwardRef is important!!
-// Dropdown needs access to the DOM node in order to position the Menu
-// React-bootstrap uses the forwardRef method to pass the ref into our function as a second argument.
 const ThreeDots = React.forwardRef(({ onClick }, ref) => (
+  /* copied from moments
+  With minor updates */
   <i
     className="fas fa-ellipsis-v"
     ref={ref}
@@ -20,8 +18,9 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
 ));
 
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
+    /* Post/comment edit/delete dropdown
+  Displays left-down from the dropdown itself */
   return (
-    // drop left positions dropdown to the left of the button
     <Dropdown className="ml-auto" drop="left">
       <Dropdown.Toggle as={ThreeDots} />
 
@@ -49,6 +48,8 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
 };
 
 export function ProfileEditDropdown({ id }) {
+  /* Profile edit dropdown
+  Displays left-down from the dropdown itself */
   const history = useHistory();
   return (
     <Dropdown className={`px-3 m-4 ${styles.Absolute}`} drop="left">

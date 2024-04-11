@@ -14,7 +14,7 @@ const PageNotFound = () => {
             This page seems to have flown away
           </h1>
           <Image
-            className={`${authStyles.Image} ${styles.NotFound}`}
+            className={`${authStyles.Image} ${styles.Filter}`}
             src={bird}
           />
           <h2 className={styles.Subheader}>Do you ever feel like a plastic bag</h2>
