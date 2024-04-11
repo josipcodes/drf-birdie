@@ -64,14 +64,14 @@ export function ProfileEditDropdown({ id }) {
           onClick={() => history.push(`/profiles/${id}/edit/username`)}
           aria-label="edit-username"
         >
-          <i className={`far fa-id-card ${styles.DropdownIcon}`} />
+          <i className={`far fa-id-card ${styles.DropdownIcon} mr-1`} />
           Change username
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit/password`)}
           aria-label="edit-password"
         >
-          <i className={`fas fa-key ${styles.DropdownIcon}`}/>
+          <i className={`fas fa-key ${styles.DropdownIcon} mr-1`}/>
           Change password
         </Dropdown.Item>
       </Dropdown.Menu>
