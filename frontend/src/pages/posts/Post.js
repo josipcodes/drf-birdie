@@ -15,7 +15,7 @@ import Avatar from "../../components/Avatar";
 import { MoreDropdown } from "../../components/Dropdowns";
 import { axiosResponse } from "../../api/axiosDefaults";
 
-// temporarily copied from Moments, modified
+// based off of Moments with modification
 const Post = (props) => {
   const {
     id,
@@ -51,7 +51,6 @@ const Post = (props) => {
   };
 
   // copied from Moments
-  // tbd if asking for confirmation would benefit or annoy the user
   const handleDelete = async () => {
     try {
       await axiosResponse.delete(`/posts/${id}/`);
@@ -112,6 +111,8 @@ const Post = (props) => {
         setCurrentPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
+            // using ternary to check if the post id matches the post we unsaved.
+            // if it does, we'll decrease the count, otherwise we return post so map can continue checking.
             return post.id === id
               ? { ...post, saved_count: post.saved_count - 1, saved_id: null }
               : post;
@@ -121,6 +122,8 @@ const Post = (props) => {
         setPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
+            // using ternary to check if the post id matches the post we unsaved.
+            // if it does, we'll decrease the count, otherwise we return post so map can continue checking.
             return post.id === id
               ? { ...post, saved_count: post.saved_count - 1, saved_id: null }
               : post;
@@ -175,6 +178,8 @@ const Post = (props) => {
         setCurrentPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
+            // using ternary to check if the post id matches the post we unliked.
+            // if it does, we'll decrease the count, otherwise we return post so map can continue checking.
             return post.id === id
               ? { ...post, likes_count: post.likes_count - 1, like_id: null }
               : post;
@@ -184,6 +189,8 @@ const Post = (props) => {
         setPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) => {
+            // using ternary to check if the post id matches the post we unliked.
+            // if it does, we'll decrease the count, otherwise we return post so map can continue checking.
             return post.id === id
               ? { ...post, likes_count: post.likes_count - 1, like_id: null }
               : post;
@@ -216,8 +223,8 @@ const Post = (props) => {
           {/* displaying when the post was last updated */}
           <Col className="mt-2 text-right d-flex justify-content-end p-0 pt-1">
             <span>{modified}</span>
-            {/* ... are placeholder for dropdown menu, we are now testing if logic works */}
             <span className="ml-3">
+              {/* display dropdown if owner and on post page */}
               {is_owner && postPage && (
                 <MoreDropdown
                   handleEdit={handleEdit}
@@ -276,9 +283,9 @@ const Post = (props) => {
                 <span className={styles.IconText}>{likes_count}</span>
               </Col>
               <Col className={styles.IconText}>
-                {/* comments icon leads to the post page */}
+                {/* comments icon leads to the post page.
+                If user is not logged in, they will be taken to login so no tooltip needed */}
                 <Link to={`/posts/${id}`} className={styles.IconText}>
-                  {/* post text hover needed to align visual representation? tbd */}
                   <i className={`far fa-comments ${styles.CommentIcon}`} />
                   {/* number of comments */}
                   {comments_count}
@@ -294,6 +301,7 @@ const Post = (props) => {
                       onClick={saved_id == null ? handleSave : handleUnsave}
                       className={styles.IconText}
                     >
+                      {/* changing icon if post is saved or not */}
                       <i
                         className={
                           saved_id !== null
@@ -301,6 +309,7 @@ const Post = (props) => {
                             : `fa-solid fa-egg ${styles.PostNotSaved}`
                         }
                       />
+                      {/* times saved for later */}
                       {saved_count}
                     </span>
                   </OverlayTrigger>

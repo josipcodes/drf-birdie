@@ -9,8 +9,6 @@ const useNavBarToggle = () => {
   // created following Moments lessons
   useEffect(() => {
     const handleClickOutside = (e) => {
-        console.log("ref", ref)
-        console.log("target", e.target)
       if (ref.current && !ref.current.contains(e.target)) {
         setExpanded(false);
       }

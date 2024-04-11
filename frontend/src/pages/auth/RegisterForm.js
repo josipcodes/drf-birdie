@@ -14,6 +14,7 @@ import { useRedirect } from "../../hooks/useRedirect";
 
 // code adapted from Moments lessons
 const RegisterForm = () => {
+  // redirect when already logged in
   useRedirect('loggedIn')
   const [signUpData, setSignUpData] = useState({
     username: "",
@@ -25,13 +26,12 @@ const RegisterForm = () => {
 
   const [errors, setErrors] = useState({})
 
-  // from router
   const history = useHistory();
 
   const handleChange = (e) => {
+    // update form fields
     setSignUpData({
       ...signUpData,
-      // this creates a key:value pair
       [e.target.name]: e.target.value,
     });
   };

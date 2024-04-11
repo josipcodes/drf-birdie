@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 import Asset from "../../components/Asset";
 
@@ -173,7 +175,16 @@ function ProfilePage() {
             </Col>
             <Col xs={3} className="pl-4">
               <div>{currentProfile?.saved_count}</div>
-              <span>Status</span>
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip>
+                    Displays how many times others saved your posts for later!
+                  </Tooltip>
+                }
+              >
+                <span>Status</span>
+              </OverlayTrigger>
             </Col>
           </Row>
         </Col>

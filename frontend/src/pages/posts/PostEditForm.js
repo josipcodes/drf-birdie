@@ -33,20 +33,22 @@ function PostEditForm() {
   });
 
   const { content, image, category } = postData;
-  // const { content, image } = postData;
 
-  // We use this useRef hook to maintain a reference to the form file upload element. Note it has a ref prop where we give it this hook below.
+  // We use this useRef hook to maintain a reference to the form file upload element.
+  // Note it has a ref prop where we give it this hook below.
   const imageInput = useRef(null);
 
   // We use this useHistory hook to redirect the user.
   const history = useHistory();
 
+  // using post id
   const { id } = useParams();
 
   // screen width check
   const smallScreen = useScreenWidth();
 
   useEffect(() => {
+    // fetching categories
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get("/categories/");
@@ -60,6 +62,7 @@ function PostEditForm() {
   }, []);
 
   useEffect(() => {
+    // fetching the post
     const fetchPost = async () => {
       try {
         const { data } = await axiosRequest.get(`/posts/${id}/`);
@@ -69,10 +72,9 @@ function PostEditForm() {
         // if user is owner, prepopulate the post, else redirect
         is_owner
           ? setPostData({ content, image, category })
-          // ? setPostData({ content, image })
           : history.push("/");
       } catch (err) {
-        // console.log(err);
+        console.log(err);
       }
     };
     fetchPost();
@@ -112,7 +114,7 @@ function PostEditForm() {
   };
 
   const handleSubmit = async (e) => {
-    // submit function
+    // prevents refresh
     e.preventDefault();
     const formData = new FormData();
 
@@ -123,7 +125,6 @@ function PostEditForm() {
     }
     formData.append("category", category);
 
-    console.log("formdata", formData);
     // copied from Moments lessons
     // because we're sending image as well as text to our API,
     // we need to refresh our user's access token before making the request
@@ -140,6 +141,7 @@ function PostEditForm() {
   };
 
   const categoryField = (
+    // categorry field
     <div className="text-center">
       <Form.Group>
         <Form.Label htmlFor="category">Category</Form.Label>
@@ -147,7 +149,6 @@ function PostEditForm() {
           as="select"
           aria-label="tbd"
           id="category"
-          // defaultValue="Category"
           onChange={handleChangeCategory}
         >
           <option disabled>Category</option>
@@ -167,6 +168,7 @@ function PostEditForm() {
   );
 
   const textField = (
+    // text field
     <div className="text-center">
       <Form.Group>
         <Form.Label>Content</Form.Label>
@@ -188,6 +190,7 @@ function PostEditForm() {
   );
 
   const imageField = (
+    // image field
     <div>
       <Form.Group>
         {image ? (
@@ -231,6 +234,7 @@ function PostEditForm() {
   );
 
   const buttonField = (
+    // buttons field
     <div className="text-right">
       <Button
         className={`${bttnStyles.Button} m-2`}
@@ -247,6 +251,7 @@ function PostEditForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <Row>
+        {/* display based on screen width */}
         {smallScreen ? (
           <>
             <Col className="p-0 p-md-2">

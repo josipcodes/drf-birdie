@@ -10,9 +10,9 @@ import { axiosResponse } from "../../api/axiosDefaults";
 
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-import useScreenWidth from "../../hooks/useScreenWidth"
+import useScreenWidth from "../../hooks/useScreenWidth";
 
-import styles from "../../styles/CommentCreateEditForm.module.css"
+import styles from "../../styles/CommentCreateEditForm.module.css";
 
 // based off of Moments, with various changes
 function CommentCreateForm(props) {
@@ -21,8 +21,8 @@ function CommentCreateForm(props) {
 
   const currentUser = useCurrentUser();
 
-    // screen width check
-    const smallScreen = useScreenWidth();
+  // screen width check
+  const smallScreen = useScreenWidth();
 
   const handleChange = (e) => {
     // update comment content
@@ -30,6 +30,7 @@ function CommentCreateForm(props) {
   };
 
   const handleSubmit = async (e) => {
+    // prevents refreshing
     e.preventDefault();
     try {
       const { data } = await axiosResponse.post("/comments/", {
@@ -48,6 +49,7 @@ function CommentCreateForm(props) {
           },
         ],
       }));
+      // reset Content upon submission
       setContent("");
     } catch (err) {
       console.log(err);
@@ -72,7 +74,6 @@ function CommentCreateForm(props) {
             rows={smallScreen ? 4 : 2}
             value={content}
             onChange={handleChange}
-  
           />
         </InputGroup>
       </Form.Group>

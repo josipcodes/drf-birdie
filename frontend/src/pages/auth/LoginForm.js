@@ -22,6 +22,7 @@ import { useRedirect } from "../../hooks/useRedirect";
 // code adapted from Moments lessons
 function LoginForm() {
   const setCurrentUser = useSetCurrentUser();
+  // redirect when already logged in
   useRedirect('loggedIn')
 
   const [signInData, setSignInData] = useState({
@@ -33,10 +34,10 @@ function LoginForm() {
 
   const [errors, setErrors] = useState({})
 
-  // from router
   const history = useHistory();
 
   const handleChange = (e) => {
+    // update form fields
     setSignInData({
       ...signInData,
       [e.target.name]: e.target.value
@@ -48,12 +49,10 @@ function LoginForm() {
     e.preventDefault();
     try {
       const { data } = await axios.post("dj-rest-auth/login/", signInData);
-      console.log("data", data)
       setCurrentUser(data.user);
-      console.log("data.user", data.user)
       // extracting exp date from the access token, saves it to user's browser in local storage.
       setTokenTimestamp(data);
-      // history.push("/")
+      // return to previous page upon logging in
       history.goBack();
     } catch(err) {
       setErrors(err.response?.data);

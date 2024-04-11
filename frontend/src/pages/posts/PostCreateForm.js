@@ -18,7 +18,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import { axiosRequest } from "../../api/axiosDefaults";
 
-import useScreenWidth from "../../hooks/useScreenWidth"
+import useScreenWidth from "../../hooks/useScreenWidth";
 
 import { useRedirect } from "../../hooks/useRedirect";
 
@@ -35,7 +35,7 @@ function PostCreateForm() {
     category: "",
   });
 
-  //   destructuring content & image
+  //   destructuring content, image and category
   const { content, image, category } = postData;
 
   const imageInput = useRef(null);
@@ -92,7 +92,7 @@ function PostCreateForm() {
   };
 
   const handleSubmit = async (e) => {
-    // submit function
+    // prevents reload
     e.preventDefault();
     const formData = new FormData();
 
@@ -103,14 +103,11 @@ function PostCreateForm() {
     }
     formData.append("category", category);
 
-    console.log("formdata", formData);
-
     // copied from Moments lessons
     // because we're sending image as well as text to our API,
     // we need to refresh our user's access token before making the request
     try {
       const { data } = await axiosRequest.post("/posts/", formData);
-      console.log(data);
       history.push(`/posts/${data.id}`);
     } catch (err) {
       console.log(err);
@@ -121,12 +118,13 @@ function PostCreateForm() {
   };
 
   const categoryField = (
+    // category dropdown
     <div className="text-center">
       <Form.Group>
         <Form.Label htmlFor="category">Category</Form.Label>
         <Form.Control
           as="select"
-          aria-label="tbd"
+          aria-label="category"
           id="category"
           defaultValue="Category"
           onChange={handleChangeCategory}
@@ -148,6 +146,7 @@ function PostCreateForm() {
   );
 
   const textField = (
+    // content field
     <div className="text-center">
       <Form.Group>
         <Form.Label>Content</Form.Label>
@@ -169,94 +168,95 @@ function PostCreateForm() {
   );
 
   const imageField = (
+    // image field
     <div>
-    <Form.Group>
-    {image ? (
-      <>
-        <figure>
-          <Image className={authStyles.Image} src={image} rounded />
-        </figure>
-        <div className="mr-auto text-right">
+      <Form.Group>
+        {image ? (
+          <>
+            <figure>
+              <Image className={authStyles.Image} src={image} rounded />
+            </figure>
+            <div className="mr-auto text-right">
+              <Form.Label
+                className={`${bttnStyles.Button} btn`}
+                htmlFor="image-upload"
+              >
+                Change the image
+              </Form.Label>
+            </div>
+          </>
+        ) : (
           <Form.Label
-            className={`${bttnStyles.Button} btn`}
+            className={`${bttnStyles.Button} text-center ${
+              smallScreen ? styles.ButtonRight : bttnStyles.Wide
+            }`}
             htmlFor="image-upload"
           >
-            Change the image
+            <Asset buttonMessage="Click or tap to upload an image" />
           </Form.Label>
-        </div>
-      </>
-    ) : (
-      <Form.Label
-        className={`${bttnStyles.Button} text-center ${smallScreen ? styles.ButtonRight : bttnStyles.Wide}`}
-        htmlFor="image-upload"
-      >
-        <Asset 
-          buttonMessage="Click or tap to upload an image"
+        )}
+        <Form.File
+          id="image-upload"
+          accept="image/*"
+          onChange={handleChangeImage}
+          ref={imageInput}
+          hidden
         />
-      </Form.Label>
-    )}
-    <Form.File
-      id="image-upload"
-      accept="image/*"
-      onChange={handleChangeImage}
-      ref={imageInput}
-      hidden
-    />
-  </Form.Group>
-  {errors.image?.map((message, idx) => (
-    <Alert variant="warning" key={idx}>
-      {message}
-    </Alert>
-  ))}
-  </div>
-  )
+      </Form.Group>
+      {errors.image?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+    </div>
+  );
 
   const buttonField = (
+    // buttons field
     <div className="text-right">
-    <Button
-    className={`${bttnStyles.Button} m-2`}
-    onClick={() => history.goBack()}
-  >
-    Cancel
-  </Button>
-  <Button className={`${bttnStyles.Button} m-2`} type="submit">
-    Post
-  </Button>
-  </div>
-  )
+      <Button
+        className={`${bttnStyles.Button} m-2`}
+        onClick={() => history.goBack()}
+      >
+        Cancel
+      </Button>
+      <Button className={`${bttnStyles.Button} m-2`} type="submit">
+        Post
+      </Button>
+    </div>
+  );
 
   return (
     <Form onSubmit={handleSubmit}>
       <Row>
-      {smallScreen ? (
-        <>
-        <Col className="p-0 p-md-2">
-        <Container className={appStyles.Content}>
-          <div>{textField}</div>
-          <div>{categoryField}</div>
-          <div className="p-2">{imageField}</div>
-          <div>{buttonField}</div>
-        </Container>
-      </Col>
-      </>
-      ) : (
-        <>
-        <Col md={8} className="p-0 p-md-2">
-        <Container className={appStyles.Content}>
-          <div>{textField}</div>
-          <div>{categoryField}</div>
-          <div>{buttonField}</div>
-        </Container>
-      </Col>
-      <Col className="py-2 p-0 p-md-2" md={4}>
-        <Container
-          className={`${appStyles.Content} ${styles.Container}`}
-        >
-          <div className="p-2">{imageField}</div>
-        </Container>
-      </Col>
-      </>
-      )}
+        {/* display based off of screen size */}
+        {smallScreen ? (
+          <>
+            <Col className="p-0 p-md-2">
+              <Container className={appStyles.Content}>
+                <div>{textField}</div>
+                <div>{categoryField}</div>
+                <div className="p-2">{imageField}</div>
+                <div>{buttonField}</div>
+              </Container>
+            </Col>
+          </>
+        ) : (
+          <>
+            <Col md={8} className="p-0 p-md-2">
+              <Container className={appStyles.Content}>
+                <div>{textField}</div>
+                <div>{categoryField}</div>
+                <div>{buttonField}</div>
+              </Container>
+            </Col>
+            <Col className="py-2 p-0 p-md-2" md={4}>
+              <Container className={`${appStyles.Content} ${styles.Container}`}>
+                <div className="p-2">{imageField}</div>
+              </Container>
+            </Col>
+          </>
+        )}
       </Row>
     </Form>
   );

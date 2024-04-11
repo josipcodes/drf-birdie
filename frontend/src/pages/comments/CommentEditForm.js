@@ -1,28 +1,25 @@
 import React, { useState } from "react";
 
-
 import Form from "react-bootstrap/Form";
 import { axiosResponse } from "../../api/axiosDefaults";
 
-import bttnStyles from "../../styles/Button.module.css"
+import bttnStyles from "../../styles/Button.module.css";
 
-import styles from "../../styles/CommentCreateEditForm.module.css"
+import styles from "../../styles/CommentCreateEditForm.module.css";
 
 // based off of Moments, with some changes
 function CommentEditForm(props) {
   const { id, content, setShowEditForm, setComments } = props;
 
-
   const [formContent, setFormContent] = useState(content);
 
-
-  const handleChange = (event) => {
-    setFormContent(event.target.value);
+  const handleChange = (e) => {
+    setFormContent(e.target.value);
   };
 
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    // prevents refreshing
+    e.preventDefault();
     try {
       await axiosResponse.put(`/comments/${id}/`, {
         content: formContent.trim(),
@@ -44,7 +41,6 @@ function CommentEditForm(props) {
       console.log(err);
     }
   };
-
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -76,6 +72,5 @@ function CommentEditForm(props) {
     </Form>
   );
 }
-
 
 export default CommentEditForm;

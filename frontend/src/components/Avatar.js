@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../styles/Avatar.module.css";
 
+// modeled after Moments with changes applied
 const Avatar = ({ src, height = 45, text }) => {
   /* src is avatar image
   height is avatar height

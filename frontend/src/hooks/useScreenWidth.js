@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 https://www.altcademy.com/blog/how-to-check-screen-width-in-reactjs/ 
 Code modified to return boolean value */ 
 const ScreenWidth = () => {
+  // check screen width
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
