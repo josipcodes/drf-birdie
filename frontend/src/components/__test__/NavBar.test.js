@@ -43,7 +43,7 @@ test("renders liked link", async () => {
   expect(likedOption).toBeInTheDocument();
 });
 
-test("renders post form", async () => {
+test("clicking post link renders post form", async () => {
   render(
     <Router>
       <CurrentUserProvider>
@@ -55,6 +55,7 @@ test("renders post form", async () => {
   fireEvent.click(createButton)
   const submitButton = await screen.findByPlaceholderText("Type your post")
   await waitFor(() => {
+    // looking for the post content form
     expect(submitButton).toBeInTheDocument();
   })
 });
