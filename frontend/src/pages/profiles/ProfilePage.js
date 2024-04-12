@@ -128,12 +128,12 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-    {/* owner dropdown */}
+      {/* owner dropdown */}
       {currentProfile?.is_owner && (
         <ProfileEditDropdown id={currentProfile?.id} />
       )}
       <Row noGutters className={`text-center ${appStyles.Content}`}>
-        <Col md={2} className="mt-1 offset-lg-0">
+        <Col md={3} className="mt-1 offset-lg-0">
           <Image
             className={styles.ProfileAvatar}
             roundedCircle
@@ -144,7 +144,7 @@ function ProfilePage() {
           <h3 className={styles.ProfileUsername}>{currentProfile?.owner}</h3>
         </Col>
         <Col
-          md={3}
+          md={2}
           className="mt-1 offset-md-2 text-lg-right d-flex justify-content-end pr-3"
         >
           {/* Follow/unfollow buttons */}

@@ -65,9 +65,10 @@ const NavBar = () => {
       to={`/profiles/${currentUser?.profile_id}`}
       className={styles.NavLink}
     >
+      {/* hiding username if too long, this matches mobile user's experience */}
       <Avatar
         src={currentUser?.profile_avatar}
-        text={currentUser?.username}
+        text={currentUser?.username.length <= 9 && currentUser?.username }
         height={38}
       />
     </NavLink>
