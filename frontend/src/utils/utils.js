@@ -27,7 +27,6 @@ export const fetchMoreData = async (resource, setResource) => {
     // code provided by Sean and Roman from Tutor support
     let url = new URL(resource.next);
     url = (url.pathname + url.search).replace("/api", "");
-    console.log({ requestUrl: url });
     // fetching data
     const { data } = await axios.get(url);
 

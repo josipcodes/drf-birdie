@@ -100,7 +100,7 @@ function ProfilePage() {
       }));
       setCurrentUserProfile((prevCurrentUserProfile) => ({
         ...prevCurrentUserProfile,
-        following_count: currentUserProfile.followers_count + 1,
+        following_count: currentUserProfile.following_count + 1,
       }));
     } catch (err) {
       // console.log(err);
@@ -119,7 +119,7 @@ function ProfilePage() {
       }));
       setCurrentUserProfile((prevCurrentUserProfile) => ({
         ...prevCurrentUserProfile,
-        following_count: currentUserProfile.followers_count - 1,
+        following_count: currentUserProfile.following_count - 1,
       }));
     } catch (err) {
       // console.log(err);
