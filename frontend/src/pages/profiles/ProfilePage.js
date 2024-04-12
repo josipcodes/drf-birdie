@@ -52,7 +52,6 @@ function ProfilePage() {
       ]);
       setCurrentProfile(profile.data);
       setCurrentPosts(posts.data);
-      console.log(currentPosts);
     } catch (err) {
       console.log(err);
     }
@@ -61,11 +60,9 @@ function ProfilePage() {
   const FetchCurrentUserProfile = async () => {
     /* Function fetches current user profile */
     try {
-      console.log("id", currentUser.profile_id);
       const profile = await axiosRequest.get(
         `/profiles/${currentUser.profile_id}/`
       );
-      console.log(profile.data);
       setCurrentUserProfile(profile.data);
       console.log("CURRENT USER PROFILE", currentUserProfile);
     } catch (err) {
@@ -74,9 +71,11 @@ function ProfilePage() {
   };
 
   useEffect(() => {
-    /* Generates a warning in the console,
+    /* Generates a warning in the console regarding missing dependencies,
     however, moving function within useEffect does not solve the issue,
-    but makes it worse. */
+    but makes it worse.
+    Adding dependencies creates infinite loop.
+    In other words, preferably don't touch. */
     FetchProfileData();
     if (currentUser) {
       FetchCurrentUserProfile();
@@ -128,6 +127,7 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
+    {/* owner dropdown */}
       {currentProfile?.is_owner && (
         <ProfileEditDropdown id={currentProfile?.id} />
       )}
@@ -146,6 +146,7 @@ function ProfilePage() {
           md={3}
           className="mt-1 offset-md-2 text-lg-right d-flex justify-content-end pr-3"
         >
+          {/* Follow/unfollow buttons */}
           {currentUser &&
             !currentProfile?.is_owner &&
             (currentProfile?.following_id ? (
@@ -190,6 +191,7 @@ function ProfilePage() {
         </Col>
         <Col xs={12} className={`${styles.ProfileText} text-left mt-3`}>
           {currentProfile?.name && (
+            // user details
             <div>
               <strong>Name: </strong>
               {currentProfile?.name}
@@ -228,7 +230,7 @@ function ProfilePage() {
         <div className={appStyles.Content}>
           <Asset message={`${currentProfile?.owner} hasn't posted yet.`} />
           {currentProfile?.is_owner && (
-            // conditional rendering call to action for owner
+            // conditional rendering call to action for the owner
             <NavLink
               to="/posts/create"
               className={`${bttnStyles.Button} ${bttnStyles.Wide} d-block text-center`}

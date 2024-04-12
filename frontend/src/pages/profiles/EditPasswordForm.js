@@ -47,6 +47,7 @@ const UserEditPasswordForm = () => {
   }, [currentUser, history, id]);
 
   const handleSubmit = async (e) => {
+    // prevents refresh
     e.preventDefault();
     try {
       await axiosResponse.post("/dj-rest-auth/password/change/", userData);

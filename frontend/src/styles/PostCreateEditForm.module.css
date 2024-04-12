@@ -1,6 +1,6 @@
-/* temporarily copied from Moments */
+/* aligning visually with the content form on desktop */
 .Container {
-    min-height: 343px;
+    min-height: 349px;
   }
 
 .ButtonRight {

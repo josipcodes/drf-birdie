@@ -18,9 +18,9 @@ import {
 import bttnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import postFormStyles from "../../styles/PostCreateEditForm.module.css";
-import authStyles from "../../styles/AuthForm.module.css"
+import authStyles from "../../styles/AuthForm.module.css";
 
-import useScreenWidth from "../../hooks/useScreenWidth"
+import useScreenWidth from "../../hooks/useScreenWidth";
 
 // based off of Moments with many adjustments
 const EditProfileForm = () => {
@@ -35,12 +35,13 @@ const EditProfileForm = () => {
     bio: "",
     avatar: "",
   });
+
   const { name, bio, avatar } = profileData;
 
   const [errors, setErrors] = useState({});
 
- // screen width check
- const smallScreen = useScreenWidth();
+  // screen width check
+  const smallScreen = useScreenWidth();
 
   useEffect(() => {
     const handleMount = async () => {
@@ -68,6 +69,7 @@ const EditProfileForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    // prevents refresh
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
@@ -83,6 +85,7 @@ const EditProfileForm = () => {
         ...currentUser,
         profile_avatar: data.avatar,
       }));
+      // return user to previous page, i.e. profile
       history.goBack();
     } catch (err) {
       console.log(err);
@@ -91,43 +94,45 @@ const EditProfileForm = () => {
   };
 
   const avatarField = (
+    // avatar section
     <Form.Group>
-    {avatar && (
-      <figure>
-        <Image className={authStyles.Image} src={avatar} fluid />
-      </figure>
-    )}
-    {errors?.avatar?.map((message, idx) => (
-      <Alert variant="warning" key={idx}>
-        {message}
-      </Alert>
-    ))}
-    <div className="mr-auto text-right">
-      <Form.Label
-        className={`${bttnStyles.Button} btn`}
-        htmlFor="image-upload"
-      >
-        Change the image
-      </Form.Label>
-    </div>
-    <Form.File
-    hidden
-      id="image-upload"
-      ref={imageFile}
-      accept="image/*"
-      onChange={(e) => {
-        if (e.target.files.length) {
-          setProfileData({
-            ...profileData,
-            avatar: URL.createObjectURL(e.target.files[0]),
-          });
-        }
-      }}
-    />
-  </Form.Group>
-  )
+      {avatar && (
+        <figure>
+          <Image className={authStyles.Image} src={avatar} fluid />
+        </figure>
+      )}
+      {errors?.avatar?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+      <div className="mr-auto text-right">
+        <Form.Label
+          className={`${bttnStyles.Button} btn`}
+          htmlFor="image-upload"
+        >
+          Change the image
+        </Form.Label>
+      </div>
+      <Form.File
+        hidden
+        id="image-upload"
+        ref={imageFile}
+        accept="image/*"
+        onChange={(e) => {
+          if (e.target.files.length) {
+            setProfileData({
+              ...profileData,
+              avatar: URL.createObjectURL(e.target.files[0]),
+            });
+          }
+        }}
+      />
+    </Form.Group>
+  );
 
   const textFields = (
+    // name and bio section
     <>
       <Form.Group>
         <Form.Label>Your name</Form.Label>
@@ -165,47 +170,49 @@ const EditProfileForm = () => {
   );
 
   const buttonField = (
+    // button field
     <div className="text-right">
-    <Button
-    className={`${bttnStyles.Button} m-2`}
-    onClick={() => history.goBack()}
-  >
-    Cancel
-  </Button>
-  <Button className={`${bttnStyles.Button} m-2`} type="submit">
-    Post
-  </Button>
-  </div>
-  )
+      <Button
+        className={`${bttnStyles.Button} m-2`}
+        onClick={() => history.goBack()}
+      >
+        Cancel
+      </Button>
+      <Button className={`${bttnStyles.Button} m-2`} type="submit">
+        Post
+      </Button>
+    </div>
+  );
 
   return (
     <Form onSubmit={handleSubmit}>
       <Row>
-      {smallScreen ? (
-        <Col className="p-0 p-md-2">
-          <Container className={appStyles.Content}>
-            <div>
-              {textFields}
-            </div>
-            <div>
-              {avatarField}
-            </div>
-            <div>{buttonField}</div>
-          </Container>
-        </Col>
-      ) : (
-        <>
-        <Col md={8} className="p-0 p-md-2">
-        <Container className={appStyles.Content}>
-          <div>{textFields}</div>
-          <div>{buttonField}</div>
-        </Container>
-      </Col>
-        <Col className="py-2 p-0 p-md-2" md={4}>
-          <Container className={`${appStyles.Content} ${postFormStyles.Container}`}><div className="p-2">{avatarField}</div></Container>
-        </Col>
-        </>
-      )}
+        {/* screen width check */}
+        {smallScreen ? (
+          <Col className="p-0 p-md-2">
+            <Container className={appStyles.Content}>
+              <div>{textFields}</div>
+              <div>{avatarField}</div>
+              <div>{buttonField}</div>
+            </Container>
+          </Col>
+        ) : (
+          <>
+            <Col md={8} className="p-0 p-md-2">
+              <Container className={appStyles.Content}>
+                <div>{textFields}</div>
+                <div>{buttonField}</div>
+              </Container>
+            </Col>
+            <Col className="py-2 p-0 p-md-2" md={4}>
+              <Container
+                className={`${appStyles.Content} ${postFormStyles.Container}`}
+              >
+                <div className="p-2">{avatarField}</div>
+              </Container>
+            </Col>
+          </>
+        )}
       </Row>
     </Form>
   );

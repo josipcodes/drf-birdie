@@ -1,12 +1,13 @@
-
+/* allowing for sufficient spacing 
+for avatar display next to comment form */
 .CommentFormWidth {
-    width: 97%;
-    margin: 0 3%;
+  width: 97%;
+  margin: 0 3%;
 }
 
 @media (min-width: 768px) {
-    .CommentFormWidth {
-        width: 93%;
-        margin: 0 7%;
-    }
+  .CommentFormWidth {
+    width: 93%;
+    margin: 0 7%;
   }
+}

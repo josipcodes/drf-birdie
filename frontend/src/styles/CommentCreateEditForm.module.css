@@ -1,3 +1,4 @@
+/* ensuring form can't be collapsed too much */
 .CommentHeight {
     min-height: 50px;
 }

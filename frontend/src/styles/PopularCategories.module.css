@@ -1,23 +1,17 @@
 .Header {
-    font-weight: bold;
-    font-size: 15px;
-    line-height: 35px;
-    text-align: center;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #fcd619;
-  }
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 35px;
+  text-align: center;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #fcd619;
+}
 
-  .CategoryName {
-    color: #f8f8f8;
-    margin: 15px;
-    display: block;
-  }
-
-  @media (max-width: 767px) { 
-    .Header {
-      text-align: right;
-      }
+.CategoryName {
+  color: #f8f8f8;
+  margin: 15px;
+  display: block;
 }
 
 .CategoryContainer {
@@ -25,3 +19,10 @@
   position: sticky;
   top: 80px;
 }
+
+@media (max-width: 767px) {
+  .Header {
+    text-align: right;
+  }
+}
+

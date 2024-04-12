@@ -1,5 +1,7 @@
+/* Adjusting the visual aspect of a post
+depending on where it is displayed */
 .Post {
-  background-color: #212529;;
+  background-color: #212529;
   border-radius: 5%;
   margin: 3px 0;
 }
@@ -16,21 +18,25 @@
   color: #f8f8f8;
 }
 
-.PostText, .PostNotLiked, .CommentIcon, .PostNotSaved {
+.PostText,
+.PostNotLiked,
+.CommentIcon,
+.PostNotSaved {
   color: #f8f8f8;
   margin: 5px;
 }
 
-.IconText, .PostLiked, .PostSaved {
+.IconText,
+.PostLiked,
+.PostSaved {
   color: #fcd619;
-    margin: 5px;
+  margin: 5px;
 }
 
 i:hover {
   cursor: pointer;
   color: #fcd619;
 }
-
 
 .Category {
   color: #fcd619;
@@ -46,6 +52,8 @@ i:hover {
   object-fit: contain;
 }
 
+/* Making <i> link representation
+not stand out too much */
 .OwnerLinkIcon {
   color: #5f5f72;
 }

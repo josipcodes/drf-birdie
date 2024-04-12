@@ -1,4 +1,5 @@
-.NotFound {
+/* 404 image filter */
+.Filter {
   filter: grayscale(1);
 }
 

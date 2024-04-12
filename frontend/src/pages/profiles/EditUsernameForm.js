@@ -41,6 +41,7 @@ const EditUsernameForm = () => {
   }, [currentUser, history, id]);
 
   const handleSubmit = async (e) => {
+    // prevents refresh
     e.preventDefault();
     try {
       await axiosResponse.put("/dj-rest-auth/user/", {
@@ -50,6 +51,7 @@ const EditUsernameForm = () => {
         ...prevUser,
         username,
       }));
+      // returns user to the previous page, i.e. profile
       history.goBack();
     } catch (err) {
       console.log(err);
