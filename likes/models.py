@@ -4,9 +4,7 @@ from posts.models import Post
 
 # copied from drf_api lessons, minor modifications
 class Like(models.Model):
-    """
-    Like model, related to User, Post.
-    """
+    # Like model, related to User, Post.
     owner = models.ForeignKey(
         User, 
         on_delete=models.CASCADE)

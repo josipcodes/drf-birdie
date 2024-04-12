@@ -16,6 +16,5 @@ class CategorySerializer(serializers.ModelSerializer):
             'id',
             'name',
             'description',
-            # 'post_count',
             'posts_count'
         ]

@@ -11,7 +11,6 @@ class FollowerSerializer(serializers.ModelSerializer):
         source='followed.username'
         )
 
-
     class Meta:
         model = Follower
         fields = [
@@ -24,9 +23,7 @@ class FollowerSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
-        """
-        Follower validation
-        """
+        # Follower validation
         try:
             # calling super() as create method is on the ModelSerializer
             return super().create(validated_data)

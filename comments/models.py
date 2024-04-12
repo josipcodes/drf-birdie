@@ -6,9 +6,7 @@ from posts.models import Post
 # Comment model has been copied from drf_api lessons
 # minor modifications applied
 class Comment(models.Model):
-    """
-    Comment model, related to User and Post
-    """
+    # Comment model, related to User and Post
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)

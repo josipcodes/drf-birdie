@@ -24,7 +24,6 @@ class SavedPostSerializer(serializers.ModelSerializer):
         The create method handles the unique constraint on 'owner' and 'post'.
         """
         try:
-            # we call super() as create method is on the ModelSerializer
             return super().create(validated_data)
         except IntegrityError:
             raise serializers.ValidationError({

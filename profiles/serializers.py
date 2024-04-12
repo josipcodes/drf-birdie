@@ -7,7 +7,6 @@ from saved_posts.models import SavedPost
 # some alternations made, validation of avatar added
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
-    # read-only field, gets value from get_is_owner
     is_owner = serializers.SerializerMethodField()
     following_id = serializers.SerializerMethodField()
     posts_count = serializers.ReadOnlyField()
@@ -37,9 +36,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         return obj.owner == request.user
 
     def get_following_id(self, obj):
-        """
-        Check if user follows another user
-        """
+        # Check if user follows another user
         user = self.context['request'].user
         if user.is_authenticated:
             following = Follower.objects.filter(

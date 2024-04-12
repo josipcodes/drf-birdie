@@ -20,7 +20,6 @@ class ProfileList(generics.ListAPIView):
         saved_count=Count('owner__post__saved', distinct=True),
     ).order_by('created')
     serializer_class = ProfileSerializer
-    # tbd if necessary here
     filter_backends = [
         filters.OrderingFilter,
         DjangoFilterBackend,
@@ -39,9 +38,7 @@ class ProfileList(generics.ListAPIView):
 
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
-    """
-    Retrieve a profile. Edit if it is yours.
-    """
+    # Retrieve a profile. Edit if it is yours.
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.annotate(

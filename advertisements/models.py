@@ -2,9 +2,9 @@ from django.db import models
 from products.models import Product
 
 class Advertisement(models.Model):
-    """
-    Advertisement model, related to Product model
-    """
+
+    # Advertisement model, related to Product model
+
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     description = models.TextField(max_length=300, blank=True)
     contract_start = models.DateTimeField()
@@ -14,7 +14,7 @@ class Advertisement(models.Model):
     alt = models.CharField(max_length=150)
 
     class Meta:
-        ordering = ['product']
+        ordering = ['contract_start']
 
 
     def __str__(self):

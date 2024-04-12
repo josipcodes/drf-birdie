@@ -4,9 +4,7 @@ from posts.models import Post
 
 # based on Like model
 class SavedPost(models.Model):
-    """
-    SavedPost model, related to User, Post.
-    """
+    # SavedPost model, related to User, Post.
     owner = models.ForeignKey(
         User, 
         on_delete=models.CASCADE)
@@ -20,7 +18,7 @@ class SavedPost(models.Model):
 
     class Meta:
         ordering = ['-created']
-        # validation
+        # preventing duplication
         unique_together = ['owner', 'post']
 
 

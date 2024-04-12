@@ -5,7 +5,7 @@ from categories.models import Category
 from saved_posts.models import SavedPost
 
 # portion of the Serializer has been copied from drf_api lessons
-# alternations made
+# alterations made
 class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
@@ -34,28 +34,14 @@ class PostSerializer(serializers.ModelSerializer):
             )
         return value
 
-    # Appropriated functions from drf_api comment lessons
-    # Tbd if it will be used
-    def get_created(self, obj):
-        """
-        Returns a string representing time since creation
-        """
-        return naturaltime(obj.created)
-
-    def get_modified(self, obj):
-        """
-        Returns a string representing time since modifying
-        """
-        return naturaltime(obj.modified)
 
     def get_is_owner(self, obj):
+        # check if owner
         request = self.context['request']
         return obj.owner == request.user
 
     def get_like_id(self, obj):
-        """
-        Check if user liked the post
-        """
+        # check if user liked the post
         user = self.context['request'].user
         if user.is_authenticated:
             like = Like.objects.filter(
@@ -65,9 +51,7 @@ class PostSerializer(serializers.ModelSerializer):
         return None
 
     def get_saved_id(self, obj):
-        """
-        Check if user saved the post
-        """
+        # check if user saved the post
         user = self.context['request'].user
         if user.is_authenticated:
             save = SavedPost.objects.filter(

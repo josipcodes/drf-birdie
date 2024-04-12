@@ -1,9 +1,7 @@
 from django.db import models
 
 class Company(models.Model):
-    """
-    Company model.
-    """
+    # Company model.
     company_name = models.CharField(max_length=100)
     internal_notes = models.TextField(max_length=300, blank=True)
 

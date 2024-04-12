@@ -13,7 +13,6 @@ class PostList(generics.ListCreateAPIView):
     Permission already set globally in settings.py.
     """
     serializer_class = PostSerializer
-    # queryset = Post.objects.all()
     queryset = Post.objects.annotate(
         comments_count=Count('comment', distinct=True),
         likes_count=Count('likes', distinct=True),
@@ -33,6 +32,7 @@ class PostList(generics.ListCreateAPIView):
         'category_id'
     ]
 
+    # not currently used but making available for future devepment
     search_fields = [
         'owner__username',
         'content'
@@ -46,19 +46,14 @@ class PostList(generics.ListCreateAPIView):
 
 
     def perform_create(self, serializer):
-        """
-        Post creation, associates owner with current user
-        """
+        # Post creation, associates owner with current user
         serializer.save(owner=self.request.user)
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Retrieve a post. Edit/delete if it is yours.
-    """
+    # Retrieve a post. Edit/delete if it is yours.
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = PostSerializer
-    # queryset = Post.objects.all()
     queryset = Post.objects.annotate(
         comments_count=Count('comment', distinct=True),
         likes_count=Count('likes', distinct=True),

@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from .models import Comment
 
-# serializers copied from drf_api lessons.
+# serializers copied from drf_api lessons with minor modifications.
 class CommentSerializer(serializers.ModelSerializer):
     """
     SerializerMethodField is read only. 
@@ -21,12 +21,8 @@ class CommentSerializer(serializers.ModelSerializer):
     created = serializers.SerializerMethodField()
     modified = serializers.SerializerMethodField()
 
-    """
-    We need to check if request.user is the same as it's owner.
-    Problem, currently logged in user is a part of the request.
-    To resolve this, we need to pass it via context in views.py.
-    This needs to happen whenever we call Serializer.
-    """
+
+    # Check if request.user is the same as it's owner.
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
