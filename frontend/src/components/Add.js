@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import appStyles from ".././App.module.css";
 import Asset from ".././components/Asset";
-import { Image } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 import styles from ".././styles/Adds.module.css";
 
 const Add = () => {

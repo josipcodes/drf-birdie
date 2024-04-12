@@ -1,4 +1,4 @@
-import { Media } from "react-bootstrap";
+import Media from "react-bootstrap/Media";
 import styles from "../styles/Comment.module.css";
 
 import React, { useState } from "react";

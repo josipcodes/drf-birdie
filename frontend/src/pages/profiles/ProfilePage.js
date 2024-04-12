@@ -16,7 +16,9 @@ import PopularCategories from "../../components/PopularCategories";
 import useScreenWidth from "../../hooks/useScreenWidth";
 import { axiosRequest, axiosResponse } from "../../api/axiosDefaults";
 import { NavLink, useParams } from "react-router-dom";
-import { Button, Image } from "react-bootstrap";
+
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
 
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Post from "../posts/Post";

@@ -1,6 +1,9 @@
 import React from "react";
 import bird from "../assets/bird.jpg";
-import { Image, Row, Container, Col } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
 import styles from "../styles/PageNotFound.module.css";
 import authStyles from "../styles/AuthForm.module.css";
 import appStyles from ".././App.module.css";

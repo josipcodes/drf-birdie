@@ -13,7 +13,7 @@ import authStyles from "../../styles/AuthForm.module.css";
 import bttnStyles from "../../styles/Button.module.css";
 
 import Asset from "../../components/Asset";
-import { Image } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import { axiosRequest } from "../../api/axiosDefaults";
