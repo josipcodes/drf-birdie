@@ -59,7 +59,7 @@ function PostPage() {
         setComments(comments);
         // clg post to check that this is working
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     // calling handleMount and running the code every time the id in the url changes.

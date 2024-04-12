@@ -54,7 +54,7 @@ const EditUsernameForm = () => {
       // returns user to the previous page, i.e. profile
       history.goBack();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setErrors(err.response?.data);
     }
   };

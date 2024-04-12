@@ -18,12 +18,11 @@ export const CurrentUserProvider = ({ children }) => {
   const handleMount = async () => {
     try {
       const { data } = await axiosResponse.get("dj-rest-auth/user/");
-      console.log("CurrentUserProvider", data)
       // Set the current user with the data we get back.
       // Without this, we'd have to log in after each refresh
       setCurrentUser(data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -36,7 +35,6 @@ export const CurrentUserProvider = ({ children }) => {
     // request interceptor
     axiosRequest.interceptors.request.use(
       async (config) => {
-        console.log(config)
         // if runs only when token needs refreshing
         if (shouldRefreshToken()) {
           try {

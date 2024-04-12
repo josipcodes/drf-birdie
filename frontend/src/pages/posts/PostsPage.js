@@ -50,7 +50,7 @@ function PostsPage({ message, filter = "", selectedCategory = "" }) {
         // setting IsLoaded to true so spinner no longer spins.
         setIsLoaded(true);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     // we want spinner displayed before we fetch posts.

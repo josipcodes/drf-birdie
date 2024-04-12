@@ -20,7 +20,7 @@ const PopularCategories = ({ selectedCategory }) => {
         const { data } = await axios.get("/categories/");
         setCategories(data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchCategories();

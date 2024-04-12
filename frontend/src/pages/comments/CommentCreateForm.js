@@ -52,7 +52,7 @@ function CommentCreateForm(props) {
       // reset Content upon submission
       setContent("");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

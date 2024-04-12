@@ -51,9 +51,8 @@ function PostCreateForm() {
       try {
         const { data } = await axios.get("/categories/");
         setCategories(data);
-        console.log(data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchCategories();
@@ -71,7 +70,6 @@ function PostCreateForm() {
   const handleChangeImage = (e) => {
     // image change handler
     // checking if there is a file
-    console.log(e.target.files.length);
     if (e.target.files.length) {
       // revokeObjectURL is used to clear browser's reference to the previous file
       // used in cases when user decides to use a different image after upload
@@ -110,7 +108,7 @@ function PostCreateForm() {
       const { data } = await axiosRequest.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }

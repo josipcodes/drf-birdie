@@ -19,7 +19,7 @@ const Add = () => {
         setAdvertisements(data);
         setIsLoaded(true)
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchAdds();

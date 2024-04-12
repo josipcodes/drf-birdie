@@ -55,7 +55,7 @@ function ProfilePage() {
       setCurrentProfile(profile.data);
       setCurrentPosts(posts.data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -66,9 +66,8 @@ function ProfilePage() {
         `/profiles/${currentUser.profile_id}/`
       );
       setCurrentUserProfile(profile.data);
-      console.log("CURRENT USER PROFILE", currentUserProfile);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -104,7 +103,7 @@ function ProfilePage() {
         following_count: currentUserProfile.followers_count + 1,
       }));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -123,7 +122,7 @@ function ProfilePage() {
         following_count: currentUserProfile.followers_count - 1,
       }));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

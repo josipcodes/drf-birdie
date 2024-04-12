@@ -53,9 +53,8 @@ function PostEditForm() {
       try {
         const { data } = await axios.get("/categories/");
         setCategories(data);
-        console.log(data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchCategories();
@@ -68,13 +67,12 @@ function PostEditForm() {
         const { data } = await axiosRequest.get(`/posts/${id}/`);
         // const { content, image, is_owner } = data;
         const { content, image, category, is_owner } = data;
-        console.log(data);
         // if user is owner, prepopulate the post, else redirect
         is_owner
           ? setPostData({ content, image, category })
           : history.push("/");
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchPost();
@@ -93,7 +91,6 @@ function PostEditForm() {
   const handleChangeImage = (e) => {
     // image change handler
     // checking if there is a file
-    console.log(e.target.files.length);
     if (e.target.files.length) {
       // revokeObjectURL is used to clear browser's reference to the previous file
       // used in cases when user decides to use a different image after upload
@@ -130,10 +127,9 @@ function PostEditForm() {
     // we need to refresh our user's access token before making the request
     try {
       const { data } = await axiosRequest.put(`/posts/${id}/`, formData);
-      console.log(data);
       history.push(`/posts/${data.id}`);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
