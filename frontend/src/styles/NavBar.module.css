@@ -14,7 +14,7 @@
   transition: color ease-in-out 1s;
 }
 
-.Active {
+.Active, .Active * {
   color: #fcd619;
 }
 
