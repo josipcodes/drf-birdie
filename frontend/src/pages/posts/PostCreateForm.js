@@ -159,7 +159,7 @@ function PostCreateForm() {
       </Form.Group>
       {errors.content?.map((idx) => (
         <Alert variant="warning" key={idx}>
-          Post has to contain at least some text.
+          Post has to contain at least some text, but no longer than 300 characters.
         </Alert>
       ))}
     </div>
