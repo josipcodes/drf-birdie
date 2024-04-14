@@ -7,6 +7,13 @@
   color: #f8f8f8;
 }
 
+/* navbar hover for icons + text */
+.NavLink:hover,
+.NavLink:hover * {
+  color: #fcd619;
+  transition: color ease-in-out 1s;
+}
+
 .Active {
   color: #fcd619;
 }

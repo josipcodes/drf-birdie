@@ -9,16 +9,6 @@
   box-sizing: border-box;
 }
 
-a {
-  color: #f8f8f8;
-  transition: color ease-in-out 1s;
-}
-
-a:hover {
-  text-decoration: none;
-  color: #fcd619;
-}
-
 .Content {
   background-color: #212529;
   padding: 1.5rem;
@@ -32,3 +22,15 @@ a:hover {
 .Main {
   padding-top: 77px;
 }
+
+/* link styling */
+a {
+  color: #f8f8f8;
+  transition: color ease-in-out 1s;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #fcd619;
+}
+

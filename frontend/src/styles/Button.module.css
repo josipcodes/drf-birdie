@@ -8,7 +8,7 @@
 }
 
 .Button:hover {
-  border-color: rgb(212, 145, 19);
+  border-color: #D49113;
   border-width: 2px;
   cursor: pointer;
   background-color: #fcd619;

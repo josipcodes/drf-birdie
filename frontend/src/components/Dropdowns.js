@@ -3,7 +3,6 @@ import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/Dropdowns.module.css";
 import { useHistory } from "react-router";
 
-
 const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   /* copied from moments
   With minor updates */
@@ -18,14 +17,14 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
 ));
 
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
-    /* Post/comment edit/delete dropdown
+  /* Post/comment edit/delete dropdown
   Displays left-down from the dropdown itself */
   return (
     <Dropdown className="ml-auto" drop="left">
       <Dropdown.Toggle as={ThreeDots} />
 
       <Dropdown.Menu
-      className={`text-center ${styles.DropdownBackground}`}
+        className={`text-center ${styles.DropdownBackground}`}
         popperConfig={{ strategy: "fixed" }}
       >
         <Dropdown.Item
@@ -52,7 +51,7 @@ export function ProfileEditDropdown({ id }) {
   Displays left-down from the dropdown itself */
   const history = useHistory();
   return (
-    <Dropdown className={`px-3 m-4 ${styles.Absolute}`} drop="left">
+    <Dropdown className={`px-4 m-4 ${styles.Absolute}`} drop="left">
       <Dropdown.Toggle as={ThreeDots} />
       <Dropdown.Menu className={`text-center ${styles.DropdownBackground}`}>
         <Dropdown.Item
@@ -72,7 +71,7 @@ export function ProfileEditDropdown({ id }) {
           onClick={() => history.push(`/profiles/${id}/edit/password`)}
           aria-label="edit-password"
         >
-          <i className={`fas fa-key ${styles.DropdownIcon} mr-1`}/>
+          <i className={`fas fa-key ${styles.DropdownIcon} mr-1`} />
           Change password
         </Dropdown.Item>
       </Dropdown.Menu>
