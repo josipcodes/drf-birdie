@@ -1,7 +1,6 @@
 from rest_framework import permissions, generics 
 from .serializers import AdvertisementSerializer
 from .models import Advertisement
-from rest_framework.permissions import IsAdminUser
 from datetime import date
 
 class AdvertisementList(generics.ListCreateAPIView):
