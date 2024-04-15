@@ -3,6 +3,7 @@ from drf_api.permissions import IsOwnerOrReadOnly
 from .models import SavedPost
 from .serializers import SavedPostSerializer
 
+
 # based off of Likes views
 class SavedPostList(generics.ListCreateAPIView):
     """
