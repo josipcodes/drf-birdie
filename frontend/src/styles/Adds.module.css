@@ -1,6 +1,4 @@
 .AddImage {
-    /* object fit will make sure avatar fits the container */
-    object-fit: fit;
     max-width: 100%;
   }
 

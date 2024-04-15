@@ -73,7 +73,6 @@ function PostPage() {
         <Container
           className={`${appStyles.Content} ${postStyles.PostText} ${styles.CommentFormWidth}`}
         >
-          {/* tbd if conditional needs changing */}
           {currentUser && (
             <CommentCreateForm
               profile_id={currentUser.profile_id}
