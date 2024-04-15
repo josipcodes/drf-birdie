@@ -2,10 +2,11 @@ from rest_framework import serializers
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from .models import Comment
 
+
 # serializers copied from drf_api lessons with minor modifications.
 class CommentSerializer(serializers.ModelSerializer):
     """
-    SerializerMethodField is read only. 
+    SerializerMethodField is read only.
     It gets its value by calling the method with a name get_fieldname.
     """
     owner = serializers.ReadOnlyField(
@@ -21,7 +22,6 @@ class CommentSerializer(serializers.ModelSerializer):
     created = serializers.SerializerMethodField()
     modified = serializers.SerializerMethodField()
 
-
     # Check if request.user is the same as it's owner.
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -29,10 +29,9 @@ class CommentSerializer(serializers.ModelSerializer):
 
     def get_created(self, obj):
         return naturaltime(obj.created)
-    
+
     def get_modified(self, obj):
         return naturaltime(obj.modified)
-
 
     class Meta:
         model = Comment

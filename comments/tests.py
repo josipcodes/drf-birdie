@@ -9,7 +9,7 @@ from rest_framework.test import APITestCase
 class CommentListViewTests(APITestCase):
     def setUp(self):
         eve = User.objects.create_user(
-            username='eve', 
+            username='eve',
             password='pass'
             )
         # creating category, needed for creating post
@@ -20,17 +20,16 @@ class CommentListViewTests(APITestCase):
             owner=eve,
             content='content',
             category=self.category)
-        
 
     def test_logged_in_user_can_create_comment(self):
         self.client.login(
             username='eve', password='pass'
             )
         response = self.client.post(
-            '/comments/',
+            '/api/comments/',
             {'content': 'content',
-            'post': self.post.id
-            })
+                'post': self.post.id}
+        )
         count = Comment.objects.count()
         self.assertEqual(count, 1)
         self.assertEqual(
@@ -39,16 +38,17 @@ class CommentListViewTests(APITestCase):
             )
 
     def test_can_list_comments(self):
-        response = self.client.get('/comments/')
+        response = self.client.get('/api/comments/')
         self.assertEqual(
-            response.status_code, 
+            response.status_code,
             status.HTTP_200_OK
             )
+
 
 class CommentDetailViewTests(APITestCase):
     def setUp(self):
         eve = User.objects.create_user(
-            username='eve', 
+            username='eve',
             password='pass'
             )
         # creating category, needed for creating post
@@ -72,7 +72,7 @@ class CommentDetailViewTests(APITestCase):
             username='eve', password='pass'
             )
         # deleting the comment
-        response = self.client.delete(f'/comments/{self.comment.id}/')
+        response = self.client.delete(f'/api/comments/{self.comment.id}/')
         count = Comment.objects.count()
         self.assertEqual(count, 0)
         self.assertEqual(

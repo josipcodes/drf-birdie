@@ -3,21 +3,22 @@ from rest_framework import generics, filters
 from .models import Category
 from .serializers import CategorySerializer
 
+
 class CategoryList(generics.ListCreateAPIView):
-        """
-        List all categories.
-        Permission already set globally in settings.py.
-        """
-        queryset = Category.objects.annotate(
+    """
+    List all categories.
+    Permission already set globally in settings.py.
+    """
+    queryset = Category.objects.annotate(
         posts_count=Count('post', distinct=True),
     ).order_by('-posts_count')
-        filter_backends = [
+    filter_backends = [
         filters.OrderingFilter
     ]
-        ordering_fields = [
+    ordering_fields = [
         'posts_count',
     ]
-        serializer_class = CategorySerializer
+    serializer_class = CategorySerializer
 
 
 class CategoryDetail(generics.RetrieveAPIView):

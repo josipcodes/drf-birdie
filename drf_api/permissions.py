@@ -1,5 +1,6 @@
 from rest_framework import permissions
 
+
 # below class has been copied from:
 # https://www.django-rest-framework.org/api-guide/permissions/
 class IsOwnerOrReadOnly(permissions.BasePermission):

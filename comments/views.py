@@ -4,6 +4,7 @@ from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Comment
 from .serializers import CommentSerializer, CommentDetailSerializer
 
+
 # views were built based off of DRF_API lessons
 class CommentList(generics.ListCreateAPIView):
     """

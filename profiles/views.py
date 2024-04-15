@@ -5,7 +5,8 @@ from .serializers import ProfileSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 from rest_framework import generics, filters
 
-# views were built based off of DRF_API lessons, 
+
+# views were built based off of DRF_API lessons,
 # but have been slightly modified before refactoring
 class ProfileList(generics.ListAPIView):
     """

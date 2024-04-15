@@ -14,10 +14,9 @@ class PostListViewTests(APITestCase):
     def test_logged_in_user_can_create_post(self):
         self.client.login(username='eve', password='pass')
         response = self.client.post(
-            '/posts/',
+            '/api/posts/',
             {'content': 'content',
-            'category': self.category.id
-            })
+                'category': self.category.id})
         count = Post.objects.count()
         self.assertEqual(count, 1)
         self.assertEqual(
@@ -31,8 +30,9 @@ class PostListViewTests(APITestCase):
             owner=eve,
             content='content',
             category=self.category)
-        response = self.client.get('/posts/')
+        response = self.client.get('/api/posts/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
 
 class PostDetailViewTests(APITestCase):
     def setUp(self):
@@ -49,7 +49,7 @@ class PostDetailViewTests(APITestCase):
             content='content',
             category=self.category)
         # deleting the post
-        response = self.client.delete(f'/posts/{self.post.id}/')
+        response = self.client.delete(f'/api/posts/{self.post.id}/')
         count = Post.objects.count()
         self.assertEqual(count, 0)
         # basing status on the Post model delete function

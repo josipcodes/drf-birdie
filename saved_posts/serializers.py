@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import SavedPost
 
+
 # based on Like serializers
 class SavedPostSerializer(serializers.ModelSerializer):
     """

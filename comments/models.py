@@ -13,10 +13,8 @@ class Comment(models.Model):
     modified = models.DateTimeField(auto_now=True)
     content = models.TextField()
 
-
     class Meta:
         ordering = ['-created']
-
 
     def __str__(self):
         return self.content

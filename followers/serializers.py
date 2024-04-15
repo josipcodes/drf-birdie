@@ -2,6 +2,7 @@ from django.db import IntegrityError
 from rest_framework import serializers
 from .models import Follower
 
+
 # copied from drf_api lessons with minor changes
 class FollowerSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(
@@ -20,7 +21,6 @@ class FollowerSerializer(serializers.ModelSerializer):
             'followed',
             'created',
         ]
-
 
     def create(self, validated_data):
         # Follower validation

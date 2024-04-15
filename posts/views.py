@@ -5,6 +5,7 @@ from .models import Post
 from .serializers import PostSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 
+
 # views were built based off of DRF_API lessons
 class PostList(generics.ListCreateAPIView):
     """
@@ -43,7 +44,6 @@ class PostList(generics.ListCreateAPIView):
         'comments_count',
         'likes__created'
     ]
-
 
     def perform_create(self, serializer):
         # Post creation, associates owner with current user

@@ -1,6 +1,7 @@
 from django.db import models
 from products.models import Product
 
+
 class Advertisement(models.Model):
 
     # Advertisement model, related to Product model
@@ -16,7 +17,5 @@ class Advertisement(models.Model):
     class Meta:
         ordering = ['contract_start']
 
-
     def __str__(self):
         return self.alt
-   

@@ -1,10 +1,11 @@
 from django.db import models
 
+
 class Category(models.Model):
     name = models.CharField(max_length=150)
     description = models.TextField()
 
-    #ordering
+    # ordering
     class Meta:
         ordering = ['name']
 

@@ -61,12 +61,12 @@ INSTALLED_APPS = [
     'cloudinary',
     'rest_framework',
     'django_filters',
-    'rest_framework.authtoken', 
+    'rest_framework.authtoken',
     'dj_rest_auth',
-     'django.contrib.sites', 
-    'allauth', 
-    'allauth.account', 
-    'allauth.socialaccount', 
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'dj_rest_auth.registration',
     'corsheaders',
 
@@ -86,18 +86,21 @@ SITE_ID = 1
 
 REST_FRAMEWORK = {
     # REST global permission policy
-    # Code adapted from https://www.django-rest-framework.org/api-guide/permissions/
+    # Code adapted from
+    # https://www.django-rest-framework.org/api-guide/permissions/
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [( 
-        'rest_framework.authentication.SessionAuthentication' 
-        if 'DEV' in os.environ 
+    'DEFAULT_AUTHENTICATION_CLASSES': [(
+        'rest_framework.authentication.SessionAuthentication'
+        if 'DEV' in os.environ
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     )],
     # copied from DRF Cheat sheet
     # pagination
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS': (
+        'rest_framework.pagination.PageNumberPagination'
+        ),
     'PAGE_SIZE': 10,
     # datetime format
     'DATETIME_FORMAT': '%d %b %Y'
@@ -124,7 +127,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS 
+# CORS
 CORS_ALLOWED_ORIGINS = [
     os.environ.get('CLIENT_ORIGIN')
 ]
@@ -138,7 +141,9 @@ JWT_AUTH_COOKIE = 'my-app-auth'
 # declare cookie names for the access and refresh tokens
 JWT_AUTH_SECURE = True
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
-REST_AUTH_SERIALIZERS = {'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'}
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'
+}
 JWT_AUTH_SAMESITE = 'None'
 # set jwt token expiration to 2 days
 # source code modified:
@@ -190,21 +195,23 @@ else:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa
     },
 ]
 
 # prevents CSRF errors
-CSRF_TRUSTED_ORIGINS = ['https://8000-josipcodes-drfbirdie-tl20mean2uf.ws-eu110.gitpod.io']
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-josipcodes-drfbirdie-tl20mean2uf.ws-eu110.gitpod.io'
+    ]
 
 
 # Internationalization

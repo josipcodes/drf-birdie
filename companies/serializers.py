@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Company
 
+
 class CompanySerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -10,4 +11,3 @@ class CompanySerializer(serializers.ModelSerializer):
             'company_name',
             'internal_notes',
         ]
-

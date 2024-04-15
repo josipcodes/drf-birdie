@@ -4,17 +4,20 @@ from likes.models import Like
 from categories.models import Category
 from saved_posts.models import SavedPost
 
+
 # portion of the Serializer has been copied from drf_api lessons
 # alterations made
 class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
-    profile_avatar = serializers.ReadOnlyField(source='owner.profile.avatar.url')
+    profile_avatar = serializers.ReadOnlyField(
+        source='owner.profile.avatar.url'
+        )
     like_id = serializers.SerializerMethodField()
     comments_count = serializers.ReadOnlyField()
     likes_count = serializers.ReadOnlyField()
-    category_name =  serializers.ReadOnlyField(source='category.name')
+    category_name = serializers.ReadOnlyField(source='category.name')
     saved_id = serializers.SerializerMethodField()
     saved_count = serializers.ReadOnlyField()
 
@@ -33,7 +36,6 @@ class PostSerializer(serializers.ModelSerializer):
                 'Image height larger than 2048px!'
             )
         return value
-
 
     def get_is_owner(self, obj):
         # check if owner

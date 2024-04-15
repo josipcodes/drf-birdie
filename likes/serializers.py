@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Like
 
+
 # copied from drf_api lessons with  minor modifications
 class LikeSerializer(serializers.ModelSerializer):
     """

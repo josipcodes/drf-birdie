@@ -1,7 +1,8 @@
-from rest_framework import permissions, generics 
+from rest_framework import permissions, generics
 from .serializers import CompanySerializer
 from .models import Company
 from rest_framework.permissions import IsAdminUser
+
 
 class CompanyList(generics.ListCreateAPIView):
     """

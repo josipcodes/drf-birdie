@@ -3,6 +3,7 @@ from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Follower
 from .serializers import FollowerSerializer
 
+
 # views are based on drf_api with added improvements
 class FollowerList(generics.ListCreateAPIView):
     """
@@ -14,10 +15,9 @@ class FollowerList(generics.ListCreateAPIView):
     serializer_class = FollowerSerializer
     queryset = Follower.objects.all()
 
-
     def perform_create(self, serializer):
         """
-        Perform_create: associate the current 
+        Perform_create: associate the current
         logged in user with a follower.
         """
         owner = self.request.user
@@ -39,5 +39,3 @@ class FollowerDetail(generics.RetrieveDestroyAPIView):
     serializer_class = FollowerSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Follower.objects.all()
-
-

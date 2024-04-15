@@ -3,6 +3,7 @@ from .models import Profile
 from followers.models import Follower
 from saved_posts.models import SavedPost
 
+
 # most of the Serializer has been copied from drf_api lessons
 # some alternations made, validation of avatar added
 class ProfileSerializer(serializers.ModelSerializer):
@@ -13,7 +14,6 @@ class ProfileSerializer(serializers.ModelSerializer):
     followers_count = serializers.ReadOnlyField()
     following_count = serializers.ReadOnlyField()
     saved_count = serializers.ReadOnlyField()
-
 
     def validate_avatar(self, value):
         # 2MB

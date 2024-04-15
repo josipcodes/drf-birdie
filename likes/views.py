@@ -3,6 +3,7 @@ from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Like
 from .serializers import LikeSerializer
 
+
 # views copied from drf_api lessons, minor modifications
 class LikeList(generics.ListCreateAPIView):
     """
