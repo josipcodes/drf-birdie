@@ -24,7 +24,6 @@ test("renders user's username", async () => {
       </CurrentUserProvider>
     </Router>
   );
-  screen.debug();
   // looking for logged in user's username
   const profileName = await screen.findByText("test11");
   expect(profileName).toBeInTheDocument();

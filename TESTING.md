@@ -2,6 +2,40 @@
 
 Return to [README](README.md).
 
+## Table of Contents
+
+### [Frontend Testing](#frontend-testing-1)
+
+#### [Automated Testing](#automated-testing-1)
+
+#### [Manual Testing](#manual-testing-1)
+
+#### [Responsiveness Testing](#responsiveness-testing-1)
+
+#### [Browser Compatibility Testing](#browser-compatibility-testing-1)
+
+### [Code Validation](#code-validation-1)
+
+#### [HTML Validation](#html-validation-1)
+
+#### [CSS Validation](#css-validation-1)
+
+#### [ESlint Validation](#eslint-validation-1)
+
+### [Lighthouse Report](#lighthouse-report-1)
+
+### [Backend Testing](#backend-testing-1)
+
+#### [Automated Tests](#automated-tests-1)
+
+### [Backend Code Validation](#backend-code-validation-1)
+
+#### [Python Validation](#python-validation-1)
+
+#### [Bugs](#bugs-1)
+
+
+
 ## Frontend Testing
 
 ### Automated Testing
@@ -15,6 +49,76 @@ I created 4 tests:
 ![Tests](/documentation/testing/frontend-automated.png)
 
 ### Manual Testing
+
+| Page | User state | Test | Expected Result | Notes |
+| --- | --- | --- | --- | --- |
+| Homepage  | Logged out | Click on logo, "Birdie" or Feed | Redirect to the homepage if not there | Pass |
+|  | Logged out | Click on Register | Redirect to Register page | Pass |
+|  | Logged out | Click on Login | Redirect to Login page | Pass |
+|  | Logged in | Click on Post in the navbar | Redirect to post creation form | Pass |
+|  | Logged in | Click on Subscribed in the navbar | Redirect to subscription feed | Pass |
+|  | Logged in | Click on Liked in the navbar | Redirect to liked feed | Pass |
+|  | Logged in | Click on Saved in the navbar | Redirect to saved feed | Pass |
+|  | Logged in | Click on Saved in the navbar | Redirect to saved feed | Pass |
+|  | Logged in | Click on heart icon on a post | Icon changes, number of likes changes | Pass |
+|  | Logged in | Click on an egg/owl icon on a post | Icon changes, number of saves changes | Pass |
+|  | Logged in | Make username longer than 9 characters | Only avatar displays in the navbar | Pass, tip - further down, you can find tests on updating username |
+| | Logged in user  on a smaller screen | Expand dropdown | Popular categories appear | Pass |
+| | Logged in user  on a smaller screen | | username doesn't show in the navbar | Pass |
+|  |  | Reload the tab several times | Advertisement randomly changes | Pass |
+|  |  | Click on one of the popular categories | Feed displays posts from that category | Pass |
+|  |  | Click on one of the users in one of the posts | User's profile loads | Pass |
+|  | Logged out | Like a post | Hover displays, advising you to log in | Pass |
+|  | Logged out | Click on a comment icon in one of the posts | Redirect to login | Pass |
+|  | Logged out | Click on the post body | Redirect to login | Pass |
+|  | | Scroll down | More posts load | Pass |
+|  | | manually input nonexistent url | 404 page loads | Pass |
+| Register  | Logged out | Click on "Login" in the form | Redirect to Login Page | Pass |
+|  | Logged out | Click Register button before inputing anything in the form | Notifications regarding input fields display | Pass |
+|  | Logged out | Input username and only two characters in the password section | Notification regarding input field displays | Pass |
+|  | Logged out | Fill the form out per Alert requirements, submit form | Redirect to Login Page | Pass |
+|  | Logged in | Manually add /register to the url and try accessing the page | Redirect to the homepage | Pass |
+| Login | Logged out | Click on "Register" in the form | Redirect to Register Page | Pass |
+|  | Logged out | Submit form without filling it out | Notification regarding input field displays | Pass |
+|  | Logged out | Submit form with only one field filled out | Notification regarding input field displays | Pass |
+|  | Logged out | Submit form with your details correctly | Redirect to the main page, navbar displays options available to logged in users | Pass |
+|  | Logged in | Manually add /login to the url and try accessing the page | Redirect to the homepage | Pass |
+| Post create form | Logged in | Submit a post without inputing anything into the form | Notifications display on the post body and category dropdown | Pass |
+| | Logged in | Fill the form out with image larger than 2MB | Notification displays | Pass, tip - use Google advanced search to find such image |
+| | Logged in | Fill the form out with/without an image, submit | Redirect to the post page, post displays content which was inputted | Pass |
+| Post page | Post owner | Click on the 3 dots | Dropdown appears | Pass |
+| | Post owner | Click heart icon in the post | Hover notification appears | Pass |
+| | Post owner | Click edit icon in the dropdown | Redirect to edit post | Pass |
+| | Post owner | Click delete icon in the dropdown | Redirect to homepage, post is visible | Pass |
+| | Logged in user | Click on an egg icon | Icon switches to an owl | Pass, additionally, click on "Saved" in the navbar to find said post |
+| | Logged in user | Click on an owl icon | Icon switches to an egg | Pass, additionally, click on "Saved" in the navbar to verify that post isn't there |
+| | Logged in user | Click Comment button without inputing a comment | Nothing happens | Pass |
+| | Logged in user | Input a comment, click Comment | Comment is displayed, number of comments goes up by one | Pass |
+| | Logged in user | Input a comment without spaces, longer than the width of the comment section, click Comment | Comment is displayed, does not widen the comment section, number of comments goes up by one | Pass |
+| | Comment owner | Click on the three dots next to the comment | Dropdown appears | Pass |
+| | Comment owner | Click on edit icon in the dropdown | Edit comment form appears | Pass |
+| | Comment owner | In comment edit form, delete comment and click Update | Nothing happens | Pass |
+| | Comment owner | In comment edit form, click Cancel button | Edit form disappears | Pass |
+| | Comment owner | In comment edit form, update comment, click Update button | Updated comment appears, time is updated to "now" | Pass |
+| | Comment owner | Click on delete icon in the dropdown | Comment is deleted, number of comments goes down | Pass |
+| | Logged in user | Click on the user's avatar or username | Redirect to Profile page | Pass |
+| | Logged in user | Add /edit to the end of someone else's post's url | Redirect to homepage | Pass |
+| Profile page | Logged in user | If not profile owner, click "Follow" | Button switches to "Unfollow", number of followers goes up by one | Pass, additionally, click on "Subscribed" to find user's posts there |
+| | Logged in user | If already following, click "Unfollow" | Button switches to "Follow", number of followers goes down by one | Pass, additionally, click on "Subscribed" to find user's posts not there |
+| | Profile owner | Click on the three dots | Dropdown appears | Pass |
+| | Profile owner | Click on editing profile | Redirect to Profile edit page | Pass |
+| | Profile owner | Click on editing username | Redirect to Edit username page | Pass |
+| | Profile owner | Click on editing password | Redirect to Edit password page | Pass |
+| | Logged in user on a smaller screen | | Advertisement appears | Pass |
+| Profile edit page | Profile owner | Update name, bio and image | Redirect to Profile page, profile displays what was added | Pass |
+| | Profile owner | Click Cancel | Redirect to Profile page | Pass |
+| Username edit page | Profile owner | Click Cancel | Redirect to Profile page | Pass |
+| | Profile owner | Remove username | Alert notification appears | Pass |
+| | Profile owner | Save new username | Redirect to Profile page, username is updated | Pass |
+| Password edit page | Profile owner |  Click Cancel | Redirect to Profile page | Pass |
+| | Profile owner | Click Save without inputting passwords | Alert notification appears | Pass |
+| | Profile owner | Click Save after inputting different passwords in the two fields | Alert notification appears | Pass |
+
 
 ### Responsiveness Testing
 
@@ -131,7 +235,7 @@ I have used [W3C Jigsaw](https://jigsaw.w3.org/css-validator/validator?uri=https
 
 ## Backend Testing
 
-### Automated Testing
+###  Automated Tests
 
 I ran seven automated tests in the backend. The tests were initially written during building of the backend.
 In order to run them successfully now in the unified project, I had to append `api/` to the start of all test urls, as well as comment in `os.environ['DEV'] = '1'` in `env.py` temporarily.
@@ -148,7 +252,7 @@ In order to run them successfully now in the unified project, I had to append `a
 
 ![Automated tests](/documentation/testing/python/backend-automated.png)
 
-## Code Validation
+## Backend Code Validation
 
 ### Python Validation
 
