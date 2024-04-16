@@ -496,3 +496,5 @@ Python validation was performed using CI Python Linter to make sure that the cod
 ## Bugs
 
 * Visual bug - when using dev tools, clicking icons results in them displaying their `hover` color constantly, but this doesn't impact regular user.
+
+* User status - when saving a post for later on a user's profile page, status number does not immediatelly update but only upon refresh. As status is mainly relevant to the profile owner, this was not considered a priority and can be reviewed in future updates.
