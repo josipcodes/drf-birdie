@@ -143,7 +143,7 @@ function PostEditForm() {
         <Form.Label htmlFor="category">Category</Form.Label>
         <Form.Control
           as="select"
-          aria-label="tbd"
+          aria-label="category"
           id="category"
           onChange={handleChangeCategory}
         >
