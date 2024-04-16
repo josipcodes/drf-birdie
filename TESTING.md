@@ -105,6 +105,7 @@ I created 4 tests:
 | | Logged in user | Add /edit to the end of someone else's post's url | Redirect to homepage | Pass |
 | Profile page | Logged in user | If not profile owner, click "Follow" | Button switches to "Unfollow", number of followers goes up by one | Pass, additionally, click on "Subscribed" to find user's posts there |
 | | Logged in user | If already following, click "Unfollow" | Button switches to "Follow", number of followers goes down by one | Pass, additionally, click on "Subscribed" to find user's posts not there |
+| | Logged in user | Hover over status stats | Hover appears, explaining the stat | Pass |
 | | Profile owner | Click on the three dots | Dropdown appears | Pass |
 | | Profile owner | Click on editing profile | Redirect to Profile edit page | Pass |
 | | Profile owner | Click on editing username | Redirect to Edit username page | Pass |
