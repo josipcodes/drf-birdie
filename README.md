@@ -244,6 +244,8 @@ I used [coolors.co](https://coolors.co/f8f8f8-212529-fcd619-f2f2f7-242a3d-2e343a
 
 #### Typography
 
+Decision on font usage came from building a quirky, yet visually please brand.
+
 - [K2D](https://fonts.google.com/specimen/K2D) was used for the primary text.
 
 - [Permanent Marker](https://fonts.google.com/?query=permanent+marker) was used for the brand display.
@@ -876,6 +878,7 @@ For either method, you will need to install any applicable packages found within
 
 You will need to create a new file called `env.py` at the root-level,
 and include the same environment variables listed above from the Heroku deployment steps.
+Make sure your `env.py` is listed in the `.gitignore` file.
 
 Sample `env.py` file:
 
