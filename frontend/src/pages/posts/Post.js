@@ -292,7 +292,7 @@ const Post = (props) => {
                   {comments_count}
                 </Link>
               </Col>
-              <Col>
+              <Col className={styles.IconText}>
                 {currentUser && !is_owner && (
                   <OverlayTrigger
                     placement="top"
